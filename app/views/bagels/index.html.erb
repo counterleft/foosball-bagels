@@ -1,0 +1,73 @@
+<h1>Bagel Central</h1>
+
+<h2>Facts</h2>
+
+<p>Current owner:
+<% if !@current_owner.nil? %>
+<%= link_to @current_owner.name, @current_owner  %>
+<% else %>
+<%= "none" %>
+<% end %>
+</p>
+
+<!--
+<p>Owned The Most Bagels: </p>
+
+<p>Baked The Most Bagels In One Day: </p>
+-->
+
+<%
+  bagel_contributor_links = []
+  @contributors.each { |b| bagel_contributor_links.push(link_to(b.name, b)) }
+
+  contribute_verb = " is "
+  contribute_verb = " are " if bagel_contributor_links.size > 1
+
+  plus_minus = @contributors.first.plus_minus.to_s
+%>
+
+<%= bagel_contributor_links.join(", ") + contribute_verb + "more likely to help a team receive a bagel with a plus-minus of " + plus_minus + "." %>
+<p>
+
+</p>
+<%
+  bagel_preventer_links = []
+  @preventers.each { |b| bagel_preventer_links.push(link_to(b.name, b)) }
+
+  prevent_verb = " is "
+  prevent_verb = " are " if bagel_preventer_links.size > 1
+
+  plus_minus = @preventers.first.plus_minus.to_s
+%>
+
+<%= bagel_preventer_links.join(", ") + prevent_verb + "more likely to help a team give a bagel to another team with a plus-minus of " + plus_minus + "." %>
+<p>
+
+
+<h2>Most Recent Bagels</h2>
+
+<table>
+  <tr>
+  	<th>Baked On</th>
+    <th>Owner</th>
+    <th>Teammate</th>
+    <th>Opponent 1</th>
+    <th>Opponent 2</th>
+  </tr>
+
+<% @bagels.each do |bagel| %>
+  <tr>
+  	<td><%=h bagel.baked_on.to_s(:date) %></td>
+    <td><%=h bagel.owner_name %></td>
+    <td><%=h bagel.teammate_name %></td>
+    <td><%=h bagel.opponent_1_name %></td>
+    <td><%=h bagel.opponent_2_name %></td>
+    <td><%= link_to 'Show', bagel %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New bagel', new_bagel_path %>
+

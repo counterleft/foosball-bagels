@@ -1,0 +1,37 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: Player1
+
+two:
+  name: Player2
+
+three:
+  name: Player3
+
+four:
+  name: Player4
+
+brian:
+  name: Brian
+  plus_minus: 2
+
+bill:
+  name: Bill
+
+contributor1:
+  name: contributor1
+  plus_minus: -3000
+
+contributor2:
+  name: contributor2
+  plus_minus: -3000
+
+preventer1:
+  name: preventer1
+  plus_minus: 1000
+
+preventer2:
+  name: preventer2
+  plus_minus: 1000
+

@@ -1,0 +1,30 @@
+
+<p>
+	<b>Baked On:</b>
+	<%=h @bagel.baked_on.to_s(:date) %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= link_to @bagel.owner.name, @bagel.owner %>
+</p>
+
+<p>
+  <b>Teammate:</b>
+  <%= link_to @bagel.teammate.name, @bagel.teammate %>
+</p>
+
+<p>
+  <b>Opponent 1:</b>
+  <%= link_to @bagel.opponent_1.name, @bagel.opponent_1 %>
+</p>
+
+<p>
+  <b>Opponent 2:</b>
+  <%= link_to @bagel.opponent_2.name, @bagel.opponent_2 %>
+</p>
+
+
+<!-- <%=  link_to 'Edit', edit_bagel_path(@bagel) %> -->
+<%= link_to 'Back', bagels_path %>
+
