@@ -36,10 +36,11 @@ class BagelsController < ApplicationController
     end
   end
 
-  # GET /bagels/1/edit
-  def edit
-    @bagel = Bagel.find(params[:id])
-  end
+# there is no update bagel feature 
+#  # GET /bagels/1/edit
+#  def edit
+#    @bagel = Bagel.find(params[:id])
+#  end
 
   # POST /bagels
   # POST /bagels.xml
@@ -58,22 +59,23 @@ class BagelsController < ApplicationController
     end
   end
 
-  # PUT /bagels/1
-  # PUT /bagels/1.xml
-  def update
-    @bagel = Bagel.find(params[:id])
-
-    respond_to do |format|
-      if @bagel.update_attributes(params[:bagel])
-        flash[:notice] = 'Bagel was successfully updated.'
-        format.html { redirect_to(@bagel) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @bagel.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
+# there is no update bagel feature 
+#  # PUT /bagels/1
+#  # PUT /bagels/1.xml
+#  def update
+#    @bagel = Bagel.find(params[:id])
+#
+#    respond_to do |format|
+#      if @bagel.update_attributes(params[:bagel])
+#        flash[:notice] = 'Bagel was successfully updated.'
+#        format.html { redirect_to(@bagel) }
+#        format.xml  { head :ok }
+#      else
+#        format.html { render :action => "edit" }
+#        format.xml  { render :xml => @bagel.errors, :status => :unprocessable_entity }
+#      end
+#    end
+#  end
 
   # DELETE /bagels/1
   # DELETE /bagels/1.xml

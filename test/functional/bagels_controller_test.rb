@@ -29,20 +29,22 @@ class BagelsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => bagels(:one).to_param
-    assert_response :success
-  end
+# there is no edit bagel page 
+#  test "should get edit" do
+#    get :edit, :id => bagels(:one).to_param
+#    assert_response :success
+#  end
 
-  test "should update bagel" do
-    put :update, :id => bagels(:one).to_param,
-        :bagel => { :baked_on => '2009/01/02',
-                    :owner_name => players(:four).name,
-                    :opponent_1_name => players(:one).name,
-                    :opponent_2_name => players(:two).name,
-                    :teammate_name => players(:three).name  }
-    assert_redirected_to bagel_path(assigns(:bagel))
-  end
+# there is no update-bagel feature 
+#  test "should update bagel" do
+#    put :update, :id => bagels(:one).to_param,
+#        :bagel => { :baked_on => '2009/01/02',
+#                    :owner_name => players(:four).name,
+#                    :opponent_1_name => players(:one).name,
+#                    :opponent_2_name => players(:two).name,
+#                    :teammate_name => players(:three).name  }
+#    assert_redirected_to bagel_path(assigns(:bagel))
+#  end
 
   test "should destroy bagel" do
     assert_difference('Bagel.count', -1) do
