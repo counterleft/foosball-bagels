@@ -77,16 +77,17 @@ class BagelsController < ApplicationController
 #    end
 #  end
 
-  # DELETE /bagels/1
-  # DELETE /bagels/1.xml
-  def destroy
-    @bagel = Bagel.find(params[:id])
-    @bagel.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(bagels_url) }
-      format.xml  { head :ok }
-    end
-  end
+# there is no delete bagel feature
+# # DELETE /bagels/1
+#  # DELETE /bagels/1.xml
+#  def destroy
+#    @bagel = Bagel.find(params[:id])
+#    @bagel.destroy
+#
+#    respond_to do |format|
+#      format.html { redirect_to(bagels_url) }
+#      format.xml  { head :ok }
+#    end
+# end
 end
 

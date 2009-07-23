@@ -46,13 +46,14 @@ class BagelsControllerTest < ActionController::TestCase
 #    assert_redirected_to bagel_path(assigns(:bagel))
 #  end
 
-  test "should destroy bagel" do
-    assert_difference('Bagel.count', -1) do
-      delete :destroy, :id => bagels(:one).to_param
-    end
-
-    assert_redirected_to bagels_path
-  end
+# delete bagel feature not needed
+#  test "should destroy bagel" do
+#    assert_difference('Bagel.count', -1) do
+#      delete :destroy, :id => bagels(:one).to_param
+#    end
+#
+#    assert_redirected_to bagels_path
+#  end
 
   test "current owner is correct" do
     get :index
