@@ -60,10 +60,10 @@ class Bagel < ActiveRecord::Base
     teammate.decr_plus_minus
     teammate.save
 
-    opponent_1.decr_plus_minus
+    opponent_1.incr_plus_minus
     opponent_1.save
 
-    opponent_2.decr_plus_minus
+    opponent_2.incr_plus_minus
     opponent_2.save
   end
 

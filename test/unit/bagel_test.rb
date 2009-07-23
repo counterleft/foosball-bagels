@@ -1,9 +1,9 @@
 require 'test_helper'
 
 class BagelTest < ActiveSupport::TestCase
-  test "opponent_2 plus-minus decreases by one after receiving a bagel" do
+  test "opponent_2 plus-minus increases by one after receiving a bagel" do
     opponent_2 = players(:four)
-    assert_difference('Player.find_by_name(opponent_2.name).plus_minus', -1) do
+    assert_difference('Player.find_by_name(opponent_2.name).plus_minus') do
       bagel = Bagel.new(:baked_on => '2009/01/02',
   	                  :owner_name => players(:one).name,
   	                  :opponent_1_name => players(:two).name,
@@ -13,9 +13,9 @@ class BagelTest < ActiveSupport::TestCase
     end
   end
 
-  test "opponent_1 plus-minus decreases by one after receiving a bagel" do
+  test "opponent_1 plus-minus increases by one after receiving a bagel" do
     opponent_1 = players(:four)
-    assert_difference('Player.find_by_name(opponent_1.name).plus_minus', -1) do
+    assert_difference('Player.find_by_name(opponent_1.name).plus_minus') do
       bagel = Bagel.new(:baked_on => '2009/01/02',
   	                  :owner_name => players(:one).name,
   	                  :opponent_1_name => opponent_1.name,
