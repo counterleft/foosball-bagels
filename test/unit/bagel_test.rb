@@ -1,6 +1,54 @@
 require 'test_helper'
 
 class BagelTest < ActiveSupport::TestCase
+  test "opponent_2 plus-minus decreases by one after receiving a bagel" do
+    opponent_2 = players(:four)
+    assert_difference('Player.find_by_name(opponent_2.name).plus_minus', -1) do
+      bagel = Bagel.new(:baked_on => '2009/01/02',
+  	                  :owner_name => players(:one).name,
+  	                  :opponent_1_name => players(:two).name,
+  	                  :opponent_2_name => opponent_2.name,
+  	                  :teammate_name => players(:three).name)
+      bagel.save
+    end
+  end
+
+  test "opponent_1 plus-minus decreases by one after receiving a bagel" do
+    opponent_1 = players(:four)
+    assert_difference('Player.find_by_name(opponent_1.name).plus_minus', -1) do
+      bagel = Bagel.new(:baked_on => '2009/01/02',
+  	                  :owner_name => players(:one).name,
+  	                  :opponent_1_name => opponent_1.name,
+  	                  :opponent_2_name => players(:two).name,
+  	                  :teammate_name => players(:three).name)
+      bagel.save
+    end
+  end
+  
+  test "teammate plus-minus decreases by one after receiving a bagel" do
+    teammate = players(:four)
+    assert_difference('Player.find_by_name(teammate.name).plus_minus', -1) do
+      bagel = Bagel.new(:baked_on => '2009/01/02',
+  	                  :owner_name => players(:one).name,
+  	                  :opponent_1_name => players(:three).name,
+  	                  :opponent_2_name => players(:two).name,
+  	                  :teammate_name => teammate.name)
+      bagel.save
+    end
+  end
+
+  test "owner plus-minus decreases by one after receiving a bagel" do
+    owner = players(:four)
+    assert_difference('Player.find_by_name(owner.name).plus_minus', -1) do
+      bagel = Bagel.new(:baked_on => '2009/01/02',
+  	                  :owner_name => owner.name,
+  	                  :opponent_1_name => players(:one).name,
+  	                  :opponent_2_name => players(:two).name,
+  	                  :teammate_name => players(:three).name)
+      bagel.save
+    end
+  end
+
   test "must have owner on save" do
   	bagel = Bagel.new(:baked_on => '2009/01/02',
   	                  :opponent_1_name => players(:one).name,

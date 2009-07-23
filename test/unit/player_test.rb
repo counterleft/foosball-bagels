@@ -1,6 +1,18 @@
 require 'test_helper'
 
 class PlayerTest < ActiveSupport::TestCase
+  test "should decrement plus minus only by one" do
+    assert_difference('players(:one).plus_minus', -1) do
+      players(:one).decr_plus_minus
+    end
+  end
+
+  test "should increment plus minus only by one" do
+    assert_difference('players(:one).plus_minus') do
+      players(:one).incr_plus_minus
+    end
+  end
+
   test "should not save player without name" do
     player = Player.new
     assert !player.save

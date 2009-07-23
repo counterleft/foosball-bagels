@@ -2,15 +2,18 @@
 
 one:
   name: Player1
+  plus_minus: 0
 
 two:
   name: Player2
+  plus_minus: 0
 
 three:
   name: Player3
 
 four:
   name: Player4
+  plus_minus: 0
 
 brian:
   name: Brian
