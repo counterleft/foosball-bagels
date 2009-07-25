@@ -1,14 +1,10 @@
-<h1>Bagel Central</h1>
+<div id="main-box">
+  <div id="quote">Fact: <%= link_to @current_owner.name, @current_owner  %> currently owns the bagel.</div>
+</div>
 
-<h2>Facts</h2>
+<div id="content">
 
-<p>Current owner:
-<% if !@current_owner.nil? %>
-<%= link_to @current_owner.name, @current_owner  %>
-<% else %>
-<%= "none" %>
-<% end %>
-</p>
+<h2>Other Facts</h2>
 
 <!--
 <p>Owned The Most Bagels: </p>
@@ -26,10 +22,10 @@
   plus_minus = @contributors.first.plus_minus.to_s
 %>
 
-<%= bagel_contributor_links.join(", ") + contribute_verb + "more likely to help a team receive a bagel with a plus-minus of " + plus_minus + "." %>
 <p>
-
+  <%= bagel_contributor_links.join(", ") + contribute_verb + "more likely to help a team receive a bagel with a plus-minus of " + plus_minus + "." %>
 </p>
+
 <%
   bagel_preventer_links = []
   @preventers.each { |b| bagel_preventer_links.push(link_to(b.name, b)) }
@@ -40,8 +36,9 @@
   plus_minus = @preventers.first.plus_minus.to_s
 %>
 
-<%= bagel_preventer_links.join(", ") + prevent_verb + "more likely to help a team give a bagel to another team with a plus-minus of " + plus_minus + "." %>
 <p>
+  <%= bagel_preventer_links.join(", ") + prevent_verb + "more likely to help a team give a bagel to another team with a plus-minus of " + plus_minus + "." %>
+</p>
 
 
 <h2>Most Recent Bagels</h2>
@@ -67,7 +64,4 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New bagel', new_bagel_path %>
-
+</div>
