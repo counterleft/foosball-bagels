@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bagels/new.html.erb" afterPath="$PROJECT_DIR$/app/views/bagels/new.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bagels/index.html.erb" afterPath="$PROJECT_DIR$/app/views/bagels/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/foosball.iml" afterPath="$PROJECT_DIR$/.idea/foosball.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/bagels.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/bagels.html.erb" />
     </list>
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +27,7 @@
           <file leaf-file-name="bagels.html.erb" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/views/layouts/bagels.html.erb">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="12" column="32" selection-start="674" selection-end="674" vertical-scroll-proportion="0.70383275">
+                <state line="24" column="27" selection-start="1066" selection-end="1066" vertical-scroll-proportion="0.7256098">
                   <folding />
                 </state>
               </provider>
@@ -40,7 +36,7 @@
           <file leaf-file-name="new.html.erb" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/views/bagels/new.html.erb">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="38" column="6" selection-start="1369" selection-end="1369" vertical-scroll-proportion="-7.1153846">
+                <state line="38" column="6" selection-start="1369" selection-end="1369" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -49,7 +45,7 @@
           <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/views/bagels/index.html.erb">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="59" column="42" selection-start="1463" selection-end="1463" vertical-scroll-proportion="-2.5384614">
+                <state line="59" column="42" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -58,7 +54,7 @@
           <file leaf-file-name="screen.css" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/public/stylesheets/screen.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="11" column="23" selection-start="366" selection-end="366" vertical-scroll-proportion="-93.5">
+                <state line="11" column="23" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -71,7 +67,7 @@
           <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/public/test_template/winter/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="36" column="23" selection-start="1381" selection-end="1381" vertical-scroll-proportion="0.18815331">
+                <state line="36" column="23" selection-start="1381" selection-end="1381" vertical-scroll-proportion="0.103658535">
                   <folding />
                 </state>
               </provider>
@@ -136,12 +132,12 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="true" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="preferences.lookFeel" />
+    <property name="recentsLimit" value="5" />
     <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RailsProjectViewPane">
     <subPane>
@@ -265,7 +261,7 @@
       </PATH>
     </subPane>
   </component>
-  <component name="RunManager" selected="Rake.test">
+  <component name="RunManager" selected="Rails.Development: foosball">
     <configuration default="true" type="RakeRunConfigurationType" factoryName="Rake">
       <module name="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e STDOUT.sync=true;STDERR.sync=true;load($0=ARGV.shift)" />
@@ -548,11 +544,11 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="6" side_tool="false" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496464" sideWeight="0.38376892" order="1" side_tool="true" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496464" sideWeight="0.6066025" order="0" side_tool="false" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496464" sideWeight="0.25722146" order="1" side_tool="true" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496464" sideWeight="0.39477304" order="0" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="2" side_tool="false" x="530" y="284" width="870" height="546" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287483" sideWeight="0.5" order="2" side_tool="false" x="530" y="284" width="870" height="546" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" />
@@ -652,35 +648,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/bagels/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="6" selection-start="1369" selection-end="1369" vertical-scroll-proportion="-7.1153846">
+        <state line="38" column="6" selection-start="1369" selection-end="1369" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/bagels/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="42" selection-start="1463" selection-end="1463" vertical-scroll-proportion="-2.5384614">
+        <state line="59" column="42" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/screen.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="23" selection-start="366" selection-end="366" vertical-scroll-proportion="-93.5">
+        <state line="11" column="23" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/test_template/winter/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="23" selection-start="1381" selection-end="1381" vertical-scroll-proportion="0.18815331">
+        <state line="36" column="23" selection-start="1381" selection-end="1381" vertical-scroll-proportion="0.103658535">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/bagels.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="32" selection-start="674" selection-end="674" vertical-scroll-proportion="0.70383275">
+        <state line="24" column="27" selection-start="1066" selection-end="1066" vertical-scroll-proportion="0.7256098">
           <folding />
         </state>
       </provider>
