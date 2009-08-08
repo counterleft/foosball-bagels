@@ -117,6 +117,7 @@ iframe.ie6_blocker {
 
 .calendar_date_select td.today {
   border: 1px dashed #999;
+  background-color:#aaa;
 }
 
 .calendar_date_select td.disabled div {

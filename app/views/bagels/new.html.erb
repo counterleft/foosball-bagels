@@ -37,3 +37,11 @@
 <%= link_to 'Back', bagels_path %>
 
 </div>
+
+<% javascript_tag  do -%>
+  document.observe("dom:loaded", function() {
+    var baked_on_date = $('bagel_baked_on')
+    var today = new Date().toFormattedString(false);
+    baked_on_date.writeAttribute({'value':today});
+  });
+<% end -%>
