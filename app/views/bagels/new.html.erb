@@ -9,25 +9,25 @@
 
   <p>
     <%= f.label :baked_on %><br />
-    <%= calendar_date_select :bagel, :baked_on, :time => false, :buttons => false, :month_year => 'label' %>
+    <%= calendar_date_select :bagel, :baked_on, :time => false, :buttons => false, :month_year => 'label', :size => 10 %>
   </p>
 
   <p>
     <%= f.label :owner_name %><br />
-    <%= text_field_with_auto_complete :bagel, :owner_name, { :autocomplete => 'off' }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
+    <%= text_field_with_auto_complete :bagel, :owner_name, { :autocomplete => 'off', :size => 20 }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name'} %>
   </p>
 
   <p>
     <%= f.label :teammate_name %><br />
-    <%= text_field_with_auto_complete :bagel, :teammate_name, { :autocomplete => 'off' }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
+    <%= text_field_with_auto_complete :bagel, :teammate_name, { :autocomplete => 'off', :size => 20 }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
   </p>
   <p>
     <%= f.label :opponent_1_name %><br />
-    <%= text_field_with_auto_complete :bagel, :opponent_1_name, { :autocomplete => 'off' }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
+    <%= text_field_with_auto_complete :bagel, :opponent_1_name, { :autocomplete => 'off', :size => 20 }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
   </p>
   <p>
     <%= f.label :opponent_2_name %><br />
-    <%= text_field_with_auto_complete :bagel, :opponent_2_name, { :autocomplete => 'off' }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
+    <%= text_field_with_auto_complete :bagel, :opponent_2_name, { :autocomplete => 'off', :size => 20 }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
   </p>
   <p>
     <%= f.submit 'Create' %>
