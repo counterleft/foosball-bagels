@@ -30,11 +30,11 @@
     <%= text_field_with_auto_complete :bagel, :opponent_2_name, { :autocomplete => 'off', :size => 20 }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Add New Bagel' %>
   </p>
 <% end %>
 
-<%= link_to 'Back', bagels_path %>
+<%= link_to 'cancel', bagels_path %>
 
 </div>
 
