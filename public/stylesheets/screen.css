@@ -3,7 +3,7 @@ body, div, span, p, a, img, ul, ol, li, table, th, tr, td, form, fieldset, legen
 body { 
   padding: 0; 
   background: #fff url('../images/bg.jpg') repeat-x; 
-  font: 0.8em/1.5 "arial",sans-serif; 
+  font: 1em/1.2 "georgia", sans-serif; 
   color: #303030; 
   text-align: center; 
 }
@@ -30,7 +30,7 @@ h5 { font-size:100%; }
       #logo {
         position: relative; 
         overflow: hidden; 
-        width: 250px; height: 108px;
+        width: 300px; height: 108px;
         font-size:250%;
         margin: 0;
         line-height: 108px;
@@ -174,3 +174,4 @@ hr { display:block; height:1px; margin:10px 0; padding:0; border:0 solid #CCC; b
 .light {padding: 4px 5px; background: #ac0001; text-decoration: none;} .light:hover {color: #fff;}
 .noscreen { display:none; }
 .clear {clear: both;}
+
