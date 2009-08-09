@@ -13,20 +13,20 @@
   </p>
 
   <p>
-    <%= f.label :owner_name %><br />
+    <%= f.label "Owner's Name" %><br />
     <%= text_field_with_auto_complete :bagel, :owner_name, { :autocomplete => 'off', :size => 20 }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name'} %>
   </p>
 
   <p>
-    <%= f.label :teammate_name %><br />
+    <%= f.label "Teammate's Name" %><br />
     <%= text_field_with_auto_complete :bagel, :teammate_name, { :autocomplete => 'off', :size => 20 }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
   </p>
   <p>
-    <%= f.label :opponent_1_name %><br />
+    <%= f.label "Offensive Opponent's Name" %><br />
     <%= text_field_with_auto_complete :bagel, :opponent_1_name, { :autocomplete => 'off', :size => 20 }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
   </p>
   <p>
-    <%= f.label :opponent_2_name %><br />
+    <%= f.label "Defensive Opponent's Name" %><br />
     <%= text_field_with_auto_complete :bagel, :opponent_2_name, { :autocomplete => 'off', :size => 20 }, { :url => names_players_path, :frequency => '0.2', :method => 'get', :param_name => 'name' } %>
   </p>
   <p>
