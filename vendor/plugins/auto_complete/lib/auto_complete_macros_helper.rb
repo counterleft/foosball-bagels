@@ -130,7 +130,7 @@ module AutoCompleteMacrosHelper
           padding:3px;
         }
         div.auto_complete ul li.selected {
-          background-color: #ffb;
+          background-color: #aaa;
         }
         div.auto_complete ul strong.highlight {
           color: #800; 

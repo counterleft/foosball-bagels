@@ -127,10 +127,17 @@ h5 { font-size:100%; }
       text-align: right;
       }
       
-      .thumbnail
-{
-float: left;
-margin: 0 13px 20px 0px;
+      .thumbnail {
+        float: left;
+        margin: 0 13px 20px 0px;
+      }
+
+form label {
+    font-weight:bold;
+}
+
+form input {
+    font-size: 110%;
 }
 
 a images {
