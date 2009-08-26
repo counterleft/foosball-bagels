@@ -177,7 +177,23 @@ del, .del { text-decoration:line-through; }
 strong, .strong { font-weight:bold; }
 cite, em, q, var { font-style:italic; }
 code, kbd, samp  {font-family:monospace; font-size:110%; }
-hr { display:block; height:1px; margin:10px 0; padding:0; border:0 solid #CCC; background:#CCC; color:#CCC;} 
+hr { display:block; height:1px; margin:10px 0; padding:0; border:0 solid #CCC; background:#CCC; color:#CCC;}
+
+.negative {
+  color: red;
+  font-weight: bold;
+}
+
+.positive {
+  color: green;
+  font-weight: bold;
+}
+
+.neutral {
+  color: black;
+  font-weight: bold;
+}
+
 .light {padding: 4px 5px; background: #ac0001; text-decoration: none;} .light:hover {color: #fff;}
 .noscreen { display:none; }
 .clear {clear: both;}

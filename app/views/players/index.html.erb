@@ -1,21 +1,16 @@
-<h1>Listing players</h1>
+<div id="main-box">
+  <div id="quote">Foos Your Daddy?</div>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
-
-<% @players.each do |player| %>
-  <tr>
-    <td><%=h player.name %></td>
-    <td><%= link_to 'Show', player %></td>
-    <td><%= link_to 'Edit', edit_player_path(player) %></td>
-    <td><%= link_to 'Destroy', player, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
+<div id="content">
+  <h2>Plus-Minus Rankings</h2>
+  
+  <ol>
+    <% @players.each do |player| %>
+    <li><%= link_to player.name, player %> : <%= colored_plus_minus player %></li>
+    <% end %>
+  </ol>
 
 <%= link_to 'New player', new_player_path %>
 
+</div>

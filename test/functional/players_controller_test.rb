@@ -49,5 +49,17 @@ class PlayersControllerTest < ActionController::TestCase
     bagel_plus_minus = players(:brian).plus_minus
     assert_equal expected_plus_minus, bagel_plus_minus
   end
+
+  test "players should be sorted by plus minus desc" do
+    get :index
+    expected = assigns(:players).to_a.sort do |p1, p2|
+      if p2.plus_minus == p1.plus_minus
+        p2.name <=> p1.name
+      else
+        p2.plus_minus <=> p1.plus_minus  
+      end
+    end
+    assert_equal expected, assigns(:players).to_a
+  end
 end
 
