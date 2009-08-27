@@ -1,6 +1,15 @@
 require 'test_helper'
 
 class BagelsControllerTest < ActionController::TestCase
+  test "bagels nav link should point to bagels index" do
+    get :index
+    assert_select "#navigation" do
+      assert_select "a", { :text => "Bagels" } do
+        assert_select "[href=?]", bagels_path
+      end
+    end
+  end
+
   test "should get index" do
     get :index
     assert_response :success
