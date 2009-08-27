@@ -19,7 +19,7 @@
   contribute_verb = " is "
   contribute_verb = " are " if bagel_contributor_links.size > 1
 
-  plus_minus = @contributors.first.plus_minus.to_s
+  plus_minus = PlayersHelper.colored_plus_minus @contributors.first.plus_minus
 %>
 
 <p>
@@ -33,7 +33,7 @@
   prevent_verb = " is "
   prevent_verb = " are " if bagel_preventer_links.size > 1
 
-  plus_minus = @preventers.first.plus_minus.to_s
+  plus_minus = PlayersHelper.colored_plus_minus @preventers.first.plus_minus
 %>
 
 <p>

@@ -7,7 +7,7 @@
   
   <ol>
     <% @players.each do |player| %>
-    <li><%= link_to player.name, player %> : <%= colored_plus_minus player %></li>
+    <li><%= link_to player.name, player %> : <%= PlayersHelper.colored_plus_minus player.plus_minus %></li>
     <% end %>
   </ol>
 
