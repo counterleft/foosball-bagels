@@ -38,14 +38,16 @@ class PlayerTest < ActiveSupport::TestCase
 
   test "find correct bagel contributors" do
     actual_contributors = Player.bagel_contributors
-    expected_contributors = [ players(:contributor2), players(:contributor1) ]
-    assert_equal expected_contributors, actual_contributors
+    expected_contributors = [ players(:contributor1), players(:contributor2) ]
+    assert_equal expected_contributors[0], actual_contributors[0]
+    assert_equal expected_contributors[1], actual_contributors[1]
   end
 
   test "find correct bagel preventers" do
     actual_preventers = Player.bagel_preventers
-    expected_preventers = [ players(:preventer2), players(:preventer1) ]
-    assert_equal expected_preventers, actual_preventers
+    expected_preventers = [ players(:preventer1), players(:preventer2) ]
+    assert_equal expected_preventers[0], actual_preventers[0]
+    assert_equal expected_preventers[1], actual_preventers[1]
   end
 end
 

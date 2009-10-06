@@ -83,14 +83,16 @@ class BagelsControllerTest < ActionController::TestCase
 
   test "bagel contributors is correct" do
     get :index
-    contributors = [ players(:contributor2), players(:contributor1) ]
-    assert_equal contributors, assigns(:contributors)
+    contributors = [ players(:contributor1), players(:contributor2) ]
+    assert_equal contributors[0], assigns(:contributors)[0]
+    assert_equal contributors[1], assigns(:contributors)[1]
   end
 
   test "bagel preventers is correct" do
     get :index
-    contributors = [ players(:preventer2), players(:preventer1) ]
-    assert_equal contributors, assigns(:preventers)
+    preventers = [ players(:preventer1), players(:preventer2) ]
+    assert_equal preventers[0], assigns(:preventers)[0]
+    assert_equal preventers[1], assigns(:preventers)[1]
   end
 end
 
