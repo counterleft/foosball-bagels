@@ -1,6 +1,23 @@
 require 'test_helper'
 
 class PlayerTest < ActiveSupport::TestCase
+  test "special wagers should return bill" do
+    special_wager = Player.special_wager_players
+
+    first_player = special_wager.shift
+    assert_equal players(:bill), first_player[0]
+    assert_equal -1, first_player[1]
+  end
+
+  test "special wagers should return paul" do
+    special_wager = Player.special_wager_players
+    special_wager.shift
+    
+    second_player = special_wager.shift
+    assert_equal players(:paul), second_player[0]
+    assert_equal 0, second_player[1]
+  end
+
   test "should decrement plus minus only by one" do
     assert_difference('players(:one).plus_minus', -1) do
       players(:one).decr_plus_minus

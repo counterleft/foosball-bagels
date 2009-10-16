@@ -40,6 +40,24 @@
   <%= bagel_preventer_links.join(", ") + prevent_verb + "more likely to help a team give a bagel to another team with a plus-minus of " + plus_minus + "." %>
 </p>
 
+  <div id="special_wager">
+    <h2>Special Wager</h2>
+    <p>Bill thinks Paul will have a -10 plus-minus between now (10/16/2009) and Christmas (12/25/2009).
+      Paul asserts that his plus-minus will still be higher
+      than Bill's (within the same time range).</p>
+    <p>We will track both of their plus-minus values here:</p>
+
+
+    <table>
+      <tr>
+        <th colspan="2">Plus-Minus Between 10/16/2009 and 12/25/2009</th>
+      </tr>
+      <% @special_wager.each do |player, plus_minus| %>
+        <%= %(<tr><td width="50%">#{player.name}</td><td>#{PlayersHelper.colored_plus_minus plus_minus}</td></tr>) %>
+      <% end %>
+    </table>
+  </div>
+
 
 <h2>Most Recent Bagels</h2>
 

@@ -94,5 +94,16 @@ class BagelsControllerTest < ActionController::TestCase
     assert_equal preventers[0], assigns(:preventers)[0]
     assert_equal preventers[1], assigns(:preventers)[1]
   end
+
+  test "index page should have special wager map" do
+    get :index
+    assert_not_nil assigns(:special_wager)
+    assert_equal 2, assigns(:special_wager).size
+  end
+
+  test "index page should have special wager section" do
+    get :index
+    assert_select "div#special_wager"
+  end
 end
 
