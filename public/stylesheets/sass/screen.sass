@@ -1,3 +1,5 @@
+!primary_blue = #1e8abb
+
 *
   margin: 0
   padding: 0
@@ -16,13 +18,13 @@ body
 
 
 a
-  color: #1e8abb
+  color = !primary_blue
 
   &:link
-    color: #1e8abb
+    color = !primary_blue
 
   &:hover
-    color: #1e8abb
+    color = !primary_blue
     text-decoration: none
 
 
@@ -79,7 +81,7 @@ h5
 
   a
     text-decoration: none
-    color: #1e8abb
+    color = !primary_blue
     font-weight: normal
     padding: 0px 10px 7px 10px
 
@@ -108,19 +110,19 @@ h5
     text-decoration: none
     border-left: 1px solid #e3eaed
 
+  a
+    &:hover
+      text-decoration: underline
+
 
 #first a
   border: none !important
 
 
-#navigation a:hover
-  text-decoration: underline
-
-
 #main-box
   color: #fff
   font-size: 24px
-  background: #1e8abb url('../images/main-top.jpg') repeat-x
+  background = !primary_blue url('../images/main-top.jpg') repeat-x
 
 
 #quote
@@ -141,7 +143,7 @@ h5
 
   a:hover
     color: #fff
-    background-color: #1e8abb
+    background-color = !primary_blue
 
 
 #footer
@@ -150,7 +152,12 @@ h5
   color: #aaaaaa
   border-top: 1px solid #dadada
 
+  a:hover
+    color: #fff
+    background-color = !primary_blue
+
   p
+    font-size: 80%
     margin-top: 0
     margin-bottom: 0
 
