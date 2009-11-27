@@ -21,7 +21,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
 
   config.gem "calendar_date_select", :version => '1.15'
-  config.gem "haml", :version => '2.2.14'
+  config.gem "haml", :version => '2.2.13'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
