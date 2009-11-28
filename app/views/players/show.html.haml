@@ -1,0 +1,13 @@
+#main-box
+  #quote Player Info
+
+#content
+  %p
+    %strong Name:
+    = @player.name
+
+  %p
+    %strong Plus-Minus:
+    = PlayersHelper.colored_plus_minus @player.plus_minus
+
+= link_to 'Back', root_path

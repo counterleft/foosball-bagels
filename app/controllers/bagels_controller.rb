@@ -10,7 +10,7 @@ class BagelsController < ApplicationController
     @special_wager = Player.special_wager_players
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @bagels }
     end
   end
@@ -21,7 +21,7 @@ class BagelsController < ApplicationController
     @bagel = Bagel.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.xml  { render :xml => @bagel }
     end
   end
@@ -32,7 +32,7 @@ class BagelsController < ApplicationController
     @bagel = Bagel.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # new.html.haml
       format.xml  { render :xml => @bagel }
     end
   end

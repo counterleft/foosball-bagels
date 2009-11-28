@@ -1,0 +1,36 @@
+!!!
+
+%html{:xmls => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
+  %head
+    %meta{ "http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
+    %meta(name="author" lang="en" content="Brian Mathiyakom; http://brian.rarevisions.net")
+    %meta(name="copyright" lang="en" content="Brian Mathiyakom; http://brian.rarevisions.net")
+    %meta(name="robots" content="none")
+    %title Bagel Central
+    = stylesheet_link_tag "screen"
+    = javascript_include_tag :defaults
+    = yield :head
+
+  %body
+    #layout
+      #header
+        %h1#logo
+          %a{:href => "#{root_path}", :title => "Bagel Central"} <span>Bagel</span> Central
+        %hr.noscreen
+
+        #navigation
+          %ul
+            %li#first= link_to "Add Bagel", new_bagel_path
+            %li= link_to "Bagels", bagels_path
+            %li= link_to 'Players', players_path
+            %li
+              %a{:href => "#", :title => "#"} About
+        %hr.noscreen
+
+        #main
+          %p{:style => "color: green"}= flash[:notice]
+          = yield
+
+        #footer
+          %p#copyright &copy; 2009 <a href="http://rarevisions.net">rareVisions</a>
+          %p#dont-delete-this Design by <a href="http://www.davidkohout.cz">David Kohout</a>

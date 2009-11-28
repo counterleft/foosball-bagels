@@ -1,0 +1,47 @@
+- content_for :head do
+  = stylesheet_link_tag "auto_complete"
+  = calendar_date_select_includes 'plain'
+
+#main-box
+  #quote Someone else got the bagel?
+
+#content
+  - form_for(@bagel) do |f|
+    = f.error_messages
+
+    %p
+      = f.label :baked_on
+      %br
+      = calendar_date_select :bagel, :baked_on, :time => false, :buttons => false, :month_year => 'label', :size => 10
+
+    %p
+      = f.label "Owner's Name"
+      %br
+      = text_field_with_auto_complete :bagel, :owner_name, { :size => 20 }, { :skip_style => true, :url => names_players_path, :frequency => '0.05', :method => 'get', :param_name => 'name'}
+
+    %p
+      = f.label "Teammate's Name"
+      %br
+      = text_field_with_auto_complete :bagel, :teammate_name, { :size => 20 }, { :skip_style => true, :url => names_players_path, :frequency => '0.05', :method => 'get', :param_name => 'name' }
+
+    %p
+      = f.label "Offensive Opponent's Name"
+      %br
+      = text_field_with_auto_complete :bagel, :opponent_1_name, { :size => 20 }, { :skip_style => true, :url => names_players_path, :frequency => '0.05', :method => 'get', :param_name => 'name' }
+
+    %p
+      = f.label "Defensive Opponent's Name"
+      %br
+      = text_field_with_auto_complete :bagel, :opponent_2_name, { :size => 20 }, { :skip_style => true, :url => names_players_path, :frequency => '0.05', :method => 'get', :param_name => 'name' }
+
+    %p
+      = f.submit "Add New Bagel"
+
+  = link_to "cancel", root_path
+
+:javascript
+  document.observe("dom:loaded", function() {
+    var baked_on_date = $('bagel_baked_on')
+    var today = new Date().toFormattedString(false);
+    baked_on_date.writeAttribute({'value':today});
+  });

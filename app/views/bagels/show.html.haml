@@ -1,0 +1,27 @@
+#main-box
+  #quote Bagel Info
+
+%p
+  %b Baked On:
+  = @bagel.baked_on.to_s(:date)
+
+%p
+  %b Owner:
+  = link_to @bagel.owner.name, @bagel.owner
+
+%p
+  %b Teammate:
+  = link_to @bagel.teammate.name, @bagel.teammate
+
+%p
+  %b Offensive Opponent:
+  = link_to @bagel.opponent_1.name, @bagel.opponent_1
+
+%p
+  %b Defensive Opponent:
+  = link_to @bagel.opponent_1.name, @bagel.opponent_2
+
+-#
+  <%=  link_to 'Edit', edit_bagel_path(@bagel) %>
+
+= link_to 'Back', root_path

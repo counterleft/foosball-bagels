@@ -1,0 +1,14 @@
+#main-box
+  #quote Foos Your Daddy?
+
+#content
+  %h2 Plus-Minus Rankings
+
+  %ol
+    - @players.each do |player|
+      %li
+        = link_to player.name, player
+        \:
+        = PlayersHelper.colored_plus_minus player.plus_minus
+
+  = link_to 'New Player', new_player_path
