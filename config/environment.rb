@@ -43,5 +43,5 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 end
 
-CalendarDateSelect.format = :american
+CalendarDateSelect.format = :iso_date
 
