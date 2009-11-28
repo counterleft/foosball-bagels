@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090713042214) do
+ActiveRecord::Schema.define(:version => 20091128114754) do
 
   create_table "bagels", :force => true do |t|
     t.integer  "owner_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20090713042214) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "plus_minus"
+    t.integer  "plus_minus", :default => 0, :null => false
   end
 
 end
