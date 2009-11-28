@@ -22,9 +22,17 @@ module AutoCompleteMacrosHelper
   #                                  innerHTML should be updated with the autocomplete
   #                                  entries returned by the AJAX request. 
   #                                  Defaults to <tt>field_id</tt> + '_auto_complete'
+  # <tt>:callback</tt>::             This function is called just before the 
+  #                                  Request is actually made, allowing you to 
+  #                                  modify the querystring that is sent to the 
+  #                                  server. The function receives the 
+  #                                  completer’s input field and the default 
+  #                                  querystring (‘value=XXX’) as parameters. 
+  #                                  You should return the querystring you want 
+  #                                  used, including the default part.  #                               
   # <tt>:with</tt>::                 A JavaScript expression specifying the
   #                                  parameters for the XMLHttpRequest. This defaults
-  #                                  to 'fieldname=value'.
+  #                                  to 'fieldname=value'. Overrides :callback.
   # <tt>:frequency</tt>::            Determines the time to wait after the last keystroke
   #                                  for the AJAX request to be initiated.
   # <tt>:indicator</tt>::            Specifies the DOM ID of an element which will be
@@ -45,6 +53,14 @@ module AutoCompleteMacrosHelper
   #                                  innerHTML is replaced.
   # <tt>:on_show</tt>::              Like on_hide, only now the expression is called
   #                                  then the div is shown.
+  # <tt>:update_element</tt>::       Hook for a custom function to replace the 
+  #                                  built-in function that adds the list item 
+  #                                  text to the input field. The custom 
+  #                                  function is called after the element has 
+  #                                  been updated (i.e. when the user has 
+  #                                  selected an entry). The function receives 
+  #                                  one parameter only: the selected item (the 
+  #                                  li item selected)
   # <tt>:after_update_element</tt>:: A Javascript expression that is called when the
   #                                  user has selected one of the proposed values. 
   #                                  The expression should take two variables: element and value.
@@ -63,15 +79,22 @@ module AutoCompleteMacrosHelper
     
     js_options = {}
     js_options[:tokens] = array_or_string_for_javascript(options[:tokens]) if options[:tokens]
-    js_options[:callback]   = "function(element, value) { return #{options[:with]} }" if options[:with]
+    if options[:with]
+      js_options[:callback]   = "function(element, value) { return #{options[:with]} }"
+    elsif options[:callback]
+      js_options[:callback] = options[:callback]
+    end
     js_options[:indicator]  = "'#{options[:indicator]}'" if options[:indicator]
     js_options[:select]     = "'#{options[:select]}'" if options[:select]
     js_options[:paramName]  = "'#{options[:param_name]}'" if options[:param_name]
     js_options[:frequency]  = "#{options[:frequency]}" if options[:frequency]
     js_options[:method]     = "'#{options[:method].to_s}'" if options[:method]
+    
+    js_options[:select]     = "'autocomplete_values'" if options[:append]
 
     { :after_update_element => :afterUpdateElement, 
-      :on_show => :onShow, :on_hide => :onHide, :min_chars => :minChars }.each do |k,v|
+      :update_element => :updateElement, :on_show => :onShow, 
+      :on_hide => :onHide, :min_chars => :minChars }.each do |k,v|
       js_options[v] = options[k] if options[k]
     end
 
@@ -93,10 +116,14 @@ module AutoCompleteMacrosHelper
   #
   # The auto_complete_result can of course also be called from a view belonging to the 
   # auto_complete action if you need to decorate it further.
-  def auto_complete_result(entries, field, phrase = nil)
+  def auto_complete_result(entries, field, phrase = nil, prepend = "")
     return unless entries
-    items = entries.map { |entry| content_tag("li", phrase ? highlight(entry[field], phrase) : h(entry[field])) }
-    content_tag("ul", items.uniq)
+    fullfield = "" if fullfield.nil?
+    items = entries.map do |entry| 
+      content_tag("li", phrase ? highlight(entry[field], phrase) : h(entry[field])\
+        + content_tag('span', prepend + " " + h(entry[field]), :style => "display: none", :class => "autocomplete_values" )) 
+    end
+    content_tag("ul", items.uniq.join)
   end
   
   # Wrapper for text_field with added AJAX autocompletion functionality.
@@ -105,10 +132,15 @@ module AutoCompleteMacrosHelper
   # auto_complete_for to respond the AJAX calls,
   # 
   def text_field_with_auto_complete(object, method, tag_options = {}, completion_options = {})
-    (completion_options[:skip_style] ? "" : auto_complete_stylesheet) +
+    if (tag_options[:index])
+      tag_name = "#{object}_#{tag_options[:index]}_#{method}"
+    else
+      tag_name = "#{object}_#{method}"
+    end
+    content_for :styles, auto_complete_stylesheet unless completion_options[:skip_style]
     text_field(object, method, tag_options) +
-    content_tag("div", "", :id => "#{object}_#{method}_auto_complete", :class => "auto_complete") +
-    auto_complete_field("#{object}_#{method}", { :url => { :action => "auto_complete_for_#{object}_#{method}" } }.update(completion_options))
+    content_tag("div", "", :id => tag_name + "_auto_complete", :class => "auto_complete") +
+    auto_complete_field(tag_name, { :url => { :action => "auto_complete_for_#{object}_#{method}" } }.update(completion_options))
   end
 
   private
@@ -130,7 +162,7 @@ module AutoCompleteMacrosHelper
           padding:3px;
         }
         div.auto_complete ul li.selected {
-          background-color: #aaa;
+          background-color: #ffb;
         }
         div.auto_complete ul strong.highlight {
           color: #800; 

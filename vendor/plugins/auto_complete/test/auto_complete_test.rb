@@ -38,6 +38,9 @@ class AutoCompleteTest < Test::Unit::TestCase
     assert_dom_equal %(<script type=\"text/javascript\">\n//<![CDATA[\nvar some_input_auto_completer = new Ajax.Autocompleter('some_input', 'some_input_auto_complete', 'http://www.example.com/autocomplete', {afterUpdateElement:function(element,value){alert('You have chosen: '+value)}})\n//]]>\n</script>),
       auto_complete_field("some_input", :url => { :action => "autocomplete" }, 
         :after_update_element => "function(element,value){alert('You have chosen: '+value)}");
+    assert_dom_equal %(<script type=\"text/javascript\">\n//<![CDATA[\nvar some_input_auto_completer = new Ajax.Autocompleter('some_input', 'some_input_auto_complete', 'http://www.example.com/autocomplete', {updateElement:function(li){alert('You have chosen: '+li)}})\n//]]>\n</script>),
+      auto_complete_field("some_input", :url => { :action => "autocomplete" }, 
+        :update_element => "function(li){alert('You have chosen: '+li)}");
     assert_dom_equal %(<script type=\"text/javascript\">\n//<![CDATA[\nvar some_input_auto_completer = new Ajax.Autocompleter('some_input', 'some_input_auto_complete', 'http://www.example.com/autocomplete', {paramName:'huidriwusch'})\n//]]>\n</script>),
       auto_complete_field("some_input", :url => { :action => "autocomplete" }, :param_name => 'huidriwusch');
     assert_dom_equal %(<script type=\"text/javascript\">\n//<![CDATA[\nvar some_input_auto_completer = new Ajax.Autocompleter('some_input', 'some_input_auto_complete', 'http://www.example.com/autocomplete', {method:'get'})\n//]]>\n</script>),
@@ -62,6 +65,11 @@ class AutoCompleteTest < Test::Unit::TestCase
 
     assert_dom_equal %(<input id=\"message_recipient\" name=\"message[recipient]\" size=\"30\" type=\"text\" /><div class=\"auto_complete\" id=\"message_recipient_auto_complete\"></div><script type=\"text/javascript\">\n//<![CDATA[\nvar message_recipient_auto_completer = new Ajax.Autocompleter('message_recipient', 'message_recipient_auto_complete', 'http://www.example.com/auto_complete_for_message_recipient', {})\n//]]>\n</script>),
       text_field_with_auto_complete(:message, :recipient, {}, :skip_style => true)
+  end
+
+  def test_text_field_with_auto_complete_indexed
+    assert_dom_equal %(<input id=\"message_0_recipient\" name=\"message[0][recipient]\" size=\"30\" type=\"text\" /><div class=\"auto_complete\" id=\"message_0_recipient_auto_complete\"></div><script type=\"text/javascript\">\n//<![CDATA[\nvar message_0_recipient_auto_completer = new Ajax.Autocompleter('message_0_recipient', 'message_0_recipient_auto_complete', 'http://www.example.com/auto_complete_for_message_recipient', {})\n//]]>\n</script>),
+      text_field_with_auto_complete(:message, :recipient, {:index => 0}, :skip_style => true)
   end
   
 end
