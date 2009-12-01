@@ -67,11 +67,13 @@ class Bagel < ActiveRecord::Base
     opponent_2.save
   end
 
+  EXISTING_PLAYER_NEEDED_MSG = "must exist correspond to an existing player"
+
   def players_must_exist
-    errors.add(:owner_name, "must exist correspond to an exist player") if owner.nil?
-    errors.add(:teammate_name, "must exist correspond to an exist player") if teammate.nil?
-    errors.add(:opponent_1_name, "must exist correspond to an exist player") if opponent_1.nil?
-    errors.add(:opponent_2_name, "must exist correspond to an exist player") if opponent_2.nil?
+    errors.add(:owner_name, EXISTING_PLAYER_NEEDED_MSG) if owner.nil?
+    errors.add(:teammate_name, EXISTING_PLAYER_NEEDED_MSG) if teammate.nil?
+    errors.add(:opponent_1_name, EXISTING_PLAYER_NEEDED_MSG) if opponent_1.nil?
+    errors.add(:opponent_2_name, EXISTING_PLAYER_NEEDED_MSG) if opponent_2.nil?
   end
 
   def players_distinct
