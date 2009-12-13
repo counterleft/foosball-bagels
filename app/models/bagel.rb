@@ -43,7 +43,7 @@ class Bagel < ActiveRecord::Base
   end
 
   def self.current_owner
-    latest_bagel = Bagel.find(:last, :order => 'baked_on, created_at')
+    latest_bagel = Bagel.find(:first, :order => 'baked_on desc, created_at desc')
     return latest_bagel.owner if latest_bagel
   end
 

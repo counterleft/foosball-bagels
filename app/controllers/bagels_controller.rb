@@ -3,7 +3,8 @@ class BagelsController < ApplicationController
   # GET /bagels
   # GET /bagels.xml
   def index
-    @bagels = Bagel.find(:all, :limit => 5, :order => 'baked_on desc, created_at desc')
+    @bagels = Bagel.find(:all, :limit => 5, :order => 'baked_on desc, created_at desc',
+                         :include => [ :owner, :teammate, :opponent_1, :opponent_2 ])
     @current_owner = Bagel.current_owner
     @contributors = Player.bagel_contributors
     @preventers = Player.bagel_preventers
