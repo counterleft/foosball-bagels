@@ -5,7 +5,7 @@ class BagelsController < ApplicationController
   def index
     @bagels = Bagel.find(:all, :limit => 5, :order => 'baked_on desc, created_at desc',
                          :include => [ :owner, :teammate, :opponent_1, :opponent_2 ])
-    @current_owner = Bagel.current_owner
+    @current_owner = Bagel.current_owner(@bagels)
     @contributors = Player.bagel_contributors
     @preventers = Player.bagel_preventers
     @special_wager = Player.special_wager_players
