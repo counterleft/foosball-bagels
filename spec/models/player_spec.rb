@@ -62,7 +62,7 @@ describe Player do
   end
 end
 
-describe Player, "when working with the special wagers" do
+describe Player, "when working with special wagers" do
   before do
     @paul = Player.make(:name => 'Paul')
     @bill = Player.make(:name => 'Bill')

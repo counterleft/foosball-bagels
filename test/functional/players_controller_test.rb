@@ -1,5 +1,7 @@
 require 'test_helper'
 
+# deprecated
+# see players_controller_spec.rb
 class PlayersControllerTest < ActionController::TestCase
   test "should get index" do
     get :index

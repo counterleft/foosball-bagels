@@ -1,5 +1,7 @@
 require 'test_helper'
 
+# deprecated
+# see player_spec.rb
 class PlayerTest < ActiveSupport::TestCase
   test "special wagers should return bill" do
     special_wager = Player.special_wager_players

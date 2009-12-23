@@ -1,5 +1,7 @@
 require 'test_helper'
 
+# deprecated
+# see bagel_spec.rb
 class BagelTest < ActiveSupport::TestCase
   test "opponent_2 plus-minus increases by one after receiving a bagel" do
     opponent_2 = players(:four)
