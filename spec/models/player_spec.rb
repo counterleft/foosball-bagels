@@ -71,7 +71,7 @@ describe Player, "when working with special wagers" do
   it "should return paul and bill" do
     special_wager_players = Player.special_wager_players
     special_wager_players.size.should == 2
-    special_wager_players.shift[0].should == @bill
-    special_wager_players.shift[0].should == @paul
+    special_wager_players[:bill] = @bill
+    special_wager_players[:paul] == @paul
   end
 end
