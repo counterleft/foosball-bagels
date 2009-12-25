@@ -60,6 +60,9 @@ h4
 h5
   font-size: 100%
 
+#errorExplanation
+  h2
+    color: red
 
 #layout
   width: 810px
@@ -186,6 +189,12 @@ form
 
   input
     font-size: 110%
+    &:focus
+      border = "2px solid #{!primary_blue}"
+
+  textarea
+    &:focus
+      border = "2px solid #{!primary_blue}"
 
 a
   images

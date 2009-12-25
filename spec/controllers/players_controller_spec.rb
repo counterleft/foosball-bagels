@@ -13,7 +13,7 @@ describe PlayersController do
     response.should be_success
   end
 
-  it "should player with post params" do
+  it "should create player with post params" do
     params = { name => 'Ben' }
     Player.should_receive(:new).with(params).and_return(@player)
     @player.should_receive(:save).and_return(true)

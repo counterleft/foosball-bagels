@@ -108,3 +108,24 @@ describe Bagel do
     }
   end
 end
+
+describe Bagel, "when getting current owner" do
+  it "should return nil when no bagels available" do
+    Bagel.current_owner.should be_nil
+  end
+
+  it "should return first bagel owner if given list of desc bagels" do
+    latest_bagel = Bagel.make(:baked_on => '2010/01/01')
+    second_bagel = Bagel.make(:baked_on => '2009/12/23')
+    actual = Bagel.current_owner([latest_bagel, second_bagel])
+    actual.should == latest_bagel.owner
+  end
+
+  it "should return current bagel owner when given empty list" do
+    Bagel.make
+    latest_bagel = Bagel.make
+    Bagel.current_owner.should == latest_bagel.owner
+
+    Bagel.current_owner([]).should == latest_bagel.owner
+  end
+end

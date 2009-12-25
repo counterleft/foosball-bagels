@@ -24,7 +24,7 @@ Player.blueprint(:preventer) do
 end
 
 Bagel.blueprint do
-  baked_on 
+  baked_on { Date.today }
   owner
   teammate
   opponent_1

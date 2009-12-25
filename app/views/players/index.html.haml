@@ -7,8 +7,6 @@
   %ol
     - @players.each do |player|
       %li
-        = link_to player.name, player
-        \:
-        = PlayersHelper.colored_plus_minus player.plus_minus
+        = "#{link_to player.name, player} : #{PlayersHelper.colored_plus_minus player.plus_minus}"
 
   = link_to 'New Player', new_player_path

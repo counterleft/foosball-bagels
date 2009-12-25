@@ -42,11 +42,11 @@ class Bagel < ActiveRecord::Base
     return o.baked_on <=> self.baked_on
   end
 
-  def self.current_owner(recent_bagels_desc=nil)
-    if !recent_bagels_desc.nil?
+  def self.current_owner(recent_bagels_desc=[])
+    if !recent_bagels_desc.empty?
       return recent_bagels_desc.first.owner
     end
-    latest_bagel = Bagel.find(:first, :order => 'baked_on desc, created_at desc')
+    latest_bagel = Bagel.find(:first, :order => 'baked_on desc, created_at desc, id desc')
     return latest_bagel.owner if latest_bagel
   end
 
