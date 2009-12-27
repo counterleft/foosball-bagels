@@ -30,4 +30,14 @@ describe "bagels index page" do
       end
     end
   end
+
+  it "should display bagel baked_on date as yyyy-mm-dd" do
+    render '/bagels/index'
+    response.should have_tag('table#recent_bagels') do
+      with_tag('tr') do
+        with_tag('td', assigns[:bagels][0].baked_on.strftime("%Y-%m-%d"))
+        with_tag('td', assigns[:bagels][1].baked_on.strftime("%Y-%m-%d"))
+      end
+    end
+  end
 end

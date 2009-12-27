@@ -42,6 +42,10 @@ class Bagel < ActiveRecord::Base
     return o.baked_on <=> self.baked_on
   end
 
+  def baked_on_display
+    return self[:baked_on].strftime("%Y-%m-%d")
+  end
+
   def self.current_owner(recent_bagels_desc=[])
     if !recent_bagels_desc.empty?
       return recent_bagels_desc.first.owner

@@ -11,6 +11,11 @@ describe Bagel do
     }
   end
 
+  it "should display baked_on as yyyy-mm-dd" do
+    actual = Bagel.make_unsaved
+    actual.baked_on_display.should == actual.baked_on.strftime("%Y-%m-%d")
+  end
+
   it "should create a new bagel given valid attributes" do
     Bagel.create!(@valid_attributes)
   end
