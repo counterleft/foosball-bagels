@@ -1,0 +1,3 @@
+describe BagelsHelper do
+
+end
