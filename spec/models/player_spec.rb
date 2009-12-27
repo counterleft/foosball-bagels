@@ -14,16 +14,16 @@ describe Player do
   end
 
   it "should find correct bagel contributors" do
-    expected_contributor_1 = Player.make(:contributor, :name => "Bob")
-    expected_contributor_2 = Player.make(:contributor, :name => "Chris")
+    expected_contributor_1 = Player.make(:contributor)
+    expected_contributor_2 = Player.make(:contributor)
     Player.make(:plus_minus => 1000)
     actual_contributors = Player.bagel_contributors
     actual_contributors.should == [ expected_contributor_1, expected_contributor_2 ]
   end
 
   it "should find correct bagel preventers" do
-    expected_preventer_1 = Player.make(:preventer, :name => "Albert")
-    expected_preventer_2 = Player.make(:preventer, :name => "Greg")
+    expected_preventer_1 = Player.make(:preventer)
+    expected_preventer_2 = Player.make(:preventer)
     Player.make
     actual_preventers = Player.bagel_preventers
     actual_preventers.should == [ expected_preventer_1, expected_preventer_2 ]

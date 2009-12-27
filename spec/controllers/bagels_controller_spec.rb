@@ -1,12 +1,15 @@
 require 'spec_helper'
 
 describe BagelsController, "when getting index page" do
-  it "should get five latest bagels sorted by baked_on desc, created_on desc, id desc" do
-    3.times { Bagel.make }
+  before do
     Player.should_receive(:special_wager_players).and_return({})
     Player.should_receive(:bagel_preventers).and_return([])
     Player.should_receive(:bagel_contributors).and_return([])
+  end
 
+  it "should get five latest bagels sorted by baked_on desc, created_on desc, id desc" do
+    3.times { Bagel.make }
+    
     get :index
     actual = assigns[:bagels]
     actual.should_not be_nil
@@ -26,10 +29,6 @@ describe BagelsController, "when getting index page" do
   it "should get 5 bagels max" do
     6.times { Bagel.make }
 
-    Player.should_receive(:special_wager_players).and_return({})
-    Player.should_receive(:bagel_preventers).and_return([])
-    Player.should_receive(:bagel_contributors).and_return([])
-
     get :index
     assigns[:bagels].size.should == 5
   end
@@ -37,10 +36,6 @@ describe BagelsController, "when getting index page" do
   it "should get the current bagel owner" do
     bagel = Bagel.make
     Bagel.should_receive(:find).and_return([bagel])
-
-    Player.should_receive(:special_wager_players).and_return({})
-    Player.should_receive(:bagel_preventers).and_return([])
-    Player.should_receive(:bagel_contributors).and_return([])
     
     get :index
     assigns[:current_owner].should == bagel.owner
@@ -48,16 +43,14 @@ describe BagelsController, "when getting index page" do
 
   it "should get bagel preventers" do
     Player.make
-    Player.should_receive(:bagel_contributors).and_return([])    
-    Player.should_receive(:special_wager_players).and_return({})
+
     get :index
     assigns[:preventers].should_not be_nil
   end
 
   it "should get bagel contributors" do
     Player.make
-    Player.should_receive(:bagel_preventers).and_return([])
-    Player.should_receive(:special_wager_players).and_return({})
+
     get :index
     assigns[:contributors].should_not be_nil
   end
@@ -72,11 +65,10 @@ describe BagelsController do
 
   it "should create bagel with post params" do
     bagel = mock_model(Bagel)
-    params = { "owner" => 1, "teammate" => 2, "opponent_1" => 3, "opponent_2" => 2 }
-    Bagel.should_receive(:new).with(params).and_return(bagel)
+    Bagel.should_receive(:new).with(bagel.to_param).and_return(bagel)
     bagel.should_receive(:save).and_return(true)
 
-    post :create, :bagel => params
+    post :create, :bagel => bagel.to_param
     flash[:notice].should_not be_nil
     response.should redirect_to(bagel_path(bagel))
   end
@@ -91,8 +83,8 @@ end
 
 describe BagelsController, "when getting special wagers" do
   it "should get wagers with bill and paul" do
-    Player.make(:name => 'Bill')
-    Player.make(:name => 'Paul')
+    bill = Player.make(:name => 'Bill')
+    paul = Player.make(:name => 'Paul')
 
     Player.should_receive(:bagel_preventers).and_return([])
     Player.should_receive(:bagel_contributors).and_return([])
@@ -100,5 +92,7 @@ describe BagelsController, "when getting special wagers" do
     get :index
     assigns[:special_wager].should_not be_nil
     assigns[:special_wager].size.should == 2
+    assigns[:special_wager][:bill] = bill.plus_minus
+    assigns[:special_wager][:paul] = paul.plus_minus
   end
 end

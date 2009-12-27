@@ -17,7 +17,7 @@ describe PlayersController do
     params = { name => 'Ben' }
     Player.should_receive(:new).with(params).and_return(@player)
     @player.should_receive(:save).and_return(true)
-    
+
     post :create, :player => params
     flash[:notice].should_not be_nil
     response.should redirect_to(player_path(@player))
