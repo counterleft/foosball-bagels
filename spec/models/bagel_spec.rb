@@ -76,8 +76,8 @@ describe Bagel do
                 :owner => owner,
                 :teammate => Player.make,
                 :opponent_1 => Player.make,
-                :opponent_2 => Player.make).save.should change(owner, :plus_minus).by(-1)
-    }
+                :opponent_2 => Player.make).save
+    }.should change(owner, :plus_minus).by(-1)
   end
 
   it "should decrease teammate's plus minus by one on save" do
@@ -87,8 +87,8 @@ describe Bagel do
                 :owner => Player.make,
                 :teammate => teammate,
                 :opponent_1 => Player.make,
-                :opponent_2 => Player.make).save.should change(teammate, :plus_minus).by(-1)
-    }
+                :opponent_2 => Player.make).save
+    }.should change(teammate, :plus_minus).by(-1)
   end
 
   it "should increase offensive opponent's plus minus by one on save" do
@@ -98,8 +98,8 @@ describe Bagel do
                 :owner => Player.make,
                 :teammate => Player.make,
                 :opponent_1 => opponent_1,
-                :opponent_2 => Player.make).save.should change(opponent_1, :plus_minus).by(1)
-    }
+                :opponent_2 => Player.make).save
+    }.should change(opponent_1, :plus_minus).by(1)
   end
 
   it "should increase defensive opponent's plus minus by one on save" do
@@ -109,8 +109,8 @@ describe Bagel do
                 :owner => Player.make,
                 :teammate => Player.make,
                 :opponent_1 => Player.make,
-                :opponent_2 => opponent_2).save.should change(opponent_2, :plus_minus).by(1)
-    }
+                :opponent_2 => opponent_2).save
+    }.should change(opponent_2, :plus_minus).by(1)
   end
 end
 
