@@ -12,24 +12,14 @@
     bagel_contributor_links = []
     @contributors.each { |b| bagel_contributor_links.push(link_to(b.name, b)) }
 
-    contribute_verb = " is "
-    contribute_verb = " are " if bagel_contributor_links.size > 1
-
-    plus_minus = PlayersHelper.colored_plus_minus @contributors.first.plus_minus
-
-  %p= bagel_contributor_links.to_sentence + contribute_verb + "more likely to help a team receive a bagel with a plus-minus of " + plus_minus + "."
+  %p= PlayersHelper.bagel_contributors @contributors, bagel_contributor_links
   
   :ruby
     bagel_preventer_links = []
     @preventers.each { |b| bagel_preventer_links.push(link_to(b.name, b)) }
 
-    prevent_verb = " is "
-    prevent_verb = " are " if bagel_preventer_links.size > 1
-
-    plus_minus = PlayersHelper.colored_plus_minus @preventers.first.plus_minus
-
-  %p= bagel_preventer_links.to_sentence + prevent_verb + "more likely to help a team give a bagel to another team with a plus-minus of " + plus_minus + "."
-
+  %p= PlayersHelper.bagel_preventers @preventers, bagel_preventer_links
+  
   #special_wager
     %h2 Special Wager
     %p
