@@ -74,7 +74,7 @@ class Bagel < ActiveRecord::Base
     opponent_2.save
   end
 
-  EXISTING_PLAYER_NEEDED_MSG = "must exist correspond to an existing player"
+  EXISTING_PLAYER_NEEDED_MSG = "must correspond to an existing player"
 
   def players_must_exist
     errors.add(:owner_name, EXISTING_PLAYER_NEEDED_MSG) if owner.nil?
