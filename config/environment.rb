@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -19,14 +19,6 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-
-  config.gem "calendar_date_select", :version => '1.15'
-  config.gem "haml", :version => '2.2.12'
-
-  config.gem "rspec", :lib => false, :version => "1.2.9"
-  config.gem "rspec-rails", :lib => false, :version => "1.2.9"
-  config.gem "machinist", :version => "1.0.6"
-  config.gem "faker", :version => "0.3.1"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
