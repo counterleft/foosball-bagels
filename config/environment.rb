@@ -23,6 +23,8 @@ Rails::Initializer.run do |config|
   config.gem "calendar_date_select", :version => '1.15'
   config.gem "haml", :version => '2.2.12'
 
+  config.gem "newrelic_rpm"
+  
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
