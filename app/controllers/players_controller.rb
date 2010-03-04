@@ -1,4 +1,7 @@
 class PlayersController < ApplicationController
+
+  caches_page :index
+
   # GET /players
   # GET /players.xml
   def index

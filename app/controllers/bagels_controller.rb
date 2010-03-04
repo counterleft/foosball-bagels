@@ -1,5 +1,7 @@
 class BagelsController < ApplicationController
 
+  caches_page :index
+
   # GET /bagels
   # GET /bagels.xml
   def index
