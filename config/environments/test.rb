@@ -28,6 +28,7 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 
 config.gem "rspec", :lib => false, :version => "1.2.9"
+config.gem "test-unit", :lib => false, :version => "1.2.3"
 config.gem "rspec-rails", :lib => false, :version => "1.2.9"
 config.gem "machinist", :version => "1.0.6"
 config.gem "faker", :version => "0.3.1"
