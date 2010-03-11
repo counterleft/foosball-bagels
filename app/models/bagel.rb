@@ -39,7 +39,13 @@ class Bagel < ActiveRecord::Base
   end
 
   def <=>(o)
-    return o.baked_on <=> self.baked_on
+    if self.baked_on < o.baked_on
+      return 1
+    elsif self.baked_on > o.baked_on
+      return -1
+    else
+      return self.id <=> o.id
+    end
   end
 
   def baked_on_display
