@@ -22,7 +22,7 @@ Rails::Initializer.run do |config|
 
   config.gem "calendar_date_select", :version => '1.15'
   config.gem "haml", :version => '2.2.12'
-  config.gem "will_paginate", :version => '2.3.12'
+  config.gem "will_paginate", :version => '2.3.11'
   
   config.gem "newrelic_rpm"
 
