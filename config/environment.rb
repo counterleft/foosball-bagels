@@ -22,9 +22,10 @@ Rails::Initializer.run do |config|
 
   config.gem "calendar_date_select", :version => '1.15'
   config.gem "haml", :version => '2.2.12'
-
-  config.gem "newrelic_rpm"
+  config.gem "will_paginate", :version => '2.3.12'
   
+  config.gem "newrelic_rpm"
+
   config.load_paths += %W( #{RAILS_ROOT}/app/sweepers )
   config.action_controller.page_cache_directory = RAILS_ROOT + "/public/cache"
   

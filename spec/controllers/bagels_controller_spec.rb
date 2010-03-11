@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe BagelsController, "when getting index page" do
+  it "should get all bagels" do
+    Bagel.should_receive(:paginate).and_return [Bagel.make_unsaved, Bagel.make_unsaved]
+
+    get :index
+    actual = assigns[:bagels]
+    actual.size.should == 2
+  end
+end
+
+describe BagelsController, "when getting home page" do
   before do
     Player.should_receive(:special_wager_players).and_return({})
     Player.should_receive(:bagel_preventers).and_return([])
@@ -10,7 +20,7 @@ describe BagelsController, "when getting index page" do
   it "should get five latest bagels sorted by baked_on desc, created_on desc, id desc" do
     3.times { Bagel.make }
     
-    get :index
+    get :home
     actual = assigns[:bagels]
     actual.should_not be_nil
     actual.empty?.should be_false
@@ -29,7 +39,7 @@ describe BagelsController, "when getting index page" do
   it "should get 5 bagels max" do
     6.times { Bagel.make }
 
-    get :index
+    get :home
     assigns[:bagels].size.should == 5
   end
 
@@ -37,21 +47,21 @@ describe BagelsController, "when getting index page" do
     bagel = Bagel.make
     Bagel.should_receive(:find).and_return([bagel])
     
-    get :index
+    get :home
     assigns[:current_owner].should == bagel.owner
   end
 
   it "should get bagel preventers" do
     Player.make
 
-    get :index
+    get :home
     assigns[:preventers].should_not be_nil
   end
 
   it "should get bagel contributors" do
     Player.make
 
-    get :index
+    get :home
     assigns[:contributors].should_not be_nil
   end
 end
@@ -89,7 +99,7 @@ describe BagelsController, "when getting special wagers" do
     Player.should_receive(:bagel_preventers).and_return([])
     Player.should_receive(:bagel_contributors).and_return([])
 
-    get :index
+    get :home
     assigns[:special_wager].should_not be_nil
     assigns[:special_wager].size.should == 2
     assigns[:special_wager][:bill] = bill.plus_minus

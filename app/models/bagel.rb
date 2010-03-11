@@ -6,6 +6,9 @@ class Bagel < ActiveRecord::Base
   belongs_to :opponent_1, :class_name => 'Player'
   belongs_to :opponent_2, :class_name => 'Player'
 
+  cattr_reader :per_page
+  @@per_page = 10
+
   def owner_name
     owner.name if owner
   end

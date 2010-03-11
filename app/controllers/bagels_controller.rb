@@ -1,10 +1,8 @@
 class BagelsController < ApplicationController
 
-  caches_page :index
+  caches_page :home, :index
 
-  # GET /bagels
-  # GET /bagels.xml
-  def index
+  def home
     @bagels = Bagel.find(:all, :limit => 5, :order => 'baked_on desc, created_at desc',
                          :include => [ :owner, :teammate, :opponent_1, :opponent_2 ])
     @current_owner = Bagel.current_owner(@bagels)
@@ -15,6 +13,18 @@ class BagelsController < ApplicationController
     respond_to do |format|
       format.html # index.html.haml
       format.xml  { render :xml => @bagels }
+    end
+  end
+
+  # GET /bagels
+  # GET /bagels.xml
+  def index
+    @bagels = Bagel.paginate :page => params[:page], :order => 'baked_on desc, created_at desc',
+                             :include => [ :owner, :teammate, :opponent_1, :opponent_2 ]
+
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @bagels }
     end
   end
 
