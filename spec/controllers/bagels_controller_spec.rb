@@ -90,19 +90,3 @@ describe BagelsController do
     assigns[:bagel].should == bagel
   end
 end
-
-describe BagelsController, "when getting special wagers" do
-  it "should get wagers with bill and paul" do
-    bill = Player.make(:name => 'Bill')
-    paul = Player.make(:name => 'Paul')
-
-    Player.should_receive(:bagel_preventers).and_return([])
-    Player.should_receive(:bagel_contributors).and_return([])
-
-    get :home
-    assigns[:special_wager].should_not be_nil
-    assigns[:special_wager].size.should == 2
-    assigns[:special_wager][:bill] = bill.plus_minus
-    assigns[:special_wager][:paul] = paul.plus_minus
-  end
-end

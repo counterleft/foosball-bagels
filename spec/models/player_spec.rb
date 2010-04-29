@@ -61,17 +61,3 @@ describe Player do
     @new_player.plus_minus.should == 0
   end
 end
-
-describe Player, "when working with special wagers" do
-  before do
-    @paul = Player.make(:name => 'Paul')
-    @bill = Player.make(:name => 'Bill')
-  end
-
-  it "should return paul and bill" do
-    special_wager_players = Player.special_wager_players
-    special_wager_players.size.should == 2
-    special_wager_players[:bill] = @bill
-    special_wager_players[:paul] == @paul
-  end
-end

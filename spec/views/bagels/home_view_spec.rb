@@ -9,11 +9,6 @@ describe "bagels home page" do
     assigns[:special_wager] = { Player.make_unsaved => 1, Player.make_unsaved => 2 }
   end
 
-  it "should have special wagers" do
-    render '/bagels/home'
-    response.should have_tag('#special_wager')
-  end
-
   it "should degrade well if no bagel owner" do
     assigns[:current_owner] = nil
     render '/bagels/home'

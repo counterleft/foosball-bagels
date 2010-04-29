@@ -8,7 +8,6 @@ class BagelsController < ApplicationController
     @current_owner = Bagel.current_owner(@bagels)
     @contributors = Player.bagel_contributors
     @preventers = Player.bagel_preventers
-    @special_wager = Player.special_wager_players
 
     respond_to do |format|
       format.html # index.html.haml

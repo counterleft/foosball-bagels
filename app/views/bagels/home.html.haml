@@ -19,22 +19,6 @@
     @preventers.each { |b| bagel_preventer_links.push(link_to(b.name, b)) }
 
   %p= PlayersHelper.bagel_preventers @preventers, bagel_preventer_links
-  
-  #special_wager
-    %h2 Special Wager
-    %p
-      :plain
-        Bill thinks Paul will have a -10 plus-minus between now (2009-10-16) and Christmas (2009-12-25).
-        Paul asserts that his plus-minus will still be higher than Bill's (within the same time range).
-    %p We will track both of their plus-minus values here:
-
-    %table
-      %tr
-        %th{:colspan => "2"} Plus-Minus Between 2009-10-16 and 2009-12-25
-      - @special_wager.each do |player, plus_minus|
-        %tr
-          %td{:width => "50%"}= player.name
-          %td= PlayersHelper.colored_plus_minus plus_minus
 
   %h2 Most Recent Bagels
 
