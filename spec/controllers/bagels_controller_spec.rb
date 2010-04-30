@@ -12,7 +12,6 @@ end
 
 describe BagelsController, "when getting home page" do
   before do
-    Player.should_receive(:special_wager_players).and_return({})
     Player.should_receive(:bagel_preventers).and_return([])
     Player.should_receive(:bagel_contributors).and_return([])
   end
