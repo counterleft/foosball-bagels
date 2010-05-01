@@ -4,19 +4,4 @@
 #content
   %h2 Bagels Baked Across Time
   
-  %table#recent_bagels
-    %tr
-      %th Baked On
-      %th Owner
-      %th Teammate
-      %th Off. Opponent
-      %th Def. Opponent
-    - @bagels.each do |bagel|
-      %tr
-        %td= h bagel.baked_on_display
-        %td= h bagel.owner_name
-        %td= h bagel.teammate_name
-        %td= h bagel.opponent_1_name
-        %td= h bagel.opponent_2_name
-        %td= link_to "Show", bagel
-  = will_paginate @bagels
+  = render :partial => 'shared/bagel_table'

@@ -31,14 +31,6 @@ describe PlayersController do
     post :create, :player => params
     response.should render_template('new')
   end
-
-  it "should show valid player" do
-    id = "1"
-    Player.should_receive(:find).with(id).and_return(@player)
-
-    get :show, :id => id
-    response.should be_success
-  end
 end
 
 describe PlayersController, "when getting index page" do
@@ -60,5 +52,31 @@ describe PlayersController, "when getting index page" do
     assigns[:players][0] == third_player
     assigns[:players][1] == first_player
     assigns[:players][2] == second_player
+  end
+end
+
+describe PlayersController, "when getting show page" do
+  it "should show valid player" do
+    id = "1"
+    Player.should_receive(:find).with(id).and_return(@player)
+
+    get :show, :id => id
+    assigns[:player].should == @player
+    response.should be_success
+  end
+
+  it "should get all bagels that player is involved with" do
+    id = "1"
+    Player.should_receive(:find).with(id).and_return(@player)
+
+    bagels = [mock_model(Bagel), mock_model(Bagel)]
+    Bagel.should_receive(:paginate).with(
+            {:page => params[:page],
+             :conditions => ["owner_id = ? or teammate_id = ? or opponent_1_id = ? or opponent_2_id = ?",
+                             id, id, id, id],
+             :order => 'baked_on desc, created_at desc'}).and_return(bagels)
+    
+    get :show, :id => id
+    assigns[:bagels].should == bagels
   end
 end

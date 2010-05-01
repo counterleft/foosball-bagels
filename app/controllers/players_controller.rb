@@ -16,8 +16,13 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.xml
   def show
-    @player = Player.find(params[:id])
-
+    player_id = params[:id]
+    @player = Player.find(player_id)
+    @bagels = Bagel.paginate :page => params[:page],
+                   :conditions => ["owner_id = ? or teammate_id = ? or opponent_1_id = ? or opponent_2_id = ?",
+                   player_id, player_id, player_id, player_id],
+                   :order => 'baked_on desc, created_at desc'
+    
     respond_to do |format|
       format.html # show.html.haml
       format.xml  { render :xml => @player }
