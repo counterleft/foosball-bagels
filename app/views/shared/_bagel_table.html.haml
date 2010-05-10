@@ -1,6 +1,6 @@
 :ruby
   if !@bagels.nil? && !@bagels.empty?
-    haml_concat %(<table id="recent_bagels"><tr><th>Baked On</th><th>Owner</th><th>Off. Opponent</th><th>Def. Opponent</th></tr>)
+    haml_concat %(<table id="recent_bagels"><tr><th>Baked On</th><th>Owner</th><th>Teammate</th><th>Off. Opponent</th><th>Def. Opponent</th></tr>)
   elsif
     haml_concat "<p>#{@player.name} has not been involved in any bagels.</p>"
   end
