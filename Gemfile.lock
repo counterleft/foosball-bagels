@@ -1,5 +1,5 @@
 --- 
-hash: 20b25180444b34a6dd1d2a47d544337f600e54a7
+hash: 734555133595211235262453fc980ff6f6740bdb
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org
@@ -18,8 +18,6 @@ specs:
     version: 2.3.5
 - activeresource: 
     version: 2.3.5
-- bundler: 
-    version: 0.9.26
 - calendar_date_select: 
     version: "1.15"
 - faker: 
@@ -51,10 +49,6 @@ specs:
 - will_paginate: 
     version: 2.3.11
 dependencies: 
-  bundler: 
-    version: ~> 0.9
-    group: 
-    - :default
   rails: 
     version: = 2.3.5
     group: 
