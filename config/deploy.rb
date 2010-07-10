@@ -25,3 +25,11 @@ namespace :deploy do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 end
+
+namespace :bundler do
+  task :install do
+    run "cd #{current_path} && bundle install --no-cache --disable-shared-gems"
+  end
+end
+
+after("deploy:symlink", "bundler:install")
