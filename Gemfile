@@ -1,5 +1,6 @@
 source :gemcutter
 
+gem "bundler", "~> 0.9"
 gem "rails", "2.3.5"
 gem "calendar_date_select", "1.15"
 gem "haml", "2.2.12"
