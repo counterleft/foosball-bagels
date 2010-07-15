@@ -1,1 +1,7 @@
 public/cache
+.bundle
+.idea
+log
+public/stylesheets/auto_complete.css
+public/stylesheets/screen.css
+tmp
