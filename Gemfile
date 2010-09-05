@@ -1,7 +1,7 @@
 source :gemcutter
 
 gem "bundler", "~> 0.9"
-gem "rails", "2.3.5"
+gem "rails", "2.3.9"
 gem "calendar_date_select", "1.15"
 gem "haml", "2.2.12"
 gem "will_paginate", "2.3.11"
