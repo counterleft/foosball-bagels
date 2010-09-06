@@ -1,5 +1,5 @@
 --- 
-hash: 5a43beb607b7f7ce79aeb3e2167cd5f7a66dd12f
+hash: 29286d94675f443b6fae710368a331d4a892fb46
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org
@@ -49,7 +49,7 @@ specs:
 - test-unit: 
     version: 1.2.3
 - will_paginate: 
-    version: 2.3.11
+    version: 2.3.14
 dependencies: 
   bundler: 
     version: ~> 0.9
@@ -68,7 +68,7 @@ dependencies:
     group: 
     - :default
   will_paginate: 
-    version: = 2.3.11
+    version: ~> 2.3
     group: 
     - :default
   newrelic_rpm: 
