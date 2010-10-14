@@ -1,36 +1,27 @@
 require "spec_helper"
 
-describe "players index page" do
+describe "players/index.html.haml" do
   it "should have the correct headers" do
-    assigns[:players] = []
-    render '/players/index'
+    assign(:players, [])
+    render
     
-    response.should have_tag('#main-box') do
-      with_tag('#quote',  "Foos Your Daddy?")
-    end
-
-    response.should have_tag('#content') do
-      with_tag('h2', 'Plus-Minus Rankings')
-    end
+    rendered.should have_selector('#main-box/#quote', :content => "Foos Your Daddy?")
+    rendered.should have_selector('#content/h2', :content => 'Plus-Minus Rankings')
   end
 
   it "should have list players" do
     first_player = Player.make_unsaved
     second_player = Player.make_unsaved
-
-    assigns[:players] = [first_player, second_player]
-    render '/players/index'
-    response.should have_tag('ol') do
-      with_tag('li', "#{first_player.name} : #{first_player.plus_minus}")
-      with_tag('li', "#{second_player.name} : #{second_player.plus_minus}")
-    end
+    assign(:players, [first_player, second_player])
+    
+    render
+    rendered.should have_selector('ol/li', :content => "#{first_player.name} : #{first_player.plus_minus}")
+    rendered.should have_selector('ol/li', :content => "#{second_player.name} : #{second_player.plus_minus}")
   end
 
   it "should have link to new player page" do
-    assigns[:players] = []
-    render '/players/index'
-    response.should have_tag('a') do
-      with_tag("[href=?]", new_player_path)
-    end
+    assign(:players, [])
+    render
+    rendered.should have_selector('a', :href => new_player_path)
   end
 end

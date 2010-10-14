@@ -3,7 +3,7 @@
     - if @current_owner.nil?
       = 'No one owns the bagel, start playing better!'
     - else
-      = "Fact: #{link_to @current_owner.name, @current_owner} currently owns the bagel."
+      != "Fact: #{link_to @current_owner.name, @current_owner} currently owns the bagel."
 
 #content
   %h2 Other Facts
@@ -31,9 +31,9 @@
       %th Def. Opponent
     - @bagels.each do |bagel|
       %tr
-        %td= h bagel.baked_on_display
-        %td= h bagel.owner_name
-        %td= h bagel.teammate_name
-        %td= h bagel.opponent_1_name
-        %td= h bagel.opponent_2_name
+        %td= bagel.baked_on_display
+        %td= bagel.owner_name
+        %td= bagel.teammate_name
+        %td= bagel.opponent_1_name
+        %td= bagel.opponent_2_name
         %td= link_to "Show", bagel

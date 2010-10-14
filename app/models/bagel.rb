@@ -96,7 +96,7 @@ class Bagel < ActiveRecord::Base
     players_involved = [self.owner_name, self.teammate_name, self.opponent_1_name, self.opponent_2_name]
     possible_teams = players_involved.collect { |p1| players_involved.collect { |p2| [p1, p2] if p1 != p2 } }.inject {|sum, n| sum + n}.compact
     if possible_teams.size != 12
-      errors.add_to_base("All players involved can only play one position (i.e. the same person cannot be the teammate and the owner)")
+      errors.add(:base, "All players involved can only play one position (i.e. the same person cannot be the teammate and the owner)")
     end
   end
 end

@@ -26,6 +26,6 @@ module PlayersHelper
     else
       css_class = "neutral"
     end
-    %(<span class="#{css_class}">#{plus_minus}</span>)
+    %(<span class="#{css_class}">#{plus_minus}</span>).html_safe
   end
 end

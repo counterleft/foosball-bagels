@@ -1,18 +1,20 @@
 source :gemcutter
 
-gem "bundler", "~> 0.9"
-gem "rails", "2.3.9"
-gem "calendar_date_select", "1.15"
-gem "haml", "2.2.12"
-gem "will_paginate", "~> 2.3"
-gem "newrelic_rpm"
+gem "bundler", "~> 1.0"
+gem "rails", "~> 3.0"
+gem "calendar_date_select", :git => 'http://github.com/paneq/calendar_date_select.git', :branch => 'rails3test'
+gem "dynamic_form"
+gem "haml", "~> 3.0"
+gem "will_paginate", "~> 3.0.pre2"
+gem "newrelic_rpm", "~> 2.13"
 gem "mysql", "2.8.1"
 
-group :test do
-  gem "rspec", "1.3.0"
-  gem "test-unit", "1.2.3"
-  gem "rspec-rails", "1.3.2"
+group :test, :development do
+  gem "rspec", "~> 2.0"
+  gem "rspec-rails", "~> 2.0"
   gem "machinist", "1.0.6"
   gem "faker", "0.3.1"
   gem "spork", "0.7.4"
+  gem "test-unit", "1.2.3"
+  gem "webrat"
 end

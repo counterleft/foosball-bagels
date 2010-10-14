@@ -14,7 +14,7 @@ describe PlayersController do
   end
 
   it "should create player with post params" do
-    params = { name => 'Ben' }
+    params = { "name" => 'Ben' }
     Player.should_receive(:new).with(params).and_return(@player)
     @player.should_receive(:save).and_return(true)
 
@@ -24,7 +24,7 @@ describe PlayersController do
   end
 
   it "should render to new player page on create fail" do
-    params = { name => 'Ben' }
+    params = { "name" => 'Ben' }
     Player.should_receive(:new).with(params).and_return(@player)
     @player.should_receive(:save).and_return(false)
 
@@ -71,7 +71,7 @@ describe PlayersController, "when getting show page" do
 
     bagels = [mock_model(Bagel), mock_model(Bagel)]
     Bagel.should_receive(:paginate).with(
-            {:page => params[:page],
+            {:page => nil,
              :conditions => ["owner_id = ? or teammate_id = ? or opponent_1_id = ? or opponent_2_id = ?",
                              id, id, id, id],
              :order => 'baked_on desc, created_at desc'}).and_return(bagels)

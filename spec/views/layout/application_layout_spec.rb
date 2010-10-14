@@ -1,23 +1,15 @@
 require "spec_helper"
 
-describe "application layout", :type => :view do
+describe "layouts/application.html.haml", :type => :view do
   before do
-    render '/layouts/application'
+    render
   end
 
   it "should point to bagels index page for 'Bagels' nav link " do
-    response.should have_tag('#navigation') do
-      with_tag('a', 'Bagels') do
-        with_tag("[href=?]", bagels_path)
-      end
-    end
+    rendered.should have_selector('#navigation//a', :content => "Bagels", :href => bagels_path)
   end
 
   it "should point to players index page for 'Players' nav link " do
-    response.should have_tag('#navigation') do
-      with_tag('a', 'Players') do
-        with_tag("[href=?]", players_path)
-      end
-    end
+    rendered.should have_selector('#navigation//a', :content => 'Players', :href => players_path)
   end
 end
