@@ -59,7 +59,7 @@ class PlayersController < ApplicationController
 
   # For auto completing player names in forms
   def names
-  	@players = Player.find(:all, :limit => 15, :order => 'name ASC', :conditions => [ 'lower(name) like lower(?)', "%#{params[:name]}%" ])
+  	@players = Player.find(:all, :limit => 15, :order => 'name ASC', :conditions => [ 'lower(name) like lower(?)', "#{params[:name]}%" ])
   	render :inline => "<%= auto_complete_result(@players, 'name') %>"
   end
 

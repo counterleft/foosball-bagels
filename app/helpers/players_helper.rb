@@ -6,7 +6,7 @@ module PlayersHelper
 
     plus_minus = PlayersHelper.colored_plus_minus contributors.first.plus_minus
 
-    bagel_contributor_links.to_sentence + contribute_verb + "more likely to help a team receive a bagel with a plus-minus of " + plus_minus + "."
+    return (bagel_contributor_links.to_sentence + contribute_verb + "more likely to help a team receive a bagel with a plus-minus of " + plus_minus + ".").html_safe
   end
 
   def self.bagel_preventers(preventers, bagel_preventer_links)
@@ -15,7 +15,7 @@ module PlayersHelper
 
     plus_minus = PlayersHelper.colored_plus_minus preventers.first.plus_minus
 
-    bagel_preventer_links.to_sentence + prevent_verb + "more likely to help a team give a bagel to another team with a plus-minus of " + plus_minus + "."
+    return (bagel_preventer_links.to_sentence + prevent_verb + "more likely to help a team give a bagel to another team with a plus-minus of " + plus_minus + ".").html_safe
   end
 
   def self.colored_plus_minus(plus_minus)
