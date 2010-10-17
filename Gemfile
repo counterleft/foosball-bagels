@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "bundler", "~> 1.0"
+gem "bundler", "~> 1.0.0"
 gem "rails", "~> 3.0"
 gem "calendar_date_select", :git => 'http://github.com/paneq/calendar_date_select.git', :branch => 'rails3test'
 gem "dynamic_form"
