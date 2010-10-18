@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :application, "Bagel Central"
 set :repository,  "git://github.com/bmthykm/foosball-bagels.git"
 
@@ -26,10 +28,10 @@ namespace :deploy do
   end
 end
 
-namespace :bundler do
-  task :install do
-    run "cd #{current_path} && bundle install --no-cache --disable-shared-gems"
-  end
-end
-
-after("deploy:symlink", "bundler:install")
+# namespace :bundler do
+#   task :install do
+#     run "cd #{current_path} && bundle install --no-cache --disable-shared-gems"
+#   end
+# end
+# 
+# after("deploy:symlink", "bundler:install")
