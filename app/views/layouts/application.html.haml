@@ -20,11 +20,9 @@
 
         #navigation
           %ul
-            %li#first= link_to "Add Bagel", new_bagel_path
+            %li#first= link_to 'Players', players_path
             %li= link_to "Bagels", bagels_path
-            %li= link_to 'Players', players_path
-            %li
-              %a{:href => "#", :title => "#"} About
+            %li= link_to "Add Bagel", new_bagel_path
         %hr.noscreen
 
         #main
