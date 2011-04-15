@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:bmthykm/calendar_date_select.git
+  remote: git://github.com/bmthykm/calendar_date_select.git
   revision: b41f05078001a81a11460ea288c1428dc48ee317
   specs:
     calendar_date_select (1.16.2)
