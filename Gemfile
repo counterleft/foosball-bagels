@@ -16,5 +16,5 @@ group :test, :development do
   gem "faker", "0.3.1"
   gem "spork", "0.7.4"
   gem "test-unit", "1.2.3"
-  gem "webrat"
+  gem "webrat", "~> 0.7.2"
 end
