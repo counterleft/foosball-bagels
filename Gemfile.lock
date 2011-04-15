@@ -1,7 +1,8 @@
-PATH
-  remote: vendor/gems
+GIT
+  remote: git@github.com:bmthykm/calendar_date_select.git
+  revision: b41f05078001a81a11460ea288c1428dc48ee317
   specs:
-    calendar_date_select (1.16.1)
+    calendar_date_select (1.16.2)
 
 GEM
   remote: http://rubygems.org/
@@ -90,16 +91,19 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
-    rspec (2.1.0)
-      rspec-core (~> 2.1.0)
-      rspec-expectations (~> 2.1.0)
-      rspec-mocks (~> 2.1.0)
-    rspec-core (2.1.0)
-    rspec-expectations (2.1.0)
+    rspec (2.5.0)
+      rspec-core (~> 2.5.0)
+      rspec-expectations (~> 2.5.0)
+      rspec-mocks (~> 2.5.0)
+    rspec-core (2.5.1)
+    rspec-expectations (2.5.0)
       diff-lcs (~> 1.1.2)
-    rspec-mocks (2.1.0)
-    rspec-rails (2.1.0)
-      rspec (~> 2.1.0)
+    rspec-mocks (2.5.0)
+    rspec-rails (2.5.0)
+      actionpack (~> 3.0)
+      activesupport (~> 3.0)
+      railties (~> 3.0)
+      rspec (~> 2.5.0)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
     spork (0.7.4)
@@ -120,7 +124,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.0.0)
-  calendar_date_select (= 1.16.1)!
+  calendar_date_select!
   capistrano (~> 2.5.21)
   dynamic_form
   faker (= 0.3.1)
@@ -129,8 +133,8 @@ DEPENDENCIES
   mysql (= 2.8.1)
   newrelic_rpm (~> 2.13)
   rails (~> 3.0)
-  rspec (~> 2.0)
-  rspec-rails (~> 2.0)
+  rspec (~> 2.5)
+  rspec-rails (~> 2.5)
   spork (= 0.7.4)
   test-unit (= 1.2.3)
   webrat (~> 0.7.2)
