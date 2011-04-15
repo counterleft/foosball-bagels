@@ -24,6 +24,7 @@ class BagelsController < ApplicationController
     respond_to do |format|
       format.html
       format.xml { render :xml => @bagels }
+      format.json { render :json => Bagel.all({:order => "baked_on desc, created_at desc"}) }
     end
   end
 
@@ -35,6 +36,7 @@ class BagelsController < ApplicationController
     respond_to do |format|
       format.html # show.html.haml
       format.xml  { render :xml => @bagel }
+      format.json { render :json => @bagel }
     end
   end
 

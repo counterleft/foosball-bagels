@@ -10,6 +10,7 @@ class PlayersController < ApplicationController
     respond_to do |format|
       format.html # index.html.haml
       format.xml  { render :xml => @players }
+      format.json { render :json => Player.all }
     end
   end
 
