@@ -2,7 +2,7 @@ source :gemcutter
 
 gem "bundler", "~> 1.0.0"
 gem "rails", "~> 3.0"
-gem "calendar_date_select", :git => "git@github.com:bmthykm/calendar_date_select.git"
+gem "calendar_date_select", :git => "git://github.com/bmthykm/calendar_date_select.git"
 gem "dynamic_form"
 gem "haml", "~> 3.0"
 gem "will_paginate", "~> 3.0.pre2"
