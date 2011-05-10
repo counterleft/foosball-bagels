@@ -1,4 +1,4 @@
-!primary_blue = #1e8abb
+$primary_blue: #1e8abb
 
 *
   margin: 0
@@ -18,13 +18,13 @@ body
 
 
 a
-  color = !primary_blue
+  color: $primary_blue
 
   &:link
-    color = !primary_blue
+    color: $primary_blue
 
   &:hover
-    color = !primary_blue
+    color: $primary_blue
     text-decoration: none
 
   &:visited
@@ -87,7 +87,7 @@ h5
 
   a
     text-decoration: none
-    color = !primary_blue
+    color: $primary_blue
     font-weight: normal
     padding: 0px 10px 7px 10px
 
@@ -128,7 +128,7 @@ h5
 #main-box
   color: #fff
   font-size: 24px
-  background = "#{!primary_blue} url('../images/main-top.jpg') repeat-x"
+  background: #{$primary_blue} url('../images/main-top.jpg') repeat-x
 
 
 #quote
@@ -149,7 +149,7 @@ h5
 
   a:hover
     color: #fff
-    background-color = !primary_blue
+    background-color: $primary_blue
 
 
 #footer
@@ -160,7 +160,7 @@ h5
 
   a:hover
     color: #fff
-    background-color = !primary_blue
+    background-color: $primary_blue
 
   p
     font-size: 80%
@@ -190,11 +190,11 @@ form
   input
     font-size: 110%
     &:focus
-      border = "2px solid #{!primary_blue}"
+      border: 2px solid #{$primary_blue}
 
   textarea
     &:focus
-      border = "2px solid #{!primary_blue}"
+      border: 2px solid #{$primary_blue}
 
 a
   images

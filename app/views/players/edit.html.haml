@@ -1,0 +1,17 @@
+#main-box
+  #quote= "Editing #{@player}"
+
+#content
+  - form_for(@player) do |f|
+    = f.error_messages
+
+    %p
+      = f.label :name
+      %br
+      = f.text_field :name
+      
+    %p
+      = f.label :active 
+      = f.check_box :active
+
+    %p= f.submit 'Update Player'

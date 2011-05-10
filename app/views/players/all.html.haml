@@ -2,13 +2,11 @@
   #quote Foos Your Daddy?
 
 #content
-  %h2 Plus-Minus Rankings (Active Players)
+  %h2 Plus-Minus Rankings (All Players)
 
   %ol
     - @players.each do |player|
       %li
         = "#{link_to player.name, player} : #{PlayersHelper.colored_plus_minus player.plus_minus}".html_safe
 
-  = link_to 'All Players', players_all_path
-  %br
   = link_to 'New Player', new_player_path

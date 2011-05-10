@@ -24,5 +24,9 @@ class Player < ActiveRecord::Base
   def self.bagel_preventers
     return Player.find(:all, :conditions => ["plus_minus = ?", Player.maximum(:plus_minus)], :order => "name asc")
   end
+  
+  def to_s
+    self.name
+  end
 end
 

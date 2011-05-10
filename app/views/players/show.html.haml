@@ -1,10 +1,10 @@
 #main-box
-  #quote Player Info
+  #quote= "Player Info: #{@player}"
 
 #content
   %p
-    %strong Name:
-    = @player.name
+    - unless @player.active?
+      %strong= "#{@player} is no an active foosball player."
 
   %p
     %strong Plus-Minus:

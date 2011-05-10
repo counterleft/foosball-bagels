@@ -5,7 +5,17 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.xml
   def index
-    @players = Player.all :order => "plus_minus desc, name asc"
+    @players = Player.where("active = true").order("plus_minus desc, name asc")
+
+    respond_to do |format|
+      format.html # index.html.haml
+      format.xml  { render :xml => @players }
+      format.json { render :json => Player.all }
+    end
+  end
+  
+  def all
+    @players = Player.order("plus_minus desc, name asc")
 
     respond_to do |format|
       format.html # index.html.haml
@@ -64,27 +74,25 @@ class PlayersController < ApplicationController
   	render :inline => "<%= auto_complete_result(@players, 'name') %>"
   end
 
-#  # GET /players/1/edit
-#  def edit
-#    @player = Player.find(params[:id])
-#  end
-#
-#  # PUT /players/1
-#  # PUT /players/1.xml
-#  def update
-#    @player = Player.find(params[:id])
-#
-#    respond_to do |format|
-#      if @player.update_attributes(params[:player])
-#        flash[:notice] = 'Player was successfully updated.'
-#        format.html { redirect_to(@player) }
-#        format.xml  { head :ok }
-#      else
-#        format.html { render :action => "edit" }
-#        format.xml  { render :xml => @player.errors, :status => :unprocessable_entity }
-#      end
-#    end
-#  end
+ # GET /players/1/edit
+ def edit
+   @player = Player.find(params[:id])
+ end
+
+ # PUT /players/1
+ # PUT /players/1.xml
+ def update
+   @player = Player.find(params[:id])
+
+   respond_to do |format|
+     if @player.update_attributes(params[:player])
+       flash[:notice] = 'Player was successfully updated.'
+       format.html { redirect_to(@player) }
+     else
+       format.html { render :action => "edit" }
+     end
+   end
+ end
 #
 #  # DELETE /players/1
 #  # DELETE /players/1.xml

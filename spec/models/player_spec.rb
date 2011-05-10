@@ -12,6 +12,10 @@ describe Player do
   it "should create a new player given valid attributes" do
     Player.create!(@valid_attributes)
   end
+  
+  it "should save players as active by default" do
+    @new_player.active?.should == true
+  end
 
   it "should find correct bagel contributors" do
     expected_contributor_1 = Player.make(:contributor)

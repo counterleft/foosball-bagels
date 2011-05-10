@@ -34,13 +34,6 @@ describe PlayersController do
 end
 
 describe PlayersController, "when getting index page" do
-  it "should get all players" do
-    player = mock_model(Player)
-    Player.should_receive(:all).and_return(player)
-    get :index
-    assigns[:players].should == player
-  end
-
   it "should get players sorted by plus minus desc, name asc" do
     first_player = Player.make(:plus_minus => 10, :name => 'A')
     second_player = Player.make(:plus_minus => 10, :name => 'B')
