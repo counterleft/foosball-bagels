@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe PlayersController do
   before do
+    session[:signed_in] = true
     @player = mock_model(Player)
   end
 
@@ -9,7 +10,7 @@ describe PlayersController do
     get :new
 
     # suppose to return true in rspec isolation mode, but seems to break appropriately
-    # when the controller is broken, so not sure if rspec docs are wrong or not 
+    # when the controller is broken, so not sure if rspec docs are wrong or not
     response.should be_success
   end
 
@@ -34,6 +35,10 @@ describe PlayersController do
 end
 
 describe PlayersController, "when getting index page" do
+  before(:each) do
+    session[:signed_in] = true
+  end
+
   it "should get players sorted by plus minus desc, name asc" do
     first_player = Player.make(:plus_minus => 10, :name => 'A')
     second_player = Player.make(:plus_minus => 10, :name => 'B')
@@ -49,6 +54,10 @@ describe PlayersController, "when getting index page" do
 end
 
 describe PlayersController, "when getting show page" do
+  before(:each) do
+    session[:signed_in] = true
+  end
+
   it "should show valid player" do
     id = "1"
     Player.should_receive(:find).with(id).and_return(@player)
@@ -68,7 +77,7 @@ describe PlayersController, "when getting show page" do
              :conditions => ["owner_id = ? or teammate_id = ? or opponent_1_id = ? or opponent_2_id = ?",
                              id, id, id, id],
              :order => 'baked_on desc, created_at desc'}).and_return(bagels)
-    
+
     get :show, :id => id
     assigns[:bagels].should == bagels
   end

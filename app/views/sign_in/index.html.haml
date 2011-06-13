@@ -1,0 +1,17 @@
+#main-box
+  #quote What's the Password?
+
+#content
+  - if flash[:error]
+    %h2= flash[:error]
+
+  - form_for("sign_in") do |f|
+    = f.error_messages
+
+    %p
+      = f.label :password
+      %br
+      = f.text_field :password
+      = f.hidden_field :hp
+
+    %p= f.submit 'Login'

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe BagelsController, "when getting index page" do
+  before(:each) do
+    session[:signed_in] = true
+  end
+
   it "should get all bagels" do
     Bagel.should_receive(:paginate).and_return [Bagel.make_unsaved, Bagel.make_unsaved]
 
@@ -12,13 +16,14 @@ end
 
 describe BagelsController, "when getting home page" do
   before do
+    session[:signed_in] = true
     Player.should_receive(:bagel_preventers).and_return([])
     Player.should_receive(:bagel_contributors).and_return([])
   end
 
   it "should get five latest bagels sorted by baked_on desc, created_on desc, id desc" do
     3.times { Bagel.make }
-    
+
     get :home
     actual = assigns[:bagels]
     actual.should_not be_nil
@@ -45,7 +50,7 @@ describe BagelsController, "when getting home page" do
   it "should get the current bagel owner" do
     bagel = Bagel.make
     Bagel.should_receive(:find).and_return([bagel])
-    
+
     get :home
     assigns[:current_owner].should == bagel.owner
   end
@@ -66,6 +71,10 @@ describe BagelsController, "when getting home page" do
 end
 
 describe BagelsController do
+  before(:each) do
+    session[:signed_in] = true
+  end
+
   it "should have new bagel on new page" do
     get :new
     assigns[:bagel].should_not be_nil

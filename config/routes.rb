@@ -10,4 +10,6 @@ Foosball::Application.routes.draw do
   end
 
   root :to => 'bagels#home'
+  get 'sign_in' => 'sign_in#index'
+  post 'sign_in' => 'sign_in#create'
 end

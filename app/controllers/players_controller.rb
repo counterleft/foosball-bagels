@@ -2,6 +2,8 @@ class PlayersController < ApplicationController
 
   caches_page :index
 
+  before_filter :require_sign_in
+
   # GET /players
   # GET /players.xml
   def index
@@ -13,7 +15,7 @@ class PlayersController < ApplicationController
       format.json { render :json => Player.all }
     end
   end
-  
+
   def all
     @players = Player.order("plus_minus desc, name asc")
 
@@ -33,7 +35,7 @@ class PlayersController < ApplicationController
                    :conditions => ["owner_id = ? or teammate_id = ? or opponent_1_id = ? or opponent_2_id = ?",
                    player_id, player_id, player_id, player_id],
                    :order => 'baked_on desc, created_at desc'
-    
+
     respond_to do |format|
       format.html # show.html.haml
       format.xml  { render :xml => @player }

@@ -2,6 +2,8 @@ class BagelsController < ApplicationController
 
   caches_page :home, :index
 
+  before_filter :require_sign_in
+
   def home
     @bagels = Bagel.find(:all, :limit => 5, :order => 'baked_on desc, created_at desc',
                          :include => [ :owner, :teammate, :opponent_1, :opponent_2 ])
@@ -51,7 +53,7 @@ class BagelsController < ApplicationController
     end
   end
 
-# there is no update bagel feature 
+# there is no update bagel feature
 #  # GET /bagels/1/edit
 #  def edit
 #    @bagel = Bagel.find(params[:id])
@@ -74,7 +76,7 @@ class BagelsController < ApplicationController
     end
   end
 
-# there is no update bagel feature 
+# there is no update bagel feature
 #  # PUT /bagels/1
 #  # PUT /bagels/1.xml
 #  def update
