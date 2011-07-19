@@ -35,9 +35,8 @@
       != text_field_with_auto_complete :bagel, :opponent_2_name, { :size => 20 }, { :skip_style => true, :url => names_players_path, :frequency => '0.05', :method => 'get', :param_name => 'name' }
 
     %p
-      = f.submit "Add New Bagel"
-
-  = link_to "cancel", root_path
+      = f.submit "Add New Bagel", :class => 'button big'
+      = link_to "cancel", root_path, :class => 'button'
 
 :javascript
   document.observe("dom:loaded", function() {
