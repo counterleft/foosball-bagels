@@ -3,5 +3,6 @@
 
 #content
   %h2 Bagels Baked Across Time
-  
+
   = render :partial => 'shared/bagel_table'
+  = will_paginate @bagels if @bagels

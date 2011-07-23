@@ -11,4 +11,8 @@
     = PlayersHelper.colored_plus_minus @player.plus_minus
 
   %h3 Bagel Participation
+
+  %p= "#{@player} has not been involved in any bagels." if @bagels.empty?
+
   = render :partial => 'shared/bagel_table'
+  = will_paginate @bagels
