@@ -14,7 +14,7 @@
       = f.password_field :password
       = f.hidden_field :hp
 
-    %p= f.submit 'Login'
+    %p= f.submit 'Login', :class => "button big"
 
 :javascript
   $('sign_in_password').focus();
