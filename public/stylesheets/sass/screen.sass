@@ -224,24 +224,25 @@ table
   font-size: 100%
   width: 100%
 
-
 th
   text-align: center
   font-weight: bold
-  border: 1px solid #cdcdcd
   padding: 4px 6px
-  border: 1px solid #cdcdcd
-
 
 td
   padding: 4px 6px
   border: 1px solid #cdcdcd
+  border-width: 0px 1px
 
-
-tr.table-top
-  background: #e5e5e5
+thead tr
   font-weight: bold
+  border: 1px solid #cdcdcd
 
+tbody tr
+  text-align: center
+
+tbody tr:nth-child(even)
+  background-color: #efefef
 
 ul, ol
   display: block
