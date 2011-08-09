@@ -12,6 +12,13 @@ body, div, span, p, a, img, ul, ol, li, table, th, tr, td, form, fieldset, legen
 @mixin default-font
   font: 1em/1.2 "georgia", sans-serif
 
+@mixin fade
+  -webkit-transition: all 0.3s ease-out
+  -moz-transition: all 0.3s ease-out
+  -o-transition: all 0.3s ease-out
+  -ms-transition: all 0.3s ease-out
+  transition: all 0.3s ease-out
+
 body
   @include default-font
   padding: 0
@@ -21,6 +28,7 @@ body
 
 
 a
+  @include fade
   color: $primary_blue
 
   &:link
