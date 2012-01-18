@@ -1,4 +1,8 @@
 Foosball::Application.routes.draw do
+  match '/' => redirect("http://protestsopa.org")
+  match '*players' => redirect("http://protestsopa.org")
+  match '*bagels' => redirect("http://protestsopa.org")
+
   get 'players/all' => 'players#all'
 
   resources :bagels
