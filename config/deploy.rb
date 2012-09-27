@@ -1,7 +1,7 @@
 require "bundler/capistrano"
 
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, '1.9.2'        # Or whatever env you want it to run in.
+set :rvm_ruby_string, '1.9.3-p194'        # Or whatever env you want it to run in.
 set :rvm_type, :user
 
 set :application, "Bagel Central"
