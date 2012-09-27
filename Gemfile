@@ -1,6 +1,5 @@
 source :gemcutter
 
-gem "bundler", "~> 1.0.0"
 gem "rails", "~> 3.0"
 gem "calendar_date_select", :git => "git://github.com/bmthykm/calendar_date_select.git"
 gem "dynamic_form"
@@ -18,9 +17,8 @@ group :test, :development do
   gem "faker", "0.3.1"
   gem "spork", "~> 0.9.0.rc3"
   gem "webrat", "~> 0.7.2"
-  gem 'guard', '~> 0.3.0'
-  gem 'guard-rspec', '~> 0.1.9'
-  gem 'guard-spork', '~> 0.1.4'
-  gem 'rb-fsevent', '~> 0.3.10'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-spork'
   gem 'growl', '~> 1.0.3'
 end
