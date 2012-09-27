@@ -48,7 +48,7 @@ production:
   encoding: utf8
   reconnect: false
   database: foosball_production
-  pool: 5
+  pool: 20
   username: foosball
   password: <%= File.read(PASSWORD_FILE).chomp if File.readable? PASSWORD_FILE %>
   socket: /var/run/mysqld/mysqld.sock
