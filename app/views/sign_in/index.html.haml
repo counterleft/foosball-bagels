@@ -5,7 +5,7 @@
   - if flash[:error]
     %h2= flash[:error]
 
-  - form_for("sign_in") do |f|
+  = form_for :sign_in do |f|
     = f.error_messages
 
     %p
