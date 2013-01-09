@@ -7,7 +7,7 @@ gem "haml", "~> 3.0"
 gem "sass", "~> 3.0"
 gem "will_paginate", "~> 3.0.pre2"
 gem "newrelic_rpm", "~> 2.13"
-gem "mysql", "2.8.1"
+gem "mysql2", "~> 0.3.11"
 
 group :test, :development do
   gem "capistrano", "~> 2.5.21"

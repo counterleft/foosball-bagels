@@ -79,7 +79,7 @@ GEM
     method_source (0.8.1)
     mime-types (1.19)
     multi_json (1.5.0)
-    mysql (2.8.1)
+    mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -168,7 +168,7 @@ DEPENDENCIES
   guard-spork
   haml (~> 3.0)
   machinist (= 1.0.6)
-  mysql (= 2.8.1)
+  mysql2 (~> 0.3.11)
   newrelic_rpm (~> 2.13)
   rails (= 3.2.11)
   rspec (~> 2.5)
