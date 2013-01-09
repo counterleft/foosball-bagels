@@ -7,7 +7,7 @@ require "bundler/capistrano"
 require "capistrano-rbenv"
 
 set :application, "Bagel Central"
-set :repository,  "git://github.com/bmthykm/foosball-bagels.git"
+set :repository,  "git://github.com/winterchord/foosball-bagels.git"
 
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, 
