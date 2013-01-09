@@ -8,6 +8,7 @@ gem "sass", "~> 3.0"
 gem "will_paginate", "~> 3.0.pre2"
 gem "newrelic_rpm", "~> 2.13"
 gem "mysql", "2.8.1"
+gem "capistrano-rbenv", "~> 0.0.8"
 
 group :test, :development do
   gem "capistrano", "~> 2.5.21"
