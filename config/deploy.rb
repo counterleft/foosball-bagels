@@ -1,10 +1,14 @@
 require "bundler/capistrano"
 
+set :bundle_flags, "--deployment --quiet --binstubs"
+
+set :default_environment, {
+  'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
+}
+
 #require "rvm/capistrano"                  # Load RVM's capistrano plugin.
 #set :rvm_ruby_string, '1.9.3-p194'        # Or whatever env you want it to run in.
 #set :rvm_type, :user
-
-require "capistrano-rbenv"
 
 set :application, "Bagel Central"
 set :repository,  "git://github.com/winterchord/foosball-bagels.git"
