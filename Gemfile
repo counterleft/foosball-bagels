@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "rails", "3.2.8"
+gem "rails", "3.2.11"
 gem "calendar_date_select", :git => "git://github.com/winterchord/calendar_date_select.git"
 gem "dynamic_form"
 gem "haml", "~> 3.0"
