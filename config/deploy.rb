@@ -28,14 +28,16 @@ set :deploy_to, "/var/www/foosball"
 
 namespace :deploy do
   task :start do ; end
+
   task :stop do ; end
+
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
-end
 
-task :precompile, :role => :app do  
-  run "cd #{release_path}/ && rake assets:precompile"  
-end  
+  task :precompile, :role => :app do  
+    run "cd #{release_path}/ && rake assets:precompile"
+  end  
+end
 
 after "deploy:finalize_update", "deploy:precompile"
