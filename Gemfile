@@ -23,3 +23,7 @@ group :test, :development do
   gem "guard-rspec"
   gem "guard-spork"
 end
+
+group :production do
+  gem "uglifier"
+end
