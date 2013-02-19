@@ -2,7 +2,7 @@
   #quote Fresh Meat?
 
 #content
-  - form_for(@player) do |f|
+  = form_for(@player) do |f|
     = f.error_messages
 
     %p
@@ -10,4 +10,4 @@
       %br
       = f.text_field :name
 
-    %p= f.submit 'Create Player'
+    %p= f.submit "Create Player", :class => "button big"
