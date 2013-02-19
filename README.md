@@ -1,4 +1,4 @@
-# Bagel Central [![build status](https://travis-ci.org/winterchord/foosball-bagels?branch=master)](https://travis-ci.org/winterchord/foosball-bagels) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/winterchord/foosball-bagels)
+# Bagel Central [![Build Status](https://travis-ci.org/winterchord/foosball-bagels.png?branch=master)](https://travis-ci.org/winterchord/foosball-bagels) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/winterchord/foosball-bagels)
 
 This is a webapp to keep track of foosball bagels given and received. A bagel is given to the goalie of a team that loses a game of foosball without ever scoring a point. We use this app exclusively at Live Gamer.
 
