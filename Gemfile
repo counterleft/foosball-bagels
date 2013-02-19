@@ -22,6 +22,7 @@ group :test, :development do
   gem "guard"
   gem "guard-rspec"
   gem "guard-spork"
+  gem "yaml_db", "~> 0.2"
 end
 
 group :production do
