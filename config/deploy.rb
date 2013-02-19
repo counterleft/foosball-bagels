@@ -6,10 +6,6 @@ set :default_environment, {
   'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
 }
 
-#require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-#set :rvm_ruby_string, '1.9.3-p194'        # Or whatever env you want it to run in.
-#set :rvm_type, :user
-
 set :application, "Bagel Central"
 set :repository,  "git://github.com/winterchord/foosball-bagels.git"
 
@@ -38,10 +34,8 @@ namespace :deploy do
   end
 end
 
-# namespace :bundler do
-#   task :install do
-#     run "cd #{current_path} && bundle install --no-cache --disable-shared-gems"
-#   end
-# end
-# 
-# after("deploy:symlink", "bundler:install")
+task :precompile, :role => :app do  
+  run "cd #{release_path}/ && rake assets:precompile"  
+end  
+
+after "deploy:finalize_update", "deploy:precompile"
