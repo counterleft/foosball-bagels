@@ -23,7 +23,7 @@ Foosball::Application.configure do
   config.assets.digest = true
    
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( bagels.js bagels.css )
+  config.assets.precompile += %w( bagels.js bagels.css pickadate.min.js pickadate.css )
   
   # See everything in the log (default is :info)
   # config.log_level = :debug
