@@ -18,6 +18,14 @@ module Foosball
     
     config.autoload_paths += %W( #{Rails.root}/app/sweepers )
     config.action_controller.page_cache_directory = Rails.root.to_s + "/public/cache"
-    CalendarDateSelect.format = :iso_date
+
+    # Enable the asset pipeline
+    config.assets.enabled = true
+     
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
+     
+    # Change the path that assets are served from
+    # config.assets.prefix = "/assets"
   end
 end

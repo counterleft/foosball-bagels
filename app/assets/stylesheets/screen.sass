@@ -22,7 +22,7 @@ body, div, span, p, a, img, ul, ol, li, table, th, tr, td, form, fieldset, legen
 body
   @include default-font
   padding: 0
-  background: #fff url('../images/bg.jpg') repeat-x
+  background: #fff image-url("bg.jpg") repeat-x
   color: #303030
   text-align: center
 
@@ -139,12 +139,12 @@ h5
 #main-box
   color: #fff
   font-size: 24px
-  background: #{$primary_blue} url('../images/main-top.jpg') repeat-x
+  background: #{$primary_blue} image-url("main-top.jpg") repeat-x
 
 
 #quote
   padding: 15px
-  background: url('../images/main-corner.jpg') no-repeat right bottom
+  background: image-url("main-corner.jpg") no-repeat right bottom
 
   a
     color: #fff
