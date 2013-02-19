@@ -39,8 +39,8 @@ test:
   reconnect: false
   database: foosball_test
   pool: 5
-  username: foosball
-  password: foosball
+  username: root
+  password:
   socket: /tmp/mysql.sock
 
 production:
