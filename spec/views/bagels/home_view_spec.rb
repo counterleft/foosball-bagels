@@ -18,22 +18,16 @@ describe "bagels/home.html.haml" do
 
   it "should display bagel owner link" do
     render
-    rendered.should have_selector('#main-box') do |n|
-      n.should have_selector('#quote') do |n|
-        n.should have_selector('a')
+    rendered.should have_selector("#main-box") do |n|
+      n.should have_selector("#quote") do |n1|
+        n1.should have_selector("a")
       end
     end
   end
 
   it "should display bagel baked_on date as yyyy-mm-dd" do
     render
-    rendered.should have_selector('table#recent_bagels/tr/td', :content => @bagels[0].baked_on.strftime("%Y-%m-%d"))
-    rendered.should have_selector('table#recent_bagels/tr/td', :content => @bagels[1].baked_on.strftime("%Y-%m-%d"))
-    # rendered.should have_tag('table#recent_bagels') do
-    #       with_tag('tr') do
-    #         with_tag('td', assigns[:bagels][0].baked_on.strftime("%Y-%m-%d"))
-    #         with_tag('td', assigns[:bagels][1].baked_on.strftime("%Y-%m-%d"))
-    #       end
-    #     end
+    rendered.should have_selector("table#recent_bagels//tr/td", :content => @bagels[0].baked_on.strftime("%Y-%m-%d"))
+    rendered.should have_selector("table#recent_bagels//tr/td", :content => @bagels[1].baked_on.strftime("%Y-%m-%d"))
   end
 end
