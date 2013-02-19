@@ -72,40 +72,29 @@ class PlayersController < ApplicationController
 
   # For auto completing player names in forms
   def names
-  	@players = Player.find(:all, :limit => 15, :order => 'name ASC', :conditions => [ 'lower(name) like lower(?)', "#{params[:name]}%" ])
-  	render :inline => "<%= auto_complete_result(@players, 'name') %>"
+  	players = Player.find(:all, :limit => 15, :order => 'name ASC', :conditions => [ 'lower(name) like lower(?)', "#{params[:term]}%" ])
+    names = players.inject([]) { |list, e| list << e.name }
+  	render :inline => "#{names.to_json}"
   end
 
- # GET /players/1/edit
- def edit
-   @player = Player.find(params[:id])
- end
+   # GET /players/1/edit
+   def edit
+     @player = Player.find(params[:id])
+   end
 
- # PUT /players/1
- # PUT /players/1.xml
- def update
-   @player = Player.find(params[:id])
+   # PUT /players/1
+   # PUT /players/1.xml
+   def update
+     @player = Player.find(params[:id])
 
-   respond_to do |format|
-     if @player.update_attributes(params[:player])
-       flash[:notice] = 'Player was successfully updated.'
-       format.html { redirect_to(@player) }
-     else
-       format.html { render :action => "edit" }
+     respond_to do |format|
+       if @player.update_attributes(params[:player])
+         flash[:notice] = 'Player was successfully updated.'
+         format.html { redirect_to(@player) }
+       else
+         format.html { render :action => "edit" }
+       end
      end
    end
- end
-#
-#  # DELETE /players/1
-#  # DELETE /players/1.xml
-#  def destroy
-#    @player = Player.find(params[:id])
-#    @player.destroy
-#
-#    respond_to do |format|
-#      format.html { redirect_to(players_url) }
-#      format.xml  { head :ok }
-#    end
-#  end
 end
 

@@ -1,5 +1,7 @@
 - content_for :head do
+  = stylesheet_link_tag "bagels"
   = javascript_include_tag "pickadate.min"
+  = javascript_include_tag "bagels"
 
 #main-box
   #quote Someone else got the bagel?
@@ -15,22 +17,22 @@
     %p
       = f.label "Owner's Name"
       %br
-      != text_field_with_auto_complete :bagel, :owner_name, { :size => 20 }, { :skip_style => true, :url => names_players_path, :frequency => '0.05', :method => 'get', :param_name => 'name'}
+      = f.text_field :owner_name, { :size => 20 }
 
     %p
       = f.label "Teammate's Name"
       %br
-      != text_field_with_auto_complete :bagel, :teammate_name, { :size => 20 }, { :skip_style => true, :url => names_players_path, :frequency => '0.05', :method => 'get', :param_name => 'name' }
+      = f.text_field :teammate_name, { :size => 20 }
 
     %p
       = f.label "Offensive Opponent's Name"
       %br
-      != text_field_with_auto_complete :bagel, :opponent_1_name, { :size => 20 }, { :skip_style => true, :url => names_players_path, :frequency => '0.05', :method => 'get', :param_name => 'name' }
+      = f.text_field :opponent_1_name, { :size => 20 }
 
     %p
       = f.label "Defensive Opponent's Name"
       %br
-      != text_field_with_auto_complete :bagel, :opponent_2_name, { :size => 20 }, { :skip_style => true, :url => names_players_path, :frequency => '0.05', :method => 'get', :param_name => 'name' }
+      = f.text_field :opponent_2_name, { :size => 20 }
 
     %p
       = f.submit "Add New Bagel", :class => 'button big'
@@ -47,5 +49,21 @@
         var month = today.getMonth() + 1;
         calendar.setDate(today.getFullYear(), month, today.getDate());
       }
+    });
+
+    $("#bagel_owner_name").autocomplete({
+      source: "#{names_players_path}"
+    });
+
+    $("#bagel_teammate_name").autocomplete({
+      source: "#{names_players_path}"
+    });
+    
+    $("#bagel_opponent_1_name").autocomplete({
+      source: "#{names_players_path}"
+    });
+
+    $("#bagel_opponent_2_name").autocomplete({
+      source: "#{names_players_path}"
     });
   });

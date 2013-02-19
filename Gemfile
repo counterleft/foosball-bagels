@@ -9,6 +9,7 @@ gem "will_paginate", "~> 3.0.pre2"
 gem "newrelic_rpm", "~> 2.13"
 gem "mysql2", "~> 0.3.11"
 gem "jquery-rails", "~> 2.1"
+gem "jquery-ui-rails"
 
 group :test, :development do
   gem "capistrano", "~> 2.5.21"
