@@ -1,4 +1,4 @@
-source :rubygems
+source "https://rubygems.org"
 
 gem "rails", "3.2.11"
 gem "dynamic_form" # WTF is this?
@@ -13,8 +13,8 @@ gem "jquery-ui-rails"
 
 group :test, :development do
   gem "capistrano", "~> 2.5.21"
-  gem "rspec", "~> 2.5"
-  gem "rspec-rails", ">= 2.5.0"
+  gem "rspec", "~> 2.13"
+  gem "rspec-rails", "~> 2.13"
   gem "machinist", "1.0.6"
   gem "faker", "0.3.1"
   gem "spork", "~> 0.9.0.rc3"
