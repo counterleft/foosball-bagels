@@ -1,17 +1,17 @@
 describe "TeamRank" do
-  Player = Struct.new(:name, :id)
-  Bagel = Struct.new(:owner, :teammate, :opponent_1, :opponent_2)
+  PlayerStub = Struct.new(:name, :id)
+  BagelStub = Struct.new(:owner, :teammate, :opponent_1, :opponent_2)
 
-  let(:alice) { Player.new("alice", 1) }
-  let(:bob) { Player.new("bob", 2) }
-  let(:sally) { Player.new("sally", 3) }
-  let(:fred) { Player.new("fred", 4) }
+  let(:alice) { PlayerStub.new("alice", 1) }
+  let(:bob) { PlayerStub.new("bob", 2) }
+  let(:sally) { PlayerStub.new("sally", 3) }
+  let(:fred) { PlayerStub.new("fred", 4) }
 
   let(:bagels) {
     [
-      Bagel.new(sally, fred, alice, bob),
-      Bagel.new(sally, fred, alice, bob),
-      Bagel.new(bob, alice, fred, sally),
+      BagelStub.new(sally, fred, alice, bob),
+      BagelStub.new(sally, fred, alice, bob),
+      BagelStub.new(bob, alice, fred, sally),
     ]
   }
 

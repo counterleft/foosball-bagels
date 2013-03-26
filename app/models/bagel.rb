@@ -1,5 +1,3 @@
-require 'set'
-
 class Bagel < ActiveRecord::Base
   belongs_to :owner, :class_name => 'Player'
   belongs_to :teammate, :class_name => 'Player'
