@@ -16,7 +16,7 @@ module Foosball
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
     
-    config.autoload_paths += %W( #{Rails.root}/app/sweepers )
+    config.autoload_paths += %W( #{Rails.root}/app/sweepers #{Rails.root}/app/services #{Rails.root}/app/lib )
     config.action_controller.page_cache_directory = Rails.root.to_s + "/public/cache"
 
     # Enable the asset pipeline
