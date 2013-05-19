@@ -19,9 +19,6 @@ group :test, :development do
   gem "faker", "0.3.1"
   gem "spork", "~> 0.9.0.rc3"
   gem "webrat", "~> 0.7.2"
-  gem "guard"
-  gem "guard-rspec"
-  gem "guard-spork"
   gem "yaml_db", "~> 0.2"
 end
 
