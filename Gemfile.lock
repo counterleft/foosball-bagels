@@ -37,7 +37,6 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.0.0)
     diff-lcs (1.2.1)
-    dynamic_form (1.1.4)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -144,7 +143,6 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano (~> 2.5.21)
-  dynamic_form
   faker (= 0.3.1)
   haml (~> 3.0)
   jquery-rails (~> 2.1)

@@ -1,7 +1,6 @@
 source "https://rubygems.org"
 
 gem "rails", "3.2.11"
-gem "dynamic_form" # WTF is this?
 gem "haml", "~> 3.0"
 gem "sass", "~> 3.0"
 gem "sass-rails", "~> 3.2"
