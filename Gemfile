@@ -19,7 +19,7 @@ group :test, :development do
   gem "spork", "~> 0.9.0.rc3"
   gem "webrat", "~> 0.7.2"
   gem "yaml_db", "~> 0.2"
-  gem "cucumber-rails", "~> 1.3"
+  gem "cucumber-rails", "~> 1.3", :require => false
 end
 
 group :production do
