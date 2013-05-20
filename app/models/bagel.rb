@@ -21,13 +21,6 @@ class Bagel < ActiveRecord::Base
     return self[:baked_on].strftime("%Y-%m-%d")
   end
 
-  def self.current_owner(recent_bagels_desc=[])
-    if !recent_bagels_desc.empty?
-      return recent_bagels_desc.first.owner
-    end
-    latest_bagel = Bagel.find(:first, :order => 'baked_on desc, created_at desc, id desc')
-    return latest_bagel.owner if latest_bagel
-  end
 
   def players=(players_for_bagel)
     self[:owner_id] = players_for_bagel.bagel_owner_id
