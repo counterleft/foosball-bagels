@@ -20,6 +20,7 @@ group :test, :development do
   gem "webrat", "~> 0.7.2"
   gem "yaml_db", "~> 0.2"
   gem "cucumber-rails", "~> 1.3", :require => false
+  gem "database_cleaner", "~> 0.7"
 end
 
 group :production do
