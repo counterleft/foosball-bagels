@@ -2,18 +2,14 @@ class BagelsController < ApplicationController
 
   caches_page :home, :index
 
-  before_filter :require_sign_in
+  # TODO re-enable signin
+  #before_filter :require_sign_in
 
   def home
-    @bagels = Bagel.find(:all, :limit => 5, :order => 'baked_on desc, created_at desc',
-                         :include => [ :owner, :teammate, :opponent_1, :opponent_2 ])
-    @current_owner = Bagel.current_owner(@bagels)
-    @contributors = Player.bagel_contributors
-    @preventers = Player.bagel_preventers
+    @report = Statistics.index_report
 
     respond_to do |format|
-      format.html # index.html.haml
-      format.xml  { render :xml => @bagels }
+      format.html
     end
   end
 
