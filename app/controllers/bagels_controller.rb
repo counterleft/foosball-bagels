@@ -2,8 +2,7 @@ class BagelsController < ApplicationController
 
   caches_page :home, :index
 
-  # TODO re-enable signin
-  #before_filter :require_sign_in
+  before_filter :require_sign_in
 
   def home
     @report = Statistics.index_report

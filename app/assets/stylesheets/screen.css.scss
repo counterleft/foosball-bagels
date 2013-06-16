@@ -4,6 +4,17 @@ nav {
   margin-top: 1.5em;
 }
 
+@media screen {
+  .login-form {
+    margin: 100px auto;
+    max-width: 208px;
+
+    &:before {
+      border-style: none;
+    }
+  }
+}
+
 @media (min-width: 1200px) {
   .container {
     max-width: $maximum-width;
