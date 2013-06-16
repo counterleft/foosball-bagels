@@ -10,6 +10,7 @@ gem "mysql2", "~> 0.3.11"
 gem "jquery-rails", "~> 2.1"
 gem "jquery-ui-rails"
 gem "chartkick"
+gem "groupdate"
 
 group :test, :development do
   gem "capistrano", "~> 2.5.21"

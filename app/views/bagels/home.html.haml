@@ -6,3 +6,6 @@
 
 %h2 Active Players That Have Received The Most Bagels
 = pie_chart @report.players_grouped_by_bagel_ownage
+
+%h2 Bagels Given By Month
+= line_chart @report.bagels_given_over_time
