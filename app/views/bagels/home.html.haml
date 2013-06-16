@@ -1,8 +1,7 @@
 %h2 Quick Stats
-#bagel-owner
-  %p= "Bagel Owner: #{@report.current_bagel_owner_name}"
-#best-team
-  %p= "Best Team: #{@report.best_team_player_names}"
+%ul
+  %li#bagel-owner= "Bagel Owner: #{@report.current_bagel_owner_name}"
+  %li#best-team= "Best Team: #{@report.best_team_player_names}"
 
 %h2 Bagels Received Between Active Players
 %p The higher the percentage, the more a player has received the bagel; losers.
