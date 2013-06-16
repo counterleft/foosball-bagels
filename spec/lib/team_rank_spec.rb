@@ -1,6 +1,10 @@
 describe "TeamRank" do
   PlayerStub = Struct.new(:name, :id)
-  BagelStub = Struct.new(:owner, :teammate, :opponent_1, :opponent_2)
+  BagelStub = Struct.new(:owner, :teammate, :opponent_1, :opponent_2) do
+    def missing_players?
+      owner.nil? || teammate.nil? || opponent_1.nil? || opponent_2.nil?
+    end
+  end
 
   let(:alice) { PlayerStub.new("alice", 1) }
   let(:bob) { PlayerStub.new("bob", 2) }
