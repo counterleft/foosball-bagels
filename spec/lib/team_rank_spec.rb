@@ -16,6 +16,7 @@ describe "TeamRank" do
       BagelStub.new(sally, fred, alice, bob),
       BagelStub.new(sally, fred, alice, bob),
       BagelStub.new(bob, alice, fred, sally),
+      BagelStub.new(bob, nil, fred, sally),
     ]
   }
 
@@ -27,5 +28,11 @@ describe "TeamRank" do
 
   it "returns an empty list when no teams have played" do
     expect(TeamRank.by_plus_minus([])).to be_empty
+  end
+
+  it "skips incomplete bagels" do
+    teams = TeamRank.by_plus_minus(bagels)
+    expect(teams).to_not be_empty
+    expect(teams).to eq [Team.new(alice, bob), Team.new(fred, sally)]
   end
 end
