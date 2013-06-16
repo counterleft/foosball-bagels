@@ -17,6 +17,12 @@ nav {
   margin-top: 1.5em;
 }
 
+a.brand {
+  &:link {
+    text-decoration: none;
+  }
+}
+
 footer {
   margin-top: 1.5em;
   padding: 8px 15px 1px 15px;
