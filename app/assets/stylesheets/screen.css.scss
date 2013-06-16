@@ -1,5 +1,18 @@
 $maximum-width: 960px;
 
+body {
+  background-image: url(/assets/bright_squares_@2X.png);
+}
+
+.sign-in-bg {
+  background-image: none;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px 20px 20px 20px;
+}
+
 nav {
   margin-top: 1.5em;
 }
