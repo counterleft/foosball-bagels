@@ -7,6 +7,8 @@ class Bagel < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
 
+  scope :with_players, includes(:owner, :teammate, :opponent_1, :opponent_2)
+
   def <=>(o)
     if self.baked_on < o.baked_on
       return 1
@@ -17,10 +19,13 @@ class Bagel < ActiveRecord::Base
     end
   end
 
+  def missing_players?
+    owner_id.nil? || teammate_id.nil? || opponent_1_id.nil? || opponent_2_id.nil?
+  end
+
   def baked_on_display
     return self[:baked_on].strftime("%Y-%m-%d")
   end
-
 
   def players=(players_for_bagel)
     self[:owner_id] = players_for_bagel.bagel_owner_id
@@ -31,6 +36,8 @@ class Bagel < ActiveRecord::Base
 
   validate :players_must_exist, :players_distinct
   validates_presence_of :baked_on
+
+
 
   private
 

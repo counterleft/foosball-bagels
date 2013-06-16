@@ -3,6 +3,12 @@ class TeamRank
     ranked_teams = {}
 
     bagels.each do |bagel|
+      if (bagel.missing_players?)
+        # Some bagels don't have all the players in production
+        # due to us only tracking the bagel_owner initially
+        next
+      end
+
       winning_team = Team.new(bagel.opponent_1, bagel.opponent_2)
       losing_team = Team.new(bagel.teammate, bagel.owner)
 

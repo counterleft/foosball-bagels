@@ -10,5 +10,10 @@ Then "the current bagel owner should be displayed" do
   within("#bagel-owner") do
     expect(page).to have_content("Brian")
   end
+
+  within("#best-team") do
+    expect(page).to have_content("Emre")
+    expect(page).to have_content("Nathan")
+  end
 end
 
