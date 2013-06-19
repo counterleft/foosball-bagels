@@ -37,14 +37,12 @@ class BagelsController < ApplicationController
     end
   end
 
-  # GET /bagels/new
-  # GET /bagels/new.xml
   def new
-    @bagel = Bagel.new
+  	players = Player.where("active = true")
+    @player_names = players.inject([]) { |list, e| list << e.name }.to_json
 
     respond_to do |format|
       format.html # new.html.haml
-      format.xml  { render :xml => @bagel }
     end
   end
 

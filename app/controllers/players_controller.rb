@@ -32,9 +32,9 @@ class PlayersController < ApplicationController
     player_id = params[:id]
     @player = Player.find(player_id)
     @bagels = Bagel.paginate :page => params[:page],
-                   :conditions => ["owner_id = ? or teammate_id = ? or opponent_1_id = ? or opponent_2_id = ?",
-                   player_id, player_id, player_id, player_id],
-                   :order => 'baked_on desc, created_at desc'
+      :conditions => ["owner_id = ? or teammate_id = ? or opponent_1_id = ? or opponent_2_id = ?",
+                      player_id, player_id, player_id, player_id],
+                      :order => 'baked_on desc, created_at desc'
 
     respond_to do |format|
       format.html # show.html.haml
@@ -70,31 +70,24 @@ class PlayersController < ApplicationController
     end
   end
 
-  # For auto completing player names in forms
-  def names
-  	players = Player.find(:all, :limit => 15, :order => 'name ASC', :conditions => [ 'lower(name) like lower(?)', "#{params[:term]}%" ])
-    names = players.inject([]) { |list, e| list << e.name }
-  	render :inline => "#{names.to_json}"
+  # GET /players/1/edit
+  def edit
+    @player = Player.find(params[:id])
   end
 
-   # GET /players/1/edit
-   def edit
-     @player = Player.find(params[:id])
-   end
+  # PUT /players/1
+  # PUT /players/1.xml
+  def update
+    @player = Player.find(params[:id])
 
-   # PUT /players/1
-   # PUT /players/1.xml
-   def update
-     @player = Player.find(params[:id])
-
-     respond_to do |format|
-       if @player.update_attributes(params[:player])
-         flash[:notice] = 'Player was successfully updated.'
-         format.html { redirect_to(@player) }
-       else
-         format.html { render :action => "edit" }
-       end
-     end
-   end
+    respond_to do |format|
+      if @player.update_attributes(params[:player])
+        flash[:notice] = 'Player was successfully updated.'
+        format.html { redirect_to(@player) }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
 end
 
