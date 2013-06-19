@@ -1,3 +1,6 @@
+- content_for :header_image do
+  = image_tag("foos.png", alt: "Foosball")
+
 %h2 Quick Stats
 %ul
   %li#bagel-owner= "Current Bagel Owner: #{@report.current_bagel_owner_name}"

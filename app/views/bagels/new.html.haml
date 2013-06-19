@@ -2,6 +2,9 @@
   = stylesheet_link_tag "picker-classic"
   = stylesheet_link_tag "picker-classic.date"
 
+- content_for :header_image do
+  = image_tag("add-bagel-header.png", alt: "Fresh Baked Bagels")
+
 = form_tag "/bagels", method: "post", id: "new-bagel-form" do
   / TODO error messages
 
