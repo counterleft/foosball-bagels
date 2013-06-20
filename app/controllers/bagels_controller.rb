@@ -12,8 +12,6 @@ class BagelsController < ApplicationController
     end
   end
 
-  # GET /bagels
-  # GET /bagels.xml
   def index
     @bagels = Bagel.paginate :page => params[:page], :order => 'baked_on desc, created_at desc',
                              :include => [ :owner, :teammate, :opponent_1, :opponent_2 ]
@@ -25,8 +23,6 @@ class BagelsController < ApplicationController
     end
   end
 
-  # GET /bagels/1
-  # GET /bagels/1.xml
   def show
     @bagel = Bagel.find(params[:id])
 
@@ -46,14 +42,6 @@ class BagelsController < ApplicationController
     end
   end
 
-# there is no update bagel feature
-#  # GET /bagels/1/edit
-#  def edit
-#    @bagel = Bagel.find(params[:id])
-#  end
-
-  # POST /bagels
-  # POST /bagels.xml
   def create
     @bagel = Bagel.new(params[:bagel])
 
@@ -68,36 +56,4 @@ class BagelsController < ApplicationController
       end
     end
   end
-
-# there is no update bagel feature
-#  # PUT /bagels/1
-#  # PUT /bagels/1.xml
-#  def update
-#    @bagel = Bagel.find(params[:id])
-#
-#    respond_to do |format|
-#      if @bagel.update_attributes(params[:bagel])
-#        flash[:notice] = 'Bagel was successfully updated.'
-#        format.html { redirect_to(@bagel) }
-#        format.xml  { head :ok }
-#      else
-#        format.html { render :action => "edit" }
-#        format.xml  { render :xml => @bagel.errors, :status => :unprocessable_entity }
-#      end
-#    end
-#  end
-
-# there is no delete bagel feature
-# # DELETE /bagels/1
-#  # DELETE /bagels/1.xml
-#  def destroy
-#    @bagel = Bagel.find(params[:id])
-#    @bagel.destroy
-#
-#    respond_to do |format|
-#      format.html { redirect_to(bagels_url) }
-#      format.xml  { head :ok }
-#    end
-# end
 end
-
