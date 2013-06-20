@@ -37,17 +37,15 @@ class Bagel < ActiveRecord::Base
   validate :players_must_exist, :players_distinct
   validates_presence_of :baked_on
 
-
-
   private
 
-  EXISTING_PLAYER_NEEDED_MSG = "must correspond to an existing player"
+  EXISTING_PLAYER_NEEDED_MSG = "must be an existing player"
 
   def players_must_exist
-    errors.add(:bagel_owner, EXISTING_PLAYER_NEEDED_MSG) if owner_id.nil?
-    errors.add(:bagel_teammate, EXISTING_PLAYER_NEEDED_MSG) if teammate_id.nil?
-    errors.add(:winning_offensive_player, EXISTING_PLAYER_NEEDED_MSG) if opponent_1_id.nil?
-    errors.add(:winning_defensive_player, EXISTING_PLAYER_NEEDED_MSG) if opponent_2_id.nil?
+    errors.add(:bagel_owner_name, "^Owner #{EXISTING_PLAYER_NEEDED_MSG}") if owner_id.nil?
+    errors.add(:bagel_teammate_name, "^Teammate #{EXISTING_PLAYER_NEEDED_MSG}") if teammate_id.nil?
+    errors.add(:bagel_opponent_1_name, "^Winning Offensive Player #{EXISTING_PLAYER_NEEDED_MSG}") if opponent_1_id.nil?
+    errors.add(:bagel_opponent_2_name, "^Winning Defensive Player #{EXISTING_PLAYER_NEEDED_MSG}") if opponent_2_id.nil?
   end
 
   def players_distinct

@@ -8,4 +8,3 @@ Feature: Add a bagel
     And adds valid bagel info
     And clicks Add Bagel
     Then a new bagel should be added
-    And the page should redirect to the new bagel page

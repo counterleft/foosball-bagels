@@ -13,6 +13,21 @@ body {
   padding: 20px 20px 20px 20px;
 }
 
+.error-text {
+  color: #e74c3c;
+}
+
+.flash {
+  padding: 10px 15px 1px 15px;
+  margin-bottom: 1.5em;
+  border-radius: 6px 6px 6px 6px;
+
+  p {
+    color: #fff;
+    font-weight: 700;
+  }
+}
+
 nav {
   margin-top: 1.5em;
 }

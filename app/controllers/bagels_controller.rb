@@ -14,46 +14,53 @@ class BagelsController < ApplicationController
 
   def index
     @bagels = Bagel.paginate :page => params[:page], :order => 'baked_on desc, created_at desc',
-                             :include => [ :owner, :teammate, :opponent_1, :opponent_2 ]
+      :include => [ :owner, :teammate, :opponent_1, :opponent_2 ]
 
     respond_to do |format|
       format.html
-      format.xml { render :xml => @bagels }
-      format.json { render :json => Bagel.all({:order => "baked_on desc, created_at desc"}) }
     end
   end
 
   def show
-    @bagel = Bagel.find(params[:id])
+    @bagel = Bagel.with_players.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.haml
-      format.xml  { render :xml => @bagel }
-      format.json { render :json => @bagel }
+      format.html
     end
   end
 
   def new
-  	players = Player.where("active = true")
-    @player_names = players.inject([]) { |list, e| list << e.name }.to_json
+    @bagel = Bagel.new
 
     respond_to do |format|
-      format.html # new.html.haml
+      format.html { render :new, locals: { player_names: player_names } }
     end
   end
 
   def create
-    @bagel = Bagel.new(params[:bagel])
+    @bagel = CreateBagel.save(
+      params[:bagel][:baked_on],
+      params[:bagel][:owner][:name],
+      params[:bagel][:teammate][:name],
+      params[:bagel][:opponent_1][:name],
+      params[:bagel][:opponent_2][:name],
+    )
 
     respond_to do |format|
-      if @bagel.save
-        flash[:notice] = 'Bagel was successfully created.'
+      if @bagel.persisted?
+        flash[:notice] = 'We got ourselves a new bagel!'
         format.html { redirect_to(@bagel) }
-        format.xml  { render :xml => @bagel, :status => :created, :location => @bagel }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @bagel.errors, :status => :unprocessable_entity }
+        format.html { render action: "new", locals: { player_names: player_names } }
       end
     end
+  end
+
+  private
+
+  def player_names
+    players = Player.where("active = true")
+    player_names = players.inject([]) { |list, e| list << e.name }.to_json
+    player_names
   end
 end

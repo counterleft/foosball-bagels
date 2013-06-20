@@ -5,30 +5,39 @@
 - content_for :header_image do
   = image_tag("add-bagel-header.png", alt: "Fresh Baked Bagels")
 
-= form_tag "/bagels", method: "post", id: "new-bagel-form" do
-  / TODO error messages
+= form_for @bagel do |bagel_form|
+  = error_messages_for @bagel, class: "error-text", header_message: "Ya got some problems, buddy..", message: ""
 
   %div.row
     %div.span4
-      = text_field_tag :baked_on, nil, class: "datepicker", size: 12
+      %div.control-group
+        = bagel_form.text_field :baked_on, class: "datepicker", size: 12
 
   %div.row
     %div.span4
-      = label_tag :owner_name, "Owner's Name"
-      = text_field_tag :owner_name, nil, "value placeholder" => "Owner's Name", autocomplete: "off"
+      %div.control-group
+        = bagel_form.fields_for :owner do |builder|
+          = builder.label :name, "Owner's Name"
+          = builder.text_field :name, "value placeholder" => "Owner's Name", autocomplete: "off"
 
     %div.span4
-      = label_tag :teammate_name, "Teammate's Name"
-      = text_field_tag :teammate_name, nil, "value placeholder" => "Teammate's Name"
+      %div.control-group
+        = bagel_form.fields_for :teammate do |builder|
+          = builder.label :name, "Teammate's Name"
+          = builder.text_field :name, "value placeholder" => "Teammate's Name", autocomplete: "off"
 
   %div.row
     %div.span4
-      = label_tag :opponent_1_name, "Winning Offensive Player's Name"
-      = text_field_tag :opponent_1_name, nil, "value placeholder" => "Winning Offensive Player's Name"
+      %div.control-group
+        = bagel_form.fields_for :opponent_1 do |builder|
+          = builder.label :name, "Winning Offensive Player's Name"
+          = builder.text_field :name, "value placeholder" => "Winning Offensive Player's Name", autocomplete: "off"
 
     %div.span4
-      = label_tag :opponent_2_name, "Winning Defensive Player's Name"
-      = text_field_tag :opponent_2_name, nil, "value placeholder" => "Winning Defensive Player's Name"
+      %div.control-group
+        = bagel_form.fields_for :opponent_2 do |builder|
+          = builder.label :name, "Winning Defensive Player's Name"
+          = builder.text_field :name, "value placeholder" => "Winning Defensive Player's Name", autocomplete: "off"
 
   %div.row
     %br
@@ -42,23 +51,23 @@
 
   :javascript
     $(function() {
-      $("#owner_name").focus();
+      $("#bagel_owner_name").focus();
 
 
-      $("#owner_name").typeahead({
-        source: #{@player_names}
+      $("#bagel_owner_name").typeahead({
+        source: #{player_names}
       });
 
-      $("#teammate_name").typeahead({
-        source: #{@player_names}
+      $("#bagel_teammate_name").typeahead({
+        source: #{player_names}
       });
 
-      $("#opponent_1_name").typeahead({
-        source: #{@player_names}
+      $("#bagel_opponent_1_name").typeahead({
+        source: #{player_names}
       });
 
-      $("#opponent_2_name").typeahead({
-        source: #{@player_names}
+      $("#bagel_opponent_2_name").typeahead({
+        source: #{player_names}
       });
 
       $(".datepicker").pickadate({
