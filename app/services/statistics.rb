@@ -9,12 +9,14 @@ class Statistics
 
     bagels_given_over_time = Bagel.group_by_month(:baked_on).count
     best_team = TeamRank.by_plus_minus(Bagel.with_players.all).first
+    worst_team = TeamRank.by_plus_minus(Bagel.with_players.all).last
 
     players_by_plus_minus = Player.active.ordered_by_plus_minus.all
 
     report = IndexReport.new(
       current_bagel_owner: CurrentBagelOwner.fetch,
       best_team: best_team,
+      worst_team: worst_team,
       players_grouped_by_bagel_ownage: players_grouped_by_bagel_ownage,
       bagels_given_over_time: bagels_given_over_time,
       players_by_plus_minus: players_by_plus_minus
@@ -30,18 +32,19 @@ class Statistics
     include ActionDispatch::Routing
     include Rails.application.routes.url_helpers
 
-    attr_reader :current_bagel_owner, :best_team, :players_grouped_by_bagel_ownage, :bagels_given_over_time
+    attr_reader :current_bagel_owner, :best_team, :worst_team, :players_grouped_by_bagel_ownage, :bagels_given_over_time
 
     def_delegator :@current_bagel_owner, :name, :current_bagel_owner_name
+
+    def_delegator :@best_team, :offense, :best_team_offensive_player
+    def_delegator :@best_team, :defense, :best_team_defensive_player
+    def_delegator :@worst_team, :offense, :worst_team_offensive_player
+    def_delegator :@worst_team, :defense, :worst_team_defensive_player
 
     def initialize(hash)
       hash.each do |k, v|
         send("#{k}=", v)
       end
-    end
-
-    def best_team_player_names
-      "#{best_team.offense.name} & #{best_team.defense.name} (#{pluralize(best_team.plus_minus, 'bagel')} given)"
     end
 
     def players_by_plus_minus
@@ -64,6 +67,6 @@ class Statistics
       %(<span class="#{css_class}">#{plus_minus}</span>).html_safe
     end
 
-    attr_writer  :current_bagel_owner, :best_team, :players_grouped_by_bagel_ownage, :bagels_given_over_time, :players_by_plus_minus
+    attr_writer  :current_bagel_owner, :best_team, :worst_team, :players_grouped_by_bagel_ownage, :bagels_given_over_time, :players_by_plus_minus
   end
 end

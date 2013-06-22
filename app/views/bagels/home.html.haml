@@ -8,7 +8,8 @@
   %h2 Quick Stats
   %ul
     %li#bagel-owner= "Current Bagel Owner: #{@report.current_bagel_owner_name}"
-    %li#best-team= "Best Team: #{@report.best_team_player_names}"
+    %li#best-team!= "The best team has #{link_to @report.best_team_offensive_player} on offense and #{link_to @report.best_team_defensive_player} on defense. They've given #{pluralize(@report.best_team.plus_minus.abs, 'bagel')}."
+    %li#worst-team!= "The worst team has #{link_to @report.worst_team_offensive_player} on offense and #{link_to @report.worst_team_defensive_player} on defense. They've received #{pluralize(@report.worst_team.plus_minus.abs, 'bagel')}."
 
 #player-rankings
   %h2 Active Player Rankings

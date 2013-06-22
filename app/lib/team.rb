@@ -7,6 +7,14 @@ class Team
     @plus_minus = 0
   end
 
+  def offense_name
+    offense.name
+  end
+
+  def defense_name
+    defense.name
+  end
+
   def increment_plus_minus
     @plus_minus += 1
   end

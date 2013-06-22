@@ -23,3 +23,9 @@ Then "the player rankings are shown" do
   end
 end
 
+Then(/^the section "(.*?)" should include "(.*?)"$/) do |div, content|
+  within(div) do
+    expect(page).to have_content(content)
+  end
+end
+
