@@ -7,3 +7,8 @@ Feature: Home Page
     Given a logged-in user
     When the user visits the home page
     Then the current bagel owner should be displayed
+
+  Scenario: Player Rankings
+    Given a logged-in user
+    When the user visits the home page
+    Then the player rankings are shown

@@ -4,10 +4,22 @@
 - content_for :header_image do
   = image_tag("foos.png", alt: "Foosball")
 
-%h2 Quick Stats
-%ul
-  %li#bagel-owner= "Current Bagel Owner: #{@report.current_bagel_owner_name}"
-  %li#best-team= "Best Team: #{@report.best_team_player_names}"
+#quick-stats
+  %h2 Quick Stats
+  %ul
+    %li#bagel-owner= "Current Bagel Owner: #{@report.current_bagel_owner_name}"
+    %li#best-team= "Best Team: #{@report.best_team_player_names}"
+
+#player-rankings
+  %h2 Active Player Rankings
+  %table.table.table-condensed.table-hover
+    %thead
+      %tr
+        %th Player
+        %th Plus-Minus
+    %tbody
+      - @report.players_by_plus_minus.each do |player|
+        %tr= player
 
 %h2 Bagels Received Between Active Players
 %p The higher the percentage, the more a player has received the bagel; losers.

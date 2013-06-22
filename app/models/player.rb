@@ -5,6 +5,9 @@ class Player < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  scope :active, where("active = true")
+  scope :ordered_by_plus_minus, order("plus_minus desc, name asc")
+
   def name=(name)
     self[:name] = name.gsub(/^[a-z]|\s+[a-z]/) { |a| a.upcase }
   end
@@ -24,7 +27,7 @@ class Player < ActiveRecord::Base
   def self.bagel_preventers
     return Player.find(:all, :conditions => ["plus_minus = ?", Player.maximum(:plus_minus)], :order => "name asc")
   end
-  
+
   def to_s
     self.name
   end
