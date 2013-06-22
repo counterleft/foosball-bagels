@@ -35,7 +35,15 @@ class Statistics
     include ActionDispatch::Routing
     include Rails.application.routes.url_helpers
 
-    attr_reader :current_bagel_owner, :best_team, :worst_team, :total_bagel_count, :players_grouped_by_bagel_ownage, :bagels_given_over_time
+    INSTANCE_METHODS = [:current_bagel_owner, :best_team, :worst_team, :total_bagel_count, :players_grouped_by_bagel_ownage, :bagels_given_over_time]
+
+    INSTANCE_METHODS.each do |name|
+      class_eval <<-CODE, __FILE__, __LINE__ + 1
+        def #{name}
+          @#{name}
+        end
+      CODE
+    end
 
     def_delegator :@current_bagel_owner, :name, :current_bagel_owner_name
 
@@ -60,6 +68,14 @@ class Statistics
     end
 
     private
+
+    INSTANCE_METHODS.each do |name|
+      class_eval <<-CODE, __FILE__, __LINE__ + 1
+        def #{name}=(name)
+          @#{name} = name
+        end
+      CODE
+    end
 
     def colored(plus_minus)
       if plus_minus > 0
