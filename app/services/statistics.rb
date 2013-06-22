@@ -41,7 +41,7 @@ class Statistics
     end
 
     def best_team_player_names
-      "#{best_team.offense.name} & #{best_team.defense.name}"
+      "#{best_team.offense.name} & #{best_team.defense.name} (#{pluralize(best_team.plus_minus, 'bagel')} given)"
     end
 
     def players_by_plus_minus
