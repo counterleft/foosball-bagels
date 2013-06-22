@@ -10,6 +10,7 @@
     %li#bagel-owner= "Current Bagel Owner: #{@report.current_bagel_owner_name}"
     %li#best-team!= "The best team has #{link_to @report.best_team_offensive_player} on offense and #{link_to @report.best_team_defensive_player} on defense. They've given #{pluralize(@report.best_team.plus_minus.abs, 'bagel')}."
     %li#worst-team!= "The worst team has #{link_to @report.worst_team_offensive_player} on offense and #{link_to @report.worst_team_defensive_player} on defense. They've received #{pluralize(@report.worst_team.plus_minus.abs, 'bagel')}."
+    %li#total-bagels= "We've baked a total of #{pluralize(@report.total_bagel_count, 'bagel')}."
 
 #player-rankings
   %h2 Active Player Rankings

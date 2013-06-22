@@ -11,12 +11,15 @@ class Statistics
     best_team = TeamRank.by_plus_minus(Bagel.with_players.all).first
     worst_team = TeamRank.by_plus_minus(Bagel.with_players.all).last
 
+    total_bagel_count = Bagel.count
+
     players_by_plus_minus = Player.active.ordered_by_plus_minus.all
 
     report = IndexReport.new(
       current_bagel_owner: CurrentBagelOwner.fetch,
       best_team: best_team,
       worst_team: worst_team,
+      total_bagel_count: total_bagel_count,
       players_grouped_by_bagel_ownage: players_grouped_by_bagel_ownage,
       bagels_given_over_time: bagels_given_over_time,
       players_by_plus_minus: players_by_plus_minus
@@ -32,7 +35,7 @@ class Statistics
     include ActionDispatch::Routing
     include Rails.application.routes.url_helpers
 
-    attr_reader :current_bagel_owner, :best_team, :worst_team, :players_grouped_by_bagel_ownage, :bagels_given_over_time
+    attr_reader :current_bagel_owner, :best_team, :worst_team, :total_bagel_count, :players_grouped_by_bagel_ownage, :bagels_given_over_time
 
     def_delegator :@current_bagel_owner, :name, :current_bagel_owner_name
 
@@ -67,6 +70,6 @@ class Statistics
       %(<span class="#{css_class}">#{plus_minus}</span>).html_safe
     end
 
-    attr_writer  :current_bagel_owner, :best_team, :worst_team, :players_grouped_by_bagel_ownage, :bagels_given_over_time, :players_by_plus_minus
+    attr_writer  :current_bagel_owner, :best_team, :worst_team, :total_bagel_count, :players_grouped_by_bagel_ownage, :bagels_given_over_time, :players_by_plus_minus
   end
 end
