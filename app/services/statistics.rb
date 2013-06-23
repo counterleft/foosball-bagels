@@ -2,7 +2,7 @@ require "ostruct"
 
 class Statistics
   def self.index_report
-    players_grouped_by_bagel_ownage = Player.where('active = true')
+    players_grouped_by_bagel_ownage = Player.active
     .joins('left outer join bagels on bagels.owner_id = players.id')
     .group(:name)
     .count
@@ -47,10 +47,10 @@ class Statistics
 
     def_delegator :@current_bagel_owner, :name, :current_bagel_owner_name
 
-    def_delegator :@best_team, :offense, :best_team_offensive_player
-    def_delegator :@best_team, :defense, :best_team_defensive_player
-    def_delegator :@worst_team, :offense, :worst_team_offensive_player
-    def_delegator :@worst_team, :defense, :worst_team_defensive_player
+    def_delegator :@best_team, :offense_name, :best_team_offensive_player_name
+    def_delegator :@best_team, :defense_name, :best_team_defensive_player_name
+    def_delegator :@worst_team, :offense_name, :worst_team_offensive_player_name
+    def_delegator :@worst_team, :defense_name, :worst_team_defensive_player_name
 
     def initialize(hash)
       hash.each do |k, v|
