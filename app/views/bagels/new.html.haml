@@ -76,8 +76,7 @@
         onStart: function() {
           var today = new Date();
           var calendar = this;
-          var month = today.getMonth() + 1;
-          calendar.set("select", [today.getFullYear(), month, today.getDate()]);
+          calendar.set("select", [today.getFullYear(), today.getMonth(), today.getDate()]);
         }
       });
     });
