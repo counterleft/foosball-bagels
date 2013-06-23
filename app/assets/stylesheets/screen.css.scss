@@ -1,4 +1,5 @@
 $maximum-width: 960px;
+$emerland: #2ECC71;
 
 body {
   background-image: url(/assets/bright_squares_@2X.png);
@@ -17,19 +18,19 @@ body {
   color: #e74c3c;
 }
 
-.flash {
-  padding: 10px 15px 1px 15px;
-  margin-bottom: 1.5em;
-  border-radius: 6px 6px 6px 6px;
-
+.alert {
   p {
-    color: #fff;
-    font-weight: 700;
+    margin: 0 0 0 0;
   }
 }
 
+.alert-success {
+  background-color: $emerland;
+  color: #fff;
+}
+
 .positive {
-  color: #2ECC71;
+  color: $emerland;
 }
 
 .negative {
