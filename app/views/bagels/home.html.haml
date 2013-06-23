@@ -8,19 +8,19 @@
   %h2 Quick Stats
   %ul.thumbnails
     %li#bagel-owner.span3
-      %div.thumbnail
+      %div.thumbnail.palette-amethyst
         %h3= @report.current_bagel_owner_name
         %p Current Bagel Owner
     %li#bagel-total.span3
-      %div.thumbnail
+      %div.thumbnail.palette-sun-flower
         %h3= @report.total_bagel_count
         %p Total Bagels
     %li#best-team.span3
-      %div.thumbnail
+      %div.thumbnail.palette-peter-river
         %h3!= "#{@report.best_team_offensive_player_name} &amp; #{@report.best_team_defensive_player_name}"
         %p <a id="best-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Best Team</a> (#{pluralize(@report.best_team.plus_minus.abs, 'Bagel')} Given)
     %li#worst-team.span3
-      %div.thumbnail
+      %div.thumbnail.palette-concrete
         %h3!= "#{@report.worst_team_offensive_player_name} &amp; #{@report.worst_team_defensive_player_name}"
         %p <a id="best-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Worst Team</a> (#{pluralize(@report.worst_team.plus_minus.abs, 'Bagel')} Received)
 

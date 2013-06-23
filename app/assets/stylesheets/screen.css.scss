@@ -15,8 +15,11 @@ body {
 }
 
 #quick-stats {
-  .thumbnail * {
-    text-align: center;
+  .thumbnail {
+    * {
+      color: #FFF;
+      text-align: center;
+    }
   }
 }
 
