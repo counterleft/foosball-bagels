@@ -10,4 +10,3 @@
 //= require jquery.placeholder
 //= require jquery.stacktable
 //= require jquery.ui.autocomplete
-//= require app
