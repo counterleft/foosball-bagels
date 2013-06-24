@@ -22,7 +22,7 @@
     %li#worst-team.span3
       %div.thumbnail.palette-concrete
         %h3!= "#{@report.worst_team_offensive_player_name} &amp; #{@report.worst_team_defensive_player_name}"
-        %p <a id="best-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Worst Team</a> (#{pluralize(@report.worst_team.plus_minus.abs, 'Bagel')} Received)
+        %p <a id="worst-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Worst Team</a> (#{pluralize(@report.worst_team.plus_minus.abs, 'Bagel')} Received)
 
 #player-rankings
   %h2 Active Player Rankings
