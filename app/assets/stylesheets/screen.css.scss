@@ -14,11 +14,30 @@ body {
   padding: 20px 20px 20px 20px;
 }
 
+.thumbnail {
+  * {
+    text-align:center;
+  }
+}
+
 #quick-stats {
   .thumbnail {
     * {
       color: #FFF;
-      text-align: center;
+    }
+  }
+}
+
+#players {
+  .thumbnails {
+    a {
+      color: #fff;
+      text-decoration: none;
+      transition-duration: 0.05s;
+
+      &:hover {
+        color: $emerland;
+      }
     }
   }
 }
@@ -82,5 +101,15 @@ footer {
 @media (min-width: 768px) and (max-width: 979px) {
   .container {
     max-width: $maximum-width;
+  }
+}
+
+@media (max-width: 480px) {
+  #players {
+    .thumbnails {
+      img {
+        display: none;
+      }
+    }
   }
 }
