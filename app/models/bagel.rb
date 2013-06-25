@@ -4,10 +4,8 @@ class Bagel < ActiveRecord::Base
   belongs_to :opponent_1, :class_name => 'Player'
   belongs_to :opponent_2, :class_name => 'Player'
 
-  cattr_reader :per_page
-  @@per_page = 10
-
   scope :with_players, includes(:owner, :teammate, :opponent_1, :opponent_2)
+  scope :order_by_baked_on, order("baked_on desc, created_at desc")
 
   def <=>(o)
     if self.baked_on < o.baked_on
@@ -21,10 +19,6 @@ class Bagel < ActiveRecord::Base
 
   def missing_players?
     owner_id.nil? || teammate_id.nil? || opponent_1_id.nil? || opponent_2_id.nil?
-  end
-
-  def baked_on_display
-    return self[:baked_on].strftime("%Y-%m-%d")
   end
 
   def players=(players_for_bagel)

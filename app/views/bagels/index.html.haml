@@ -1,8 +1,23 @@
-#main-box
-  #quote Look at them bagels!
+%h2 Bagels
 
-#content
-  %h2 Bagels Baked Across Time
+- if flash[:notice]
+  %div.alert.alert-success
+    %button.close(data-dismiss="alert") &times;
+    %p= flash[:notice]
 
-  = render :partial => 'shared/bagel_table'
-  = will_paginate @bagels if @bagels
+#bagels
+  %table.table.table-condensed.table-striped
+    %thead
+      %th Baked On
+      %th Owner
+      %th Teammate
+      %th Winning Offensive Player
+      %th Winning Defensive Player
+    %tbody
+      - @bagels.each do |bagel|
+        %tr
+          %td= bagel.baked_on.strftime("%Y-%m-%d")
+          %td= bagel.owner.name || "-"
+          %td= bagel.teammate.nil? ? "-" : bagel.teammate.name
+          %td= bagel.opponent_1.nil? ? "-" : bagel.opponent_1.name
+          %td= bagel.opponent_2.nil? ? "-" : bagel.opponent_2.name

@@ -13,16 +13,7 @@ class BagelsController < ApplicationController
   end
 
   def index
-    @bagels = Bagel.paginate :page => params[:page], :order => 'baked_on desc, created_at desc',
-      :include => [ :owner, :teammate, :opponent_1, :opponent_2 ]
-
-    respond_to do |format|
-      format.html
-    end
-  end
-
-  def show
-    @bagel = Bagel.with_players.find(params[:id])
+    @bagels = Bagel.order_by_baked_on.with_players.all
 
     respond_to do |format|
       format.html
@@ -49,7 +40,7 @@ class BagelsController < ApplicationController
     respond_to do |format|
       if @bagel.persisted?
         flash[:notice] = 'We got ourselves a new bagel!'
-        format.html { redirect_to(@bagel) }
+        format.html { redirect_to(bagels_path) }
       else
         format.html { render action: "new", locals: { player_names: player_names } }
       end

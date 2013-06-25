@@ -20,4 +20,12 @@ end
 
 Then "a new bagel should be added" do
   expect(page).to have_content("We got ourselves a new bagel!")
+
+  within("#bagels") do
+    expect(page).to have_xpath("table/tbody/tr[1]/td[1][. = '2013-10-15']")
+    expect(page).to have_xpath("table/tbody/tr[1]/td[2][. = '#{@brian.name}']")
+    expect(page).to have_xpath("table/tbody/tr[1]/td[3][. = '#{@greg.name}']")
+    expect(page).to have_xpath("table/tbody/tr[1]/td[4][. = '#{@nathan.name}']")
+    expect(page).to have_xpath("table/tbody/tr[1]/td[5][. = '#{@emre.name}']")
+  end
 end
