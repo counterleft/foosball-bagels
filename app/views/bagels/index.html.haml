@@ -1,3 +1,6 @@
+- content_for :header_image do
+  = image_tag("philly.png", alt: "Cream Cheese")
+
 %h2 Bagels
 
 - if flash[:notice]
@@ -17,7 +20,7 @@
       - @bagels.each do |bagel|
         %tr
           %td= bagel.baked_on.strftime("%Y-%m-%d")
-          %td= bagel.owner.name || "-"
-          %td= bagel.teammate.nil? ? "-" : bagel.teammate.name
-          %td= bagel.opponent_1.nil? ? "-" : bagel.opponent_1.name
-          %td= bagel.opponent_2.nil? ? "-" : bagel.opponent_2.name
+          %td= link_to(bagel.owner, bagel.owner)
+          %td= bagel.teammate.nil? ? "-" : link_to(bagel.teammate.name, bagel.teammate)
+          %td= bagel.opponent_1.nil? ? "-" : link_to(bagel.opponent_1.name, bagel.opponent_1)
+          %td= bagel.opponent_2.nil? ? "-" : link_to(bagel.opponent_2.name, bagel.opponent_2)
