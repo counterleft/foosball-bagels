@@ -5,6 +5,7 @@ class PlayersController < ApplicationController
   before_filter :require_sign_in
 
   def index
+    @active_nav_link = "players-nav-link"
     @players = Player.active.order("name asc")
 
     respond_to do |format|

@@ -5,7 +5,7 @@
   = image_tag("foos.png", alt: "Foosball")
 
 #quick-stats
-  %h2 Quick Stats
+  %h1 Quick Stats
   %ul.thumbnails
     %li#bagel-owner.span3
       %div.thumbnail.palette-amethyst
@@ -25,7 +25,7 @@
         %p <a id="worst-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Worst Team</a> (#{pluralize(@report.worst_team.plus_minus.abs, 'Bagel')} Received)
 
 #player-rankings
-  %h2 Active Player Rankings
+  %h1 Active Player Rankings
   %table.table.table-condensed.table-hover
     %thead
       %tr
@@ -35,11 +35,11 @@
       - @report.players_by_plus_minus.each do |player|
         %tr= player
 
-%h2 Bagels Received Between Active Players
+%h1 Bagels Received Between Active Players
 %p The higher the percentage, the more a player has received the bagel; losers.
 = pie_chart @report.players_grouped_by_bagel_ownage
 
-%h2 Bagels Received by Month
+%h1 Bagels Received by Month
 %p Do we give out more bagels in the summer? (Hint: you can't answer the question with this chart)
 = line_chart @report.bagels_given_over_time
 

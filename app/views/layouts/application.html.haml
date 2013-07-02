@@ -25,13 +25,13 @@
               %span.icon-bar
               %span.icon-bar
 
-            %a.brand{:href => "#{root_path}", :title => "Bagel Central"} <span class="fui-arrow-right"></span> Bagel Central
+            %a.brand{:href => "#{root_path}", :title => "Bagel Central"} Bagel Central
 
             %div.nav-collapse.collapse
               %ul.nav.pull-right
-                %li#first= link_to 'Players', players_path
-                %li= link_to "Bagels", bagels_path
-                %li= link_to "Add Bagel", new_bagel_path
+                %li#players-nav-link= link_to 'Players', players_path
+                %li#bagels-nav-link= link_to "Bagels", bagels_path
+                %li#new-bagel-nav-link.last= link_to "Add Bagel", new_bagel_path
 
       %section
         = yield
@@ -40,4 +40,7 @@
         %p Made with <span class="fui-heart"></span> by <a href="http://brian.rarevisions.net">Brian Mathiyakom</a>.  <span class="pull-right"><a href="http://rarevisions.net">rareVisions</a></span>
 
     = javascript_include_tag "application"
+    - if @active_nav_link
+      :javascript
+        $("##{@active_nav_link}").addClass("active");
     = yield :page_js

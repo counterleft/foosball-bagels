@@ -1,5 +1,6 @@
 $maximum-width: 960px;
 $emerland: #2ECC71;
+$wet-asphalt: #34495E;
 
 body {
   background-image: url(/assets/bright_squares_@2X.png);
@@ -12,6 +13,36 @@ body {
 .container {
   background-color: #fff;
   padding: 20px 20px 20px 20px;
+}
+
+// Fixes pull-right active-tab bugs from flat-ui
+.navbar-inverse .nav.pull-right {
+  li.active.last a {
+    border-radius: 0 6px 6px 0;
+  }
+  li.active a {
+    border-radius: 0 0 0 0;
+  }
+}
+
+// Fixes active-tab bugs from flat-ui
+.navbar-inverse .nav {
+  li.active {
+    &:first-child a {
+      &:hover {
+        padding-left: 20px;
+      }
+    }
+    a {
+      border-bottom-color: $emerland;
+      &:hover {
+        border-bottom-color: $emerland;
+      }
+      &:focus {
+        border-bottom-color: $emerland;
+      }
+    }
+  }
 }
 
 .thumbnail {

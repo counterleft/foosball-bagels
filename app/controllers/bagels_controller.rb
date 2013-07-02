@@ -13,6 +13,7 @@ class BagelsController < ApplicationController
   end
 
   def index
+    @active_nav_link = "bagels-nav-link"
     @bagels = Bagel.order_by_baked_on.with_players.all
 
     respond_to do |format|
@@ -21,6 +22,7 @@ class BagelsController < ApplicationController
   end
 
   def new
+    @active_nav_link = "new-bagel-nav-link"
     @bagel = Bagel.new
 
     respond_to do |format|

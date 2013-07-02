@@ -1,18 +1,4 @@
-#main-box
-  #quote= "Player Info: #{@player}"
+%h1= @player.name
+%p= "This player's plus-minus is #{@player.plus_minus}."
 
-#content
-  %p
-    - unless @player.active?
-      %strong= "#{@player} is not an active foosball player."
-
-  %p
-    %strong Plus-Minus:
-    = PlayersHelper.colored_plus_minus @player.plus_minus
-
-  %h3 Bagel Participation
-
-  %p= "#{@player} has not been involved in any bagels." if @bagels.empty?
-
-  = render :partial => 'shared/bagel_table'
-  = will_paginate @bagels
+%h3 Their Bagels
