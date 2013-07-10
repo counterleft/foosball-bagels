@@ -1,6 +1,3 @@
-- content_for :head do
-  = javascript_include_tag "https://www.google.com/jsapi", "chartkick"
-
 - content_for :header_image do
   = image_tag("foos.png", alt: "Foosball")
 
@@ -37,12 +34,14 @@
 
 %h1 Bagels Received Between Active Players
 %p The higher the percentage, the more a player has received the bagel; losers.
-= pie_chart @report.players_grouped_by_bagel_ownage
+= pie_chart @report.players_grouped_by_bagel_ownage, content_for: :chart_js
 
 %h1 Bagels Received by Month
 %p Do we give out more bagels in the summer? (Hint: you can't answer the question with this chart)
-= line_chart @report.bagels_given_over_time
+= line_chart @report.bagels_given_over_time, content_for: :chart_js
 
 - content_for :page_js do
   :javascript
     $("[data-toggle=tooltip]").tooltip("hide");
+  = javascript_include_tag "highcharts", "chartkick"
+  = yield :chart_js
