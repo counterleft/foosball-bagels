@@ -17,25 +17,25 @@
         %div.thumbnail.palette-emerland
           %h3= @player_view.best_team_on_offense.defense_name
           %p Best Defensive Teammate
-          %p= "(#{pluralize(@player_view.best_team_on_offense.plus_minus.abs, 'Bagel')} Given)"
+          %p= "Team Plus-Minus: #{@player_view.best_team_on_offense.plus_minus}"
     - if @player_view.best_team_on_defense
       %li#best-offensive-teammate.span3
         %div.thumbnail.palette-nephritis
           %h3= @player_view.best_team_on_defense.offense_name
           %p Best Offensive Teammate
-          %p= "(#{pluralize(@player_view.best_team_on_defense.plus_minus.abs, 'Bagel')} Given)"
+          %p= "Team Plus-Minus: #{@player_view.best_team_on_defense.plus_minus}"
     - if @player_view.worst_team_on_offense
       %li#worst-defensive-teammate.span3
         %div.thumbnail.palette-alizarin
           %h3= @player_view.worst_team_on_offense.defense_name
           %p Worst Defensive Teammate
-          %p= "(#{pluralize(@player_view.worst_team_on_offense.plus_minus.abs, 'Bagel')} Received)"
+          %p= "Team Plus-Minus: #{@player_view.worst_team_on_offense.plus_minus}"
     - if @player_view.worst_team_on_defense
       %li#worst-offensive-teammate.span3
         %div.thumbnail.palette-pomegranate
           %h3= @player_view.worst_team_on_defense.offense_name
           %p Worst Offensive Teammate
-          %p= "(#{pluralize(@player_view.worst_team_on_defense.plus_minus.abs, 'Bagel')} Received)"
+          %p= "Team Plus-Minus: #{@player_view.worst_team_on_defense.plus_minus}"
 
 %h2 Bagel Ownership Compared To Other Players
 %p The ownership is based on the number of times the player was the bagel owner.
