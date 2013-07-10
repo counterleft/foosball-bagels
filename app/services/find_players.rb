@@ -14,4 +14,29 @@ class FindPlayers
     winning_defensive_player = Player.find_by_name(create_bagel.winning_defensive_player_name)
     PlayersForBagel.new(bagel_owner, bagel_teammate, winning_offensive_player, winning_defensive_player)
   end
+
+  def self.single_player(id)
+    player = Player.find(id)
+    return nil if player.nil?
+
+    num_bagels_owned = Bagel.where("owner_id = ?", player.id).count
+    total_bagels = Bagel.count
+
+    data_for_bagels_owned_chart = { player.name => num_bagels_owned, "Others" => total_bagels }
+
+    ranked_teams = TeamRank.by_plus_minus(Bagel.all)
+    best_team_on_offense = ranked_teams.find { |team| team.offense_name == player.name }
+    worst_team_on_offense = ranked_teams.reverse_each.find { |team| team.offense_name == player.name }
+    best_team_on_defense = ranked_teams.find { |team| team.defense_name == player.name }
+    worst_team_on_defense = ranked_teams.reverse_each.find { |team| team.defense_name == player.name }
+
+    SinglePlayerView.new(
+      player,
+      data_for_bagels_owned_chart,
+      best_team_on_offense,
+      worst_team_on_offense,
+      best_team_on_defense,
+      worst_team_on_defense,
+    )
+  end
 end

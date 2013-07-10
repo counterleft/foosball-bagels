@@ -1,4 +1,46 @@
-%h1= @player.name
-%p= "This player's plus-minus is #{@player.plus_minus}."
+- content_for :head do
+  = javascript_include_tag "https://www.google.com/jsapi", "chartkick"
 
-%h3 Their Bagels
+- content_for :header_image do
+  = image_tag("cat_table.png", alt: "Cats on Foosball Table")
+
+%h1= @player_view.name
+
+#quick-stats
+  %ul.thumbnails
+    %li#plus-minus.span3
+      %div.thumbnail.palette-peter-river
+        %h3= @player_view.plus_minus
+        %p Plus-Minus
+    - if @player_view.best_team_on_offense
+      %li#best-defensive-teammate.span3
+        %div.thumbnail.palette-emerland
+          %h3= @player_view.best_team_on_offense.defense_name
+          %p Best Defensive Teammate
+          %p= "(#{pluralize(@player_view.best_team_on_offense.plus_minus.abs, 'Bagel')} Given)"
+    - if @player_view.best_team_on_defense
+      %li#best-offensive-teammate.span3
+        %div.thumbnail.palette-nephritis
+          %h3= @player_view.best_team_on_defense.offense_name
+          %p Best Offensive Teammate
+          %p= "(#{pluralize(@player_view.best_team_on_defense.plus_minus.abs, 'Bagel')} Given)"
+    - if @player_view.worst_team_on_offense
+      %li#worst-defensive-teammate.span3
+        %div.thumbnail.palette-alizarin
+          %h3= @player_view.worst_team_on_offense.defense_name
+          %p Worst Defensive Teammate
+          %p= "(#{pluralize(@player_view.worst_team_on_offense.plus_minus.abs, 'Bagel')} Received)"
+    - if @player_view.worst_team_on_defense
+      %li#worst-offensive-teammate.span3
+        %div.thumbnail.palette-pomegranate
+          %h3= @player_view.worst_team_on_defense.offense_name
+          %p Worst Offensive Teammate
+          %p= "(#{pluralize(@player_view.worst_team_on_defense.plus_minus.abs, 'Bagel')} Received)"
+
+%h2 Bagel Ownership Compared To Other Players
+%p The ownership is based on the number of times the player was the bagel owner.
+= pie_chart @player_view.data_for_bagels_owned_chart, id: "ownership-chart"
+
+%h2#bagels Their Bagels
+
+

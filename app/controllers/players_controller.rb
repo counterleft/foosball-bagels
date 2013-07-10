@@ -24,12 +24,7 @@ class PlayersController < ApplicationController
   end
 
   def show
-    player_id = params[:id]
-    @player = Player.find(player_id)
-    @bagels = Bagel.paginate :page => params[:page],
-      :conditions => ["owner_id = ? or teammate_id = ? or opponent_1_id = ? or opponent_2_id = ?",
-                      player_id, player_id, player_id, player_id],
-                      :order => 'baked_on desc, created_at desc'
+    @player_view = FindPlayers.single_player(params[:id])
 
     respond_to do |format|
       format.html
