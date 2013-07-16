@@ -6,19 +6,11 @@
     %button.close(data-dismiss="alert") &times;
     %p= flash[:notice]
 
-#bagels
-  %table.table.table-condensed.table-striped
-    %thead
-      %th Baked On
-      %th Owner
-      %th Teammate
-      %th Winning Offensive Player
-      %th Winning Defensive Player
-    %tbody
-      - @bagels.each do |bagel|
-        %tr
-          %td= bagel.baked_on.strftime("%Y-%m-%d")
-          %td= link_to(bagel.owner, bagel.owner)
-          %td= bagel.teammate.nil? ? "-" : link_to(bagel.teammate.name, bagel.teammate)
-          %td= bagel.opponent_1.nil? ? "-" : link_to(bagel.opponent_1.name, bagel.opponent_1)
-          %td= bagel.opponent_2.nil? ? "-" : link_to(bagel.opponent_2.name, bagel.opponent_2)
+#bagels(data-pjax-container)
+  = render partial: "shared/bagels_table", locals: { bagels: @bagels }
+  = will_paginate @bagels
+
+- content_for :page_js do
+  = javascript_include_tag "jquery.pjax"
+  :javascript
+    $(document).pjax('.pagination a:not([data-remote]):not([data-behavior]):not([data-skip-pjax])', '[data-pjax-container]');

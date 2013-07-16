@@ -41,8 +41,16 @@
 %p The ownership is based on the number of times the player was the bagel owner.
 = pie_chart @player_view.data_for_bagels_owned_chart, id: "ownership-chart", content_for: :chart_js
 
-%h2#bagels Their Bagels
+%h2 Their Bagels
+
+%div(data-pjax-container)
+  #bagels
+    = render partial: "shared/bagels_table", locals: { bagels: @player_view.bagels }
+    = will_paginate @player_view.bagels, params: { anchor: "bagels" }
 
 - content_for :page_js do
   = javascript_include_tag "highcharts", "chartkick"
   = yield :chart_js
+  = javascript_include_tag "jquery.pjax"
+  :javascript
+    $(document).pjax('.pagination a:not([data-remote]):not([data-behavior]):not([data-skip-pjax])', '[data-pjax-container]');

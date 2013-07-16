@@ -9,4 +9,3 @@
 //= require jquery.tagsinput
 //= require jquery.placeholder
 //= require jquery.stacktable
-//= require jquery.ui.autocomplete

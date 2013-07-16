@@ -7,6 +7,8 @@ class Bagel < ActiveRecord::Base
   scope :with_players, includes(:owner, :teammate, :opponent_1, :opponent_2)
   scope :order_by_baked_on, order("baked_on desc, created_at desc")
 
+  self.per_page = 10
+
   def <=>(o)
     if self.baked_on < o.baked_on
       return 1

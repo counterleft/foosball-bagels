@@ -24,7 +24,7 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @player_view = FindPlayers.single_player(params[:id])
+    @player_view = FindPlayers.single_player(params[:id], params[:page])
 
     respond_to do |format|
       format.html
