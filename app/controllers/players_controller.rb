@@ -60,13 +60,19 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
 
     respond_to do |format|
-      if @player.update_attributes(params[:player])
+      if @player.update_attributes!(player_params)
         flash[:notice] = 'Player was successfully updated.'
         format.html { redirect_to(@player) }
       else
         format.html { render :action => "edit" }
       end
     end
+  end
+
+  private
+
+  def player_params
+    params.require(:player).permit(:name, :active)
   end
 end
 
