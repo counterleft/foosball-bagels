@@ -6,3 +6,7 @@ def sign_in(password="secret")
     click_button "Enter"
   end
 end
+
+When(/the user visits the (.*) page/) do |path|
+  visit(send("#{path}_path"))
+end

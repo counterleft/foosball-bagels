@@ -2,10 +2,6 @@ Given "an unlogged-in user" do
   # do nothing
 end
 
-When "the user visits the sign-in page" do
-  visit("/")
-end
-
 Then "the user must login" do
   sign_in
   expect(page).to have_selector("a[title='Bagel Central']")

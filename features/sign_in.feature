@@ -4,11 +4,11 @@ Feature: Sign In
 
   Scenario: Sign In Page
     Given an unlogged-in user
-    When the user visits the sign-in page
+    When the user visits the sign_in page
     Then the user must login
 
   Scenario: Failed Sign In
     Given an unlogged-in user
-    When the user visits the sign-in page
+    When the user visits the sign_in page
     And the user enters an incorrect password
     Then an error is shown
