@@ -15,4 +15,9 @@ Before do
   CreateBagel.save("2012-01-01", @brian.name, @greg.name, @emre.name, @nathan.name)
   CreateBagel.save("2012-01-01", @brian.name, @greg.name, @nathan.name, @emre.name)
 
+  # enough bagels for pagination to kick in
+  10.times.each do
+    CreateBagel.save("2012-01-01", @brian.name, @greg.name, @nathan.name, @emre.name)
+  end
+
 end

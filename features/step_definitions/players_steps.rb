@@ -20,3 +20,12 @@ Then(/^the user is shown that player's show page$/) do
   expect(page).to have_css("#worst-defensive-teammate")
   expect(page).to have_css("#bagels")
 end
+
+Then(/^pagination exists for bagels$/) do
+  within("#bagels") do
+    within(".pagination") do
+      click_link("2")
+      expect(page.html).to have_xpath("//li[@class = 'active']/a[. = '2']")
+    end
+  end
+end

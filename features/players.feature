@@ -12,3 +12,10 @@ Feature: Players
     When the user visits the players page
     And visits a player's show page
     Then the user is shown that player's show page
+
+  Scenario: Paginating Player's Bagels
+    Given a logged-in user
+    When the user visits the players page
+    And visits a player's show page
+    Then pagination exists for bagels
+
