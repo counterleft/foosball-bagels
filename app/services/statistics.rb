@@ -3,7 +3,7 @@ require "ostruct"
 class Statistics
   def self.index_report
     players_grouped_by_bagel_ownage = Player.active
-    .joins('left outer join bagels on bagels.owner_id = players.id')
+    .joins("inner join bagels on bagels.owner_id = players.id")
     .group(:name)
     .count
 
