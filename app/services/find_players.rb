@@ -20,9 +20,9 @@ class FindPlayers
     return nil if player.nil?
 
     num_bagels_owned = Bagel.where("owner_id = ?", player.id).count
-    total_bagels = Bagel.count
+    num_rest_of_bagels = Bagel.count - num_bagels_owned
 
-    data_for_bagels_owned_chart = { player.name => num_bagels_owned, "Others" => total_bagels }
+    data_for_bagels_owned_chart = { player.name => num_bagels_owned, "Others" => num_rest_of_bagels }
 
     ranked_teams = TeamRank.by_plus_minus(Bagel.with_players.all)
     best_team_on_offense = ranked_teams.find { |team| team.offense_name == player.name }
