@@ -35,7 +35,9 @@ class Statistics
     include ActionDispatch::Routing
     include Rails.application.routes.url_helpers
 
-    INSTANCE_METHODS = [:current_bagel_owner, :best_team, :worst_team, :total_bagel_count, :players_grouped_by_bagel_ownage, :bagels_given_over_time]
+    INSTANCE_METHODS = [:current_bagel_owner, :best_team, :worst_team, 
+                        :total_bagel_count, :players_grouped_by_bagel_ownage, 
+                        :bagels_given_over_time]
 
     INSTANCE_METHODS.each do |name|
       class_eval <<-CODE, __FILE__, __LINE__ + 1
