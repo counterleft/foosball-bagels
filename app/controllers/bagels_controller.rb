@@ -1,7 +1,4 @@
 class BagelsController < ApplicationController
-
-  caches_page :home, :index
-
   before_filter :require_sign_in
 
   def home

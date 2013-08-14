@@ -1,7 +1,4 @@
 class PlayersController < ApplicationController
-
-  caches_page :index
-
   before_filter :require_sign_in
 
   def index
