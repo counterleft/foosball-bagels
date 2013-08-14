@@ -1,18 +1,61 @@
-#main-box
-  #quote= "Player Info: #{@player}"
+- content_for :head do
+  = javascript_include_tag "https://www.google.com/jsapi", "chartkick"
 
-#content
-  %p
-    - unless @player.active?
-      %strong= "#{@player} is not an active foosball player."
+- content_for :header_image do
+  = image_tag("cat_table.png", alt: "Cats on Foosball Table")
 
-  %p
-    %strong Plus-Minus:
-    = PlayersHelper.colored_plus_minus @player.plus_minus
+- if flash[:notice]
+  %div.alert.alert-success
+    %button.close(data-dismiss="alert") &times;
+    %p= flash[:notice]
 
-  %h3 Bagel Participation
+%h1= @player_view.name
 
-  %p= "#{@player} has not been involved in any bagels." if @bagels.empty?
+#quick-stats
+  %ul.thumbnails
+    %li#plus-minus.span3
+      %div.thumbnail.palette-peter-river
+        %h3= @player_view.plus_minus
+        %p Plus-Minus
+    - if @player_view.best_team_on_offense
+      %li#best-defensive-teammate.span3
+        %div.thumbnail.palette-emerland
+          %h3= @player_view.best_team_on_offense.defense_name
+          %p Best Defensive Teammate
+          %p= "Team Plus-Minus: #{@player_view.best_team_on_offense.plus_minus}"
+    - if @player_view.best_team_on_defense
+      %li#best-offensive-teammate.span3
+        %div.thumbnail.palette-nephritis
+          %h3= @player_view.best_team_on_defense.offense_name
+          %p Best Offensive Teammate
+          %p= "Team Plus-Minus: #{@player_view.best_team_on_defense.plus_minus}"
+    - if @player_view.worst_team_on_offense
+      %li#worst-defensive-teammate.span3
+        %div.thumbnail.palette-alizarin
+          %h3= @player_view.worst_team_on_offense.defense_name
+          %p Worst Defensive Teammate
+          %p= "Team Plus-Minus: #{@player_view.worst_team_on_offense.plus_minus}"
+    - if @player_view.worst_team_on_defense
+      %li#worst-offensive-teammate.span3
+        %div.thumbnail.palette-pomegranate
+          %h3= @player_view.worst_team_on_defense.offense_name
+          %p Worst Offensive Teammate
+          %p= "Team Plus-Minus: #{@player_view.worst_team_on_defense.plus_minus}"
 
-  = render :partial => 'shared/bagel_table'
-  = will_paginate @bagels
+%h2 Bagel Ownership Compared To Other Players
+%p The ownership is based on the number of times the player was the bagel owner.
+= pie_chart @player_view.data_for_bagels_owned_chart, id: "ownership-chart", content_for: :chart_js
+
+%h2 Their Bagels
+
+%div(data-pjax-container)
+  #bagels
+    = render partial: "shared/bagels_table", locals: { bagels: @player_view.bagels }
+    = will_paginate @player_view.bagels, params: { anchor: "bagels" }
+
+- content_for :page_js do
+  = javascript_include_tag "highcharts", "chartkick"
+  = yield :chart_js
+  = javascript_include_tag "jquery.pjax"
+  :javascript
+    $(document).pjax('.pagination a:not([data-remote]):not([data-behavior]):not([data-skip-pjax])', '[data-pjax-container]');

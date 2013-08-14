@@ -1,17 +1,22 @@
-#main-box
-  #quote= "Editing #{@player}"
+%h1= "Editing #{@player}"
 
-#content
-  - form_for(@player) do |f|
-    = f.error_messages
+= form_for @player do |f|
+  = error_messages_for class: "error-text", header_message: "Don't look now, but you gave me bad input."
 
-    %p
-      = f.label :name
-      %br
-      = f.text_field :name
-      
-    %p
-      = f.label :active 
-      = f.check_box :active
+  %div.row
+    %div.span4
+      %div.control-group
+        = f.label :name
+        = f.text_field :name
 
-    %p= f.submit 'Update Player'
+  %div.row
+    %div.span4
+      %div.control-group
+        = f.label :active, "#{f.check_box :active, "data-toggle" => "checkbox"} Still Active?".html_safe, class: "checkbox"
+
+  %div.row
+    %br
+  %div.row
+    %div.span4
+      %div.control-group
+        = f.button "Update Player", class: "btn btn-primary btn-large"

@@ -1,25 +1,47 @@
-#main-box
-  #quote
-    - if @current_owner.nil?
-      = 'No one owns the bagel, start playing better!'
-    - else
-      != "Fact: #{link_to @current_owner.name, @current_owner} currently owns the bagel."
+- content_for :header_image do
+  = image_tag("foos.png", alt: "Foosball")
 
-#content
-  %h2 Other Facts
+#quick-stats
+  %h1 Quick Stats
+  %ul.thumbnails
+    %li#bagel-owner.span3
+      %div.thumbnail.palette-amethyst
+        %h3= @report.current_bagel_owner_name
+        %p Current Bagel Owner
+    %li#bagel-total.span3
+      %div.thumbnail.palette-sun-flower
+        %h3= @report.total_bagel_count
+        %p Total Bagels
+    %li#best-team.span3
+      %div.thumbnail.palette-peter-river
+        %h3!= "#{@report.best_team_offensive_player_name} &amp; #{@report.best_team_defensive_player_name}"
+        %p <a id="best-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Best Team</a> (Plus-Minus: #{@report.best_team.plus_minus})
+    %li#worst-team.span3
+      %div.thumbnail.palette-concrete
+        %h3!= "#{@report.worst_team_offensive_player_name} &amp; #{@report.worst_team_defensive_player_name}"
+        %p <a id="worst-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Worst Team</a> (Plus-Minus: #{@report.worst_team.plus_minus})
 
-  :ruby
-    bagel_contributor_links = []
-    @contributors.each { |b| bagel_contributor_links.push(link_to(b.name, b)) }
+#player-rankings
+  %h1 Active Player Rankings
+  %table.table.table-condensed.table-striped
+    %thead
+      %tr
+        %th Player
+        %th Plus-Minus
+    %tbody
+      - @report.players_by_plus_minus.each do |player|
+        %tr= player
 
-  %p= PlayersHelper.bagel_contributors @contributors, bagel_contributor_links
+%h1 Bagels Received Between Active Players
+%p The higher the percentage, the more a player has received the bagel; losers.
+= pie_chart @report.players_grouped_by_bagel_ownage, content_for: :chart_js
 
-  :ruby
-    bagel_preventer_links = []
-    @preventers.each { |b| bagel_preventer_links.push(link_to(b.name, b)) }
+%h1 Bagels Received by Month
+%p Do we give out more bagels in the summer? (Hint: you can't answer the question with this chart)
+= line_chart @report.bagels_given_over_time, content_for: :chart_js
 
-  %p= PlayersHelper.bagel_preventers @preventers, bagel_preventer_links
-
-  %h2 Most Recent Bagels
-
-  = render :partial => 'shared/bagel_table'
+- content_for :page_js do
+  :javascript
+    $("[data-toggle=tooltip]").tooltip("hide");
+  = javascript_include_tag "highcharts", "chartkick"
+  = yield :chart_js

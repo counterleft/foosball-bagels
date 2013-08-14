@@ -1,45 +1,13 @@
-require 'set'
-
 class Bagel < ActiveRecord::Base
   belongs_to :owner, :class_name => 'Player'
   belongs_to :teammate, :class_name => 'Player'
   belongs_to :opponent_1, :class_name => 'Player'
   belongs_to :opponent_2, :class_name => 'Player'
 
-  cattr_reader :per_page
-  @@per_page = 10
+  scope :with_players, includes(:owner, :teammate, :opponent_1, :opponent_2)
+  scope :order_by_baked_on, order("baked_on desc, created_at desc")
 
-  def owner_name
-    owner.name if owner
-  end
-
-  def owner_name=(name)
-    self.owner = Player.find_by_name(name)
-  end
-
-  def teammate_name
-    teammate.name if teammate
-  end
-
-  def teammate_name=(name)
-    self.teammate = Player.find_by_name(name)
-  end
-
-  def opponent_1_name
-    opponent_1.name if opponent_1
-  end
-
-  def opponent_1_name=(name)
-    self.opponent_1 = Player.find_by_name(name)
-  end
-
-  def opponent_2_name
-    opponent_2.name if opponent_2
-  end
-
-  def opponent_2_name=(name)
-    self.opponent_2 = Player.find_by_name(name)
-  end
+  self.per_page = 10
 
   def <=>(o)
     if self.baked_on < o.baked_on
@@ -51,50 +19,34 @@ class Bagel < ActiveRecord::Base
     end
   end
 
-  def baked_on_display
-    return self[:baked_on].strftime("%Y-%m-%d")
+  def missing_players?
+    owner_id.nil? || teammate_id.nil? || opponent_1_id.nil? || opponent_2_id.nil?
   end
 
-  def self.current_owner(recent_bagels_desc=[])
-    if !recent_bagels_desc.empty?
-      return recent_bagels_desc.first.owner
-    end
-    latest_bagel = Bagel.find(:first, :order => 'baked_on desc, created_at desc, id desc')
-    return latest_bagel.owner if latest_bagel
+  def players=(players_for_bagel)
+    self[:owner_id] = players_for_bagel.bagel_owner_id
+    self[:teammate_id] = players_for_bagel.bagel_teammate_id
+    self[:opponent_1_id] = players_for_bagel.winning_offensive_player_id
+    self[:opponent_2_id] = players_for_bagel.winning_defensive_player_id
   end
-
-  after_create :adjust_players_plus_minus
 
   validate :players_must_exist, :players_distinct
   validates_presence_of :baked_on
-  
+
   private
-  def adjust_players_plus_minus
-    owner.decr_plus_minus
-    owner.save
 
-    teammate.decr_plus_minus
-    teammate.save
-
-    opponent_1.incr_plus_minus
-    opponent_1.save
-
-    opponent_2.incr_plus_minus
-    opponent_2.save
-  end
-
-  EXISTING_PLAYER_NEEDED_MSG = "must correspond to an existing player"
+  EXISTING_PLAYER_NEEDED_MSG = "must be an existing player"
 
   def players_must_exist
-    errors.add(:owner_name, EXISTING_PLAYER_NEEDED_MSG) if owner.nil?
-    errors.add(:teammate_name, EXISTING_PLAYER_NEEDED_MSG) if teammate.nil?
-    errors.add(:opponent_1_name, EXISTING_PLAYER_NEEDED_MSG) if opponent_1.nil?
-    errors.add(:opponent_2_name, EXISTING_PLAYER_NEEDED_MSG) if opponent_2.nil?
+    errors.add(:bagel_owner_name, "^Owner #{EXISTING_PLAYER_NEEDED_MSG}") if owner_id.nil?
+    errors.add(:bagel_teammate_name, "^Teammate #{EXISTING_PLAYER_NEEDED_MSG}") if teammate_id.nil?
+    errors.add(:bagel_opponent_1_name, "^Winning Offensive Player #{EXISTING_PLAYER_NEEDED_MSG}") if opponent_1_id.nil?
+    errors.add(:bagel_opponent_2_name, "^Winning Defensive Player #{EXISTING_PLAYER_NEEDED_MSG}") if opponent_2_id.nil?
   end
 
   def players_distinct
-    players_involved = [self.owner_name, self.teammate_name, self.opponent_1_name, self.opponent_2_name]
-    possible_teams = players_involved.collect { |p1| players_involved.collect { |p2| [p1, p2] if p1 != p2 } }.inject {|sum, n| sum + n}.compact
+    players = [owner_id, teammate_id, opponent_1_id, opponent_2_id]
+    possible_teams = players.collect { |p1| players.collect { |p2| [p1, p2] if p1 != p2 } }.inject {|sum, n| sum + n}.compact
     if possible_teams.size != 12
       errors.add(:base, "All players involved can only play one position (i.e. the same person cannot be the teammate and the owner)")
     end

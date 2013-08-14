@@ -1,69 +1,82 @@
 - content_for :head do
-  = stylesheet_link_tag "bagels"
-  = javascript_include_tag "pickadate.min"
-  = javascript_include_tag "bagels"
+  = stylesheet_link_tag "picker-classic"
+  = stylesheet_link_tag "picker-classic.date"
 
-#main-box
-  #quote Someone else got the bagel?
+- content_for :header_image do
+  = image_tag("add-bagel-header.png", alt: "Fresh Baked Bagels")
 
-#content
-  = form_for(@bagel) do |f|
-    = f.error_messages
+= form_for @bagel do |bagel_form|
+  = error_messages_for @bagel, class: "error-text", header_message: "Ya got some problems, buddy..", message: ""
 
-    %p
-      = f.label :baked_on
-      %br
-      = f.text_field :baked_on, :class => "datepicker", :size => 12
-    %p
-      = f.label "Owner's Name"
-      %br
-      = f.text_field :owner_name, { :size => 20 }
+  %div.row
+    %div.span4
+      %div.control-group
+        = bagel_form.text_field :baked_on, class: "datepicker", size: 12
 
-    %p
-      = f.label "Teammate's Name"
-      %br
-      = f.text_field :teammate_name, { :size => 20 }
+  %div.row
+    %div.span4
+      %div.control-group
+        = bagel_form.fields_for :owner do |builder|
+          = builder.label :name, "Owner's Name"
+          = builder.text_field :name, "value placeholder" => "Owner's Name", autocomplete: "off"
 
-    %p
-      = f.label "Offensive Opponent's Name"
-      %br
-      = f.text_field :opponent_1_name, { :size => 20 }
+    %div.span4
+      %div.control-group
+        = bagel_form.fields_for :teammate do |builder|
+          = builder.label :name, "Teammate's Name"
+          = builder.text_field :name, "value placeholder" => "Teammate's Name", autocomplete: "off"
 
-    %p
-      = f.label "Defensive Opponent's Name"
-      %br
-      = f.text_field :opponent_2_name, { :size => 20 }
+  %div.row
+    %div.span4
+      %div.control-group
+        = bagel_form.fields_for :opponent_1 do |builder|
+          = builder.label :name, "Winning Offensive Player's Name"
+          = builder.text_field :name, "value placeholder" => "Winning Offensive Player's Name", autocomplete: "off"
 
-    %p
-      = f.submit "Add New Bagel", :class => 'button big'
-      = link_to "cancel", root_path, :class => 'button'
+    %div.span4
+      %div.control-group
+        = bagel_form.fields_for :opponent_2 do |builder|
+          = builder.label :name, "Winning Defensive Player's Name"
+          = builder.text_field :name, "value placeholder" => "Winning Defensive Player's Name", autocomplete: "off"
 
-:javascript
-  $(function() {
-    $(".datepicker").pickadate({
-      format: 'yyyy-mm-dd',
-      clear: false,
-      onStart: function() {
-        var today = new Date();
-        var calendar = this;
-        var month = today.getMonth() + 1;
-        calendar.setDate(today.getFullYear(), month, today.getDate());
-      }
+  %div.row
+    %br
+  %div.row
+    %div.span4
+      = button_tag "Add New Bagel", class: 'btn btn-primary btn-large'
+
+- content_for :page_js do
+  = javascript_include_tag "picker"
+  = javascript_include_tag "picker.date"
+
+  :javascript
+    $(function() {
+      $("#bagel_owner_name").focus();
+
+
+      $("#bagel_owner_name").typeahead({
+        source: #{player_names}
+      });
+
+      $("#bagel_teammate_name").typeahead({
+        source: #{player_names}
+      });
+
+      $("#bagel_opponent_1_name").typeahead({
+        source: #{player_names}
+      });
+
+      $("#bagel_opponent_2_name").typeahead({
+        source: #{player_names}
+      });
+
+      $(".datepicker").pickadate({
+        format: 'Bake!d on yyyy-mm-dd',
+        clear: false,
+        onStart: function() {
+          var today = new Date();
+          var calendar = this;
+          calendar.set("select", [today.getFullYear(), today.getMonth(), today.getDate()]);
+        }
+      });
     });
-
-    $("#bagel_owner_name").autocomplete({
-      source: "#{names_players_path}"
-    });
-
-    $("#bagel_teammate_name").autocomplete({
-      source: "#{names_players_path}"
-    });
-    
-    $("#bagel_opponent_1_name").autocomplete({
-      source: "#{names_players_path}"
-    });
-
-    $("#bagel_opponent_2_name").autocomplete({
-      source: "#{names_players_path}"
-    });
-  });
