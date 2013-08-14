@@ -11,20 +11,20 @@ Foosball::Application.configure do
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
-   
+
   # Choose the compressors to use
   # config.assets.js_compressor  = :uglifier
   # config.assets.css_compressor = :yui
-   
+
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
-   
+
   # Generate digests for assets URLs.
   config.assets.digest = true
-   
+
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( bagels.js bagels.css pickadate.min.js pickadate.css )
-  
+  config.assets.precompile += %w( bagels.js highcharts.js picker-classic.css picker-classic.date.css jquery.pjax.js )
+
   # See everything in the log (default is :info)
   # config.log_level = :debug
 

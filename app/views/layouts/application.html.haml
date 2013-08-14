@@ -1,34 +1,46 @@
 !!!
 
-%html{:xmls => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
+%html
   %head
-    %meta{ "http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
+    %meta(http-equiv="content-type" content="text/html;charset=UTF-8")
     %meta(name="author" lang="en" content="Brian Mathiyakom; http://brian.rarevisions.net")
     %meta(name="copyright" lang="en" content="Brian Mathiyakom; http://brian.rarevisions.net")
     %meta(name="robots" content="none")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     %title Bagel Central
     = stylesheet_link_tag "application"
-    = javascript_include_tag "application"
     = yield :head
 
   %body
-    #layout
-      #header
-        %h1#logo
-          %a{:href => "#{root_path}", :title => "Bagel Central"} <span>Bagel</span> Central
-        %hr.noscreen
+    %div.container
+      %header
+        %div.thumbnail
+          = yield :header_image
 
-        #navigation
-          %ul
-            %li#first= link_to 'Players', players_path
-            %li= link_to "Bagels", bagels_path
-            %li= link_to "Add Bagel", new_bagel_path
-        %hr.noscreen
+      %nav
+        %div.navbar.navbar-inverse
+          %div.navbar-inner
+            %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
 
-        #main
-          %p{:style => "color: green"}= flash[:notice]
-          = yield
+            %a.brand{:href => "#{root_path}", :title => "Bagel Central"} Bagel Central
 
-        #footer
-          %p#copyright &copy; 2009 <a href="http://rarevisions.net">rareVisions</a>
-          %p#dont-delete-this Design by <a href="http://www.davidkohout.cz">David Kohout</a>
+            %div.nav-collapse.collapse
+              %ul.nav.pull-right
+                %li#players-nav-link= link_to 'Players', players_path
+                %li#bagels-nav-link= link_to "Bagels", bagels_path
+                %li#new-bagel-nav-link.last= link_to "Add Bagel", new_bagel_path
+
+      %section
+        = yield
+
+      %footer
+        %p Made with <span class="fui-heart"></span> by <a href="http://brian.rarevisions.net">Brian Mathiyakom</a>.  <span class="pull-right"><a href="http://rarevisions.net">rareVisions</a></span>
+
+    = javascript_include_tag "application"
+    - if @active_nav_link
+      :javascript
+        $("##{@active_nav_link}").addClass("active");
+    = yield :page_js

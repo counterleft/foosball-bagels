@@ -5,106 +5,55 @@ class BagelsController < ApplicationController
   before_filter :require_sign_in
 
   def home
-    @bagels = Bagel.find(:all, :limit => 5, :order => 'baked_on desc, created_at desc',
-                         :include => [ :owner, :teammate, :opponent_1, :opponent_2 ])
-    @current_owner = Bagel.current_owner(@bagels)
-    @contributors = Player.bagel_contributors
-    @preventers = Player.bagel_preventers
-
-    respond_to do |format|
-      format.html # index.html.haml
-      format.xml  { render :xml => @bagels }
-    end
-  end
-
-  # GET /bagels
-  # GET /bagels.xml
-  def index
-    @bagels = Bagel.paginate :page => params[:page], :order => 'baked_on desc, created_at desc',
-                             :include => [ :owner, :teammate, :opponent_1, :opponent_2 ]
+    @report = Statistics.index_report
 
     respond_to do |format|
       format.html
-      format.xml { render :xml => @bagels }
-      format.json { render :json => Bagel.all({:order => "baked_on desc, created_at desc"}) }
     end
   end
 
-  # GET /bagels/1
-  # GET /bagels/1.xml
-  def show
-    @bagel = Bagel.find(params[:id])
+  def index
+    @active_nav_link = "bagels-nav-link"
+    @bagels = Bagel.with_players.order_by_baked_on.paginate(page: params[:page])
 
     respond_to do |format|
-      format.html # show.html.haml
-      format.xml  { render :xml => @bagel }
-      format.json { render :json => @bagel }
+      format.html
     end
   end
 
-  # GET /bagels/new
-  # GET /bagels/new.xml
   def new
+    @active_nav_link = "new-bagel-nav-link"
     @bagel = Bagel.new
 
     respond_to do |format|
-      format.html # new.html.haml
-      format.xml  { render :xml => @bagel }
+      format.html { render :new, locals: { player_names: player_names } }
     end
   end
 
-# there is no update bagel feature
-#  # GET /bagels/1/edit
-#  def edit
-#    @bagel = Bagel.find(params[:id])
-#  end
-
-  # POST /bagels
-  # POST /bagels.xml
   def create
-    @bagel = Bagel.new(params[:bagel])
+    @bagel = CreateBagel.save(
+      params[:bagel][:baked_on],
+      params[:bagel][:owner][:name],
+      params[:bagel][:teammate][:name],
+      params[:bagel][:opponent_1][:name],
+      params[:bagel][:opponent_2][:name],
+    )
 
     respond_to do |format|
-      if @bagel.save
-        flash[:notice] = 'Bagel was successfully created.'
-        format.html { redirect_to(@bagel) }
-        format.xml  { render :xml => @bagel, :status => :created, :location => @bagel }
+      if @bagel.persisted?
+        flash[:notice] = 'We got ourselves a new bagel!'
+        format.html { redirect_to(bagels_path) }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @bagel.errors, :status => :unprocessable_entity }
+        format.html { render action: "new", locals: { player_names: player_names } }
       end
     end
   end
 
-# there is no update bagel feature
-#  # PUT /bagels/1
-#  # PUT /bagels/1.xml
-#  def update
-#    @bagel = Bagel.find(params[:id])
-#
-#    respond_to do |format|
-#      if @bagel.update_attributes(params[:bagel])
-#        flash[:notice] = 'Bagel was successfully updated.'
-#        format.html { redirect_to(@bagel) }
-#        format.xml  { head :ok }
-#      else
-#        format.html { render :action => "edit" }
-#        format.xml  { render :xml => @bagel.errors, :status => :unprocessable_entity }
-#      end
-#    end
-#  end
+  private
 
-# there is no delete bagel feature
-# # DELETE /bagels/1
-#  # DELETE /bagels/1.xml
-#  def destroy
-#    @bagel = Bagel.find(params[:id])
-#    @bagel.destroy
-#
-#    respond_to do |format|
-#      format.html { redirect_to(bagels_url) }
-#      format.xml  { head :ok }
-#    end
-# end
+  def player_names
+    players = Player.where("active = true")
+    player_names = players.inject([]) { |list, e| list << e.name }.to_json
+    player_names
+  end
 end
-

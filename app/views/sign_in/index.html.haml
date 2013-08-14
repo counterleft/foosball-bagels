@@ -1,20 +1,14 @@
-#main-box
-  #quote What's the Password?
-
-#content
-  - if flash[:error]
-    %h2= flash[:error]
-
-  = form_for :sign_in do |f|
-    = f.error_messages
-
-    %p
-      = f.label :password
-      %br
-      = f.password_field :password
-      = f.hidden_field :hp
-
-    %p= f.submit 'Login', :class => "button big"
-
-:javascript
-  $('sign_in_password').focus();
+%section
+  %section#sign-in.login-form
+    %h1 Bagel Central
+    = form_for :sign_in do |f|
+      - if flash[:error]
+        %section.control-group.error
+          = f.password_field :password, "value placeholder" => "Password"
+          = f.hidden_field :hp
+        = f.submit "Enter", class: "btn btn-primary btn-large btn-block"
+      - else
+        %section.control-group
+          = f.password_field :password, "value placeholder" => "Password"
+          = f.hidden_field :hp
+        = f.submit "Enter", name: "enter", class: "btn btn-primary btn-large btn-block"
