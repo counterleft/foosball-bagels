@@ -17,9 +17,9 @@ describe Statistics do
     end
 
     context "bagels have been given" do
-      before(:all) do
+      before(:each) do
         @player = Player.make
-        @bagel = Bagel.make(baked_on: '3000/12/12', owner: @player)
+        @bagel = Bagel.make(baked_on: "3000/12/12", owner: @player)
       end
 
       it "has the current bagel owner" do
@@ -45,6 +45,15 @@ describe Statistics do
       it "has the worst team" do
         expect(subject.worst_team.offense_name).to eq(@bagel.teammate.name)
         expect(subject.worst_team.defense_name).to eq(@bagel.owner.name)
+      end
+    end
+
+    context "bagels with inactive players" do
+      it "cannot be the best team" do
+        @inactive = Player.make(active: false)
+        Bagel.make(owner: @inactive)
+
+        expect(subject.best_team).to be_nil
       end
     end
   end

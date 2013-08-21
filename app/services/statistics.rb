@@ -8,8 +8,10 @@ class Statistics
     .count
 
     bagels_given_over_time = Bagel.group_by_month(:baked_on).count
-    best_team = TeamRank.by_plus_minus(Bagel.with_players.all).first
-    worst_team = TeamRank.by_plus_minus(Bagel.with_players.all).last
+
+    ranked_teams = TeamRank.by_plus_minus(Bagel.with_active_players)
+    best_team = ranked_teams.first
+    worst_team = ranked_teams.last
 
     total_bagel_count = Bagel.count
 

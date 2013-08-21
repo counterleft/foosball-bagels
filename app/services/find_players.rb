@@ -24,7 +24,7 @@ class FindPlayers
 
     data_for_bagels_owned_chart = { player.name => num_bagels_owned, "Others" => num_rest_of_bagels }
 
-    ranked_teams = TeamRank.by_plus_minus(Bagel.with_players.all)
+    ranked_teams = TeamRank.by_plus_minus(Bagel.with_active_players)
     best_team_on_offense = ranked_teams.find { |team| team.offense_name == player.name }
     worst_team_on_offense = ranked_teams.reverse_each.find { |team| team.offense_name == player.name }
     best_team_on_defense = ranked_teams.find { |team| team.defense_name == player.name }

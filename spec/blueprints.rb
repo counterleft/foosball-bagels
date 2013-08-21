@@ -1,25 +1,22 @@
-require 'machinist/active_record'
-require 'sham'
-require 'faker'
-
-Sham.name { Faker::Name.name }
+require "machinist/active_record"
+require "faker"
 
 Player.blueprint do
-  name { Sham.name }
+  name { Faker::Name.name }
   plus_minus { 0 }
 end
 
 CONTRIBUTOR_PLUS_MINUS = -10000
 
 Player.blueprint(:contributor) do
-  name { Sham.name }
+  name { Faker::Name.name }
   plus_minus { CONTRIBUTOR_PLUS_MINUS }
 end
 
 PREVENTER_PLUS_MINUS = 20000
 
 Player.blueprint(:preventer) do
-  name { Sham.name }
+  name { Faker::Name.name }
   plus_minus { PREVENTER_PLUS_MINUS }
 end
 

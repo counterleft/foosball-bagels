@@ -20,7 +20,7 @@ group :test, :development do
   gem "rspec", "~> 2.13"
   gem "rspec-rails", "~> 2.13"
   gem "machinist", "1.0.6"
-  gem "faker", "0.3.1"
+  gem "faker", "~> 1.2.0"
   gem "spork", "~> 0.9.0.rc3"
   gem "webrat", "~> 0.7.2"
   gem "yaml_db", "~> 0.2"

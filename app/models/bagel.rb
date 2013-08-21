@@ -4,10 +4,25 @@ class Bagel < ActiveRecord::Base
   belongs_to :opponent_1, :class_name => 'Player'
   belongs_to :opponent_2, :class_name => 'Player'
 
-  scope :with_players, includes(:owner, :teammate, :opponent_1, :opponent_2)
-  scope :order_by_baked_on, order("baked_on desc, created_at desc")
-
   self.per_page = 10
+
+  def self.with_players
+    includes(:owner, :teammate, :opponent_1, :opponent_2)
+  end
+
+  def self.with_active_players
+    with_players.select do |b|
+      if b.missing_players?
+        b.owner.active?
+      else
+        b.owner.active? && b.teammate.active? && b.opponent_1.active? && b.opponent_2.active?
+      end
+    end
+  end
+
+  def self.order_by_baked_on
+    order("baked_on desc, created_at desc")
+  end
 
   def <=>(o)
     if self.baked_on < o.baked_on
