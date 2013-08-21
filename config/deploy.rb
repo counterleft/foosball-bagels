@@ -36,7 +36,7 @@ namespace :deploy do
   end
 
   task :precompile, :role => :app do  
-    run "cd #{release_path}/ && rake assets:precompile"
+    run "cd #{release_path}/ && bundle exec rake assets:precompile"
   end  
 end
 
