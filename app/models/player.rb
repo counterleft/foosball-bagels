@@ -20,14 +20,6 @@ class Player < ActiveRecord::Base
     decrement :plus_minus
   end
 
-  def self.bagel_contributors
-    return Player.find(:all, :conditions => ["plus_minus = ?", Player.minimum(:plus_minus)], :order => "name asc")
-  end
-
-  def self.bagel_preventers
-    return Player.find(:all, :conditions => ["plus_minus = ?", Player.maximum(:plus_minus)], :order => "name asc")
-  end
-
   def to_s
     self.name
   end
