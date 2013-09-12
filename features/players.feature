@@ -19,3 +19,9 @@ Feature: Players
     And visits a player's show page
     Then pagination exists for bagels
 
+  Scenario: Adding a new player
+    Given a logged-in user
+    When the user visits the new_player page
+    And enters "Watson" into the Name field
+    And clicks the "Add Player" button
+    Then a new player should be added
