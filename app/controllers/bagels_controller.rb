@@ -38,7 +38,7 @@ class BagelsController < ApplicationController
 
     respond_to do |format|
       if @bagel.persisted?
-        flash[:notice] = 'We got ourselves a new bagel!'
+        flash[:notice] = "We got ourselves a new bagel!"
         format.html { redirect_to(bagels_path) }
       else
         format.html { render action: "new", locals: { player_names: player_names } }

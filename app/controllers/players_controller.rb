@@ -32,19 +32,20 @@ class PlayersController < ApplicationController
     @player = Player.new
 
     respond_to do |format|
-      format.html # new.html.haml
+      format.html
     end
   end
 
   def create
-    @player = Player.new(params[:player])
+    @player = Player.new(player_params)
+    @player.active = true
 
     respond_to do |format|
       if @player.save
-        flash[:notice] = 'Player was successfully created.'
-        format.html { redirect_to(@player) }
+        flash[:notice] = "We got ourselves a new player!"
+        format.html { redirect_to(players_path) }
       else
-        format.html { render :action => "new" }
+        format.html { render :new }
       end
     end
   end
@@ -58,7 +59,7 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.update_attributes!(player_params)
-        flash[:notice] = 'Player was successfully updated.'
+        flash[:notice] = "Player was successfully updated."
         format.html { redirect_to(@player) }
       else
         format.html { render :action => "edit" }

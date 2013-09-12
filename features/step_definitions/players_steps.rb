@@ -25,3 +25,15 @@ Then(/^pagination exists for bagels$/) do
     end
   end
 end
+
+When(/^enters "(.*?)" into the (\w+) field$/) do |value, input_label|
+  fill_in(input_label, with: value)
+end
+
+When(/^clicks the "(.*?)" button$/) do |button_label|
+  click_button(button_label)
+end
+
+Then(/^a new player should be added$/) do
+  expect(page).to have_content("We got ourselves a new player")
+end

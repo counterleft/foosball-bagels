@@ -1,13 +1,16 @@
-#main-box
-  #quote Fresh Meat?
+- content_for :header_image do
+  = image_tag("legos.png", alt: "Lego Blocks")
 
-#content
-  = form_for(@player) do |f|
-    = f.error_messages
+%h1 Add A New Player
 
-    %p
-      = f.label :name
-      %br
-      = f.text_field :name
+= form_for @player do |form|
+  = form.error_messages
 
-    %p= f.submit "Create Player", :class => "button big"
+  %div.row
+    %div.span4
+      %div.control-group
+        = form.text_field :name, "value placeholder" => "Name"
+
+  %div.row
+    %div.span4
+      = button_tag "Add Player", class: "btn btn-primary btn-large"
