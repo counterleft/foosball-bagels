@@ -52,7 +52,6 @@ class PlayersController < ApplicationController
 
   def edit
     @player = FindPlayers.single_player(params[:id])
-    puts @player.methods.sort
   end
 
   def update
