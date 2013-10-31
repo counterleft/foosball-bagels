@@ -29,8 +29,11 @@
         %th Player
         %th Plus-Minus
     %tbody
-      - @report.players_by_plus_minus.each do |player|
-        %tr= player
+      - @report.each_player_by_plus_minus do |player|
+        %tr
+          %td= link_to(player.name, player_path(player.id))
+          %td
+            %span{class: player.plus_minus_color}= player.plus_minus
 
 %h1 Bagels Received Between Active Players
 %p The higher the percentage, the more a player has received the bagel; losers.

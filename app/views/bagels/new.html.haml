@@ -17,30 +17,28 @@
     %div.span4
       %div.control-group
         = bagel_form.fields_for :owner do |builder|
-          = builder.label :name, "Owner's Name"
-          = builder.text_field :name, "value placeholder" => "Owner's Name", autocomplete: "off"
+          = builder.label :name, "Bagel Owner"
+          = select :bagel, :owner, options_for_select(player_selection, selected: @bagel.owner_id), {}, { class: "selectpicker" }
 
     %div.span4
       %div.control-group
         = bagel_form.fields_for :teammate do |builder|
-          = builder.label :name, "Teammate's Name"
-          = builder.text_field :name, "value placeholder" => "Teammate's Name", autocomplete: "off"
+          = builder.label :name, "Bagel Teammate"
+          = select :bagel, :teammate, options_for_select(player_selection, selected: @bagel.teammate_id), {}, { class: "selectpicker" }
 
   %div.row
     %div.span4
       %div.control-group
         = bagel_form.fields_for :opponent_1 do |builder|
-          = builder.label :name, "Winning Offensive Player's Name"
-          = builder.text_field :name, "value placeholder" => "Winning Offensive Player's Name", autocomplete: "off"
+          = builder.label :name, "Winning Offensive Player"
+          = select :bagel, :opponent_1, options_for_select(player_selection, selected: @bagel.opponent_1_id), {}, { class: "selectpicker" }
 
     %div.span4
       %div.control-group
         = bagel_form.fields_for :opponent_2 do |builder|
-          = builder.label :name, "Winning Defensive Player's Name"
-          = builder.text_field :name, "value placeholder" => "Winning Defensive Player's Name", autocomplete: "off"
+          = builder.label :name, "Winning Defensive Player"
+          = select :bagel, :opponent_2, options_for_select(player_selection, selected: @bagel.opponent_2_id), {}, { class: "selectpicker" }
 
-  %div.row
-    %br
   %div.row
     %div.span4
       = button_tag "Add New Bagel", class: 'btn btn-primary btn-large'
@@ -50,33 +48,14 @@
   = javascript_include_tag "picker.date"
 
   :javascript
-    $(function() {
-      $("#bagel_owner_name").focus();
-
-
-      $("#bagel_owner_name").typeahead({
-        source: #{player_names}
-      });
-
-      $("#bagel_teammate_name").typeahead({
-        source: #{player_names}
-      });
-
-      $("#bagel_opponent_1_name").typeahead({
-        source: #{player_names}
-      });
-
-      $("#bagel_opponent_2_name").typeahead({
-        source: #{player_names}
-      });
-
-      $(".datepicker").pickadate({
-        format: 'Bake!d on yyyy-mm-dd',
-        clear: false,
-        onStart: function() {
-          var today = new Date();
-          var calendar = this;
-          calendar.set("select", [today.getFullYear(), today.getMonth(), today.getDate()]);
-        }
-      });
+    $(".datepicker").pickadate({
+      format: 'Bake!d on yyyy-mm-dd',
+      clear: false,
+      onStart: function() {
+        var today = new Date();
+        var calendar = this;
+        calendar.set("select", [today.getFullYear(), today.getMonth(), today.getDate()]);
+      }
     });
+
+    $(".selectpicker").selectpicker({menuStyle: "dropdown-inverse"});

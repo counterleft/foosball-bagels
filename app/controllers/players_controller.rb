@@ -3,7 +3,9 @@ class PlayersController < ApplicationController
 
   def index
     @active_nav_link = "players-nav-link"
-    @players = Player.active.order("name asc")
+
+    raw_players = Player.active.order("name, surname asc")
+    @players = raw_players.map { |p| PlayerPresenter.new_from(p) }
 
     respond_to do |format|
       format.html
@@ -14,14 +16,12 @@ class PlayersController < ApplicationController
     @players = Player.order("plus_minus desc, name asc")
 
     respond_to do |format|
-      format.html # index.html.haml
-      format.xml  { render :xml => @players }
-      format.json { render :json => Player.all }
+      format.html
     end
   end
 
   def show
-    @player_view = FindPlayers.single_player(params[:id], params[:page])
+    @player = FindPlayers.single_player(params[:id], params[:page])
 
     respond_to do |format|
       format.html
@@ -51,7 +51,8 @@ class PlayersController < ApplicationController
   end
 
   def edit
-    @player = Player.find(params[:id])
+    @player = FindPlayers.single_player(params[:id])
+    puts @player.methods.sort
   end
 
   def update
@@ -70,7 +71,7 @@ class PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:name, :active)
+    params.require(:player).permit(:name, :surname, :active)
   end
 end
 

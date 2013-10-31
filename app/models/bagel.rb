@@ -53,10 +53,10 @@ class Bagel < ActiveRecord::Base
   EXISTING_PLAYER_NEEDED_MSG = "must be an existing player"
 
   def players_must_exist
-    errors.add(:bagel_owner_name, "^Owner #{EXISTING_PLAYER_NEEDED_MSG}") if owner_id.nil?
-    errors.add(:bagel_teammate_name, "^Teammate #{EXISTING_PLAYER_NEEDED_MSG}") if teammate_id.nil?
-    errors.add(:bagel_opponent_1_name, "^Winning Offensive Player #{EXISTING_PLAYER_NEEDED_MSG}") if opponent_1_id.nil?
-    errors.add(:bagel_opponent_2_name, "^Winning Defensive Player #{EXISTING_PLAYER_NEEDED_MSG}") if opponent_2_id.nil?
+    errors.add(:bagel_owner_name, "^Owner #{EXISTING_PLAYER_NEEDED_MSG}") unless Player.exists?(owner_id)
+    errors.add(:bagel_teammate_name, "^Teammate #{EXISTING_PLAYER_NEEDED_MSG}") unless Player.exists?(teammate_id)
+    errors.add(:bagel_opponent_1_name, "^Winning Offensive Player #{EXISTING_PLAYER_NEEDED_MSG}") unless Player.exists?(opponent_1_id)
+    errors.add(:bagel_opponent_2_name, "^Winning Defensive Player #{EXISTING_PLAYER_NEEDED_MSG}") unless Player.exists?(opponent_2_id)
   end
 
   def players_distinct

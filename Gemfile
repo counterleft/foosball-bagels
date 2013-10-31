@@ -14,6 +14,7 @@ gem "groupdate", "~> 1.0.4"
 gem "strong_parameters", "~> 0.2.1"
 gem "dynamic_form", "~> 1.1.4"
 gem "rack-pjax", "~> 0.7.0"
+gem "naught"
 
 group :test, :development do
   gem "capistrano", "~> 2.5.21"

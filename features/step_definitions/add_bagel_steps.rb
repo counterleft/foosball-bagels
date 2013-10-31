@@ -5,10 +5,10 @@ end
 And "adds valid bagel info" do
   within("#new_bagel") do
     fill_in("bagel_baked_on", with: "2013-10-15")
-    fill_in("Owner's Name", with: @brian.name)
-    fill_in("Teammate's Name", with: @greg.name)
-    fill_in("Winning Offensive Player's Name", with: @nathan.name)
-    fill_in("Winning Defensive Player's Name", with: @emre.name)
+    select("Brian", from: "bagel[owner]")
+    select("Greg", from: "bagel[teammate]")
+    select("Nathan", from: "bagel[opponent_1]")
+    select("Emre", from: "bagel[opponent_2]")
   end
 end
 

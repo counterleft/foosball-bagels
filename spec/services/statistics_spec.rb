@@ -7,8 +7,16 @@ describe Statistics do
     context "no bagels given ever" do
       it "provides sensible report values" do
         expect(subject.current_bagel_owner).to be_nil
+        expect(subject.current_bagel_owner_name).to be_nil
+
         expect(subject.best_team).to be_nil
+        expect(subject.best_team_offensive_player_name).to be_nil
+        expect(subject.best_team_defensive_player_name).to be_nil
+
         expect(subject.worst_team).to be_nil
+        expect(subject.worst_team_offensive_player_name).to be_nil
+        expect(subject.worst_team_defensive_player_name).to be_nil
+
         expect(subject.total_bagel_count).to eq(0)
         expect(subject.players_grouped_by_bagel_ownage).to be_empty
         expect(subject.bagels_given_over_time).to be_empty
@@ -23,7 +31,8 @@ describe Statistics do
       end
 
       it "has the current bagel owner" do
-        expect(subject.current_bagel_owner).to eq(@player)
+        expect(subject.current_bagel_owner.id).to eq(@player.id)
+        expect(subject.current_bagel_owner.plus_minus).to eq(@player.plus_minus)
       end
 
       it "has players grouped by bagels owned" do

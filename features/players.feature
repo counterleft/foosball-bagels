@@ -24,4 +24,12 @@ Feature: Players
     When the user visits the new_player page
     And enters "Watson" into the Name field
     And clicks the "Add Player" button
-    Then a new player should be added
+    Then a new player, "Watson" should be added
+
+  Scenario: Adding a new player with optional surname
+    Given a logged-in user
+    When the user visits the new_player page
+    And enters "John" into the Name field
+    And enters "Watson" into the Surname field
+    And clicks the "Add Player" button
+    Then a new player, "John W." should be added

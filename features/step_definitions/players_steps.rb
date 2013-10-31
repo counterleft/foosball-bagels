@@ -34,6 +34,7 @@ When(/^clicks the "(.*?)" button$/) do |button_label|
   click_button(button_label)
 end
 
-Then(/^a new player should be added$/) do
+Then(/^a new player, "(.*?)" should be added$/) do |player_name|
   expect(page).to have_content("We got ourselves a new player")
+  expect(page).to have_content(player_name)
 end

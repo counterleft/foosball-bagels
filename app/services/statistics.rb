@@ -2,34 +2,47 @@ require "ostruct"
 
 class Statistics
   def self.index_report
-    players_grouped_by_bagel_ownage = Player.active
+    raw_players_grouped_by_bagel_ownage = Player.active
     .joins("inner join bagels on bagels.owner_id = players.id")
-    .group(:name)
+    .group(:name, :surname)
     .count
+
+    players_grouped_by_bagel_ownage = {}
+    raw_players_grouped_by_bagel_ownage.each do |name_pair,num_bagels_received|
+      name = name_pair[0]
+      surname = name_pair[1]
+      display_name = PlayerPresenter.name_for(name, surname)
+      players_grouped_by_bagel_ownage[display_name] = num_bagels_received
+    end
 
     bagels_given_over_time = Bagel.group_by_month(:baked_on).count
 
     ranked_teams = TeamRank.by_plus_minus(Bagel.with_active_players)
+    ranked_teams.map! { |t| TeamPresenter.new_from(t) }
+    ranked_teams = [ NullPresenter.new ] if ranked_teams.empty?
+
     best_team = ranked_teams.first
     worst_team = ranked_teams.last
 
     total_bagel_count = Bagel.count
 
     players_by_plus_minus = Player.active.ordered_by_plus_minus.all
+    players_by_plus_minus.map! { |p| PlayerPresenter.new_from(p) }
+
+    current_bagel_owner = PlayerPresenter.new_from(CurrentBagelOwner.fetch)
 
     report = IndexReport.new(
-      current_bagel_owner: CurrentBagelOwner.fetch,
+      current_bagel_owner: current_bagel_owner,
       best_team: best_team,
       worst_team: worst_team,
       total_bagel_count: total_bagel_count,
       players_grouped_by_bagel_ownage: players_grouped_by_bagel_ownage,
       bagels_given_over_time: bagels_given_over_time,
-      players_by_plus_minus: players_by_plus_minus
+      players_by_plus_minus: players_by_plus_minus,
     )
 
     report
   end
-
 
   class IndexReport
     extend Forwardable
@@ -39,7 +52,7 @@ class Statistics
 
     INSTANCE_METHODS = [:current_bagel_owner, :best_team, :worst_team, 
                         :total_bagel_count, :players_grouped_by_bagel_ownage, 
-                        :bagels_given_over_time]
+                        :bagels_given_over_time, :players_by_plus_minus]
 
     INSTANCE_METHODS.each do |name|
       class_eval <<-CODE, __FILE__, __LINE__ + 1
@@ -62,13 +75,10 @@ class Statistics
       end
     end
 
-    def players_by_plus_minus
-      list = @players_by_plus_minus.inject([]) do |acc, player|
-        acc << "<td>#{link_to(player.name, player)}</td><td>#{colored(player.plus_minus)}</td>".html_safe
-        acc
+    def each_player_by_plus_minus(&block)
+      @players_by_plus_minus.each do |player|
+        block.call(player)
       end
-
-      list
     end
 
     private
@@ -79,15 +89,6 @@ class Statistics
           @#{name} = name
         end
       CODE
-    end
-
-    def colored(plus_minus)
-      if plus_minus > 0
-        css_class = "positive"
-      elsif plus_minus < 0
-        css_class = "negative"
-      end
-      %(<span class="#{css_class}">#{plus_minus}</span>).html_safe
     end
 
     attr_writer  :current_bagel_owner, :best_team, :worst_team, :total_bagel_count, :players_grouped_by_bagel_ownage, :bagels_given_over_time, :players_by_plus_minus

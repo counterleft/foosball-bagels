@@ -6,10 +6,10 @@
     %th Winning Offensive Player
     %th Winning Defensive Player
   %tbody
-    - bagels.each do |bagel|
+    - bagels.each_bagel do |bagel|
       %tr
         %td= bagel.baked_on.strftime("%Y-%m-%d")
-        %td= link_to(bagel.owner, bagel.owner)
-        %td= bagel.teammate.nil? ? "-" : link_to(bagel.teammate.name, bagel.teammate)
-        %td= bagel.opponent_1.nil? ? "-" : link_to(bagel.opponent_1.name, bagel.opponent_1)
-        %td= bagel.opponent_2.nil? ? "-" : link_to(bagel.opponent_2.name, bagel.opponent_2)
+        %td= link_to(bagel.owner.name, player_path(bagel.owner.id))
+        %td= bagel.teammate.nil? ? "-" : link_to(bagel.teammate.name, player_path(bagel.teammate.id))
+        %td= bagel.opponent_1.nil? ? "-" : link_to(bagel.opponent_1.name, player_path(bagel.opponent_1.id))
+        %td= bagel.opponent_2.nil? ? "-" : link_to(bagel.opponent_2.name, player_path(bagel.opponent_2.id))

@@ -1,21 +1,16 @@
 require 'ostruct'
 
 class CreateBagel
-  def self.save(baked_on, owner_name, teammate_name, winning_offensive_player_name, winning_defensive_player_name)
-    bagel = Bagel.new(baked_on: baked_on)
+  def self.save(baked_on, owner_id, teammate_id, winning_offensive_player_id, winning_defensive_player_id)
+    bagel = Bagel.new(baked_on: baked_on,
+                      owner_id: owner_id,
+                      teammate_id: teammate_id,
+                      opponent_1_id: winning_offensive_player_id,
+                      opponent_2_id: winning_defensive_player_id)
 
-    players = FindPlayers.get_players_by_name(
-      OpenStruct.new(
-        owner_name: owner_name,
-        teammate_name: teammate_name,
-        winning_offensive_player_name: winning_offensive_player_name,
-        winning_defensive_player_name: winning_defensive_player_name
-      )
-    )
-
-    bagel.players = players
     bagel.save
 
+    players = FindPlayers.get_players_for(bagel)
     AdjustPlayerPlusMinus.adjust(players) if bagel.persisted?
 
     bagel

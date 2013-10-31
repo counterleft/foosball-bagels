@@ -3,14 +3,19 @@
 
 %h1 Add A New Player
 
-= form_for @player do |form|
-  = form.error_messages
+= form_for @player do |f|
+  = f.error_messages
 
   %div.row
     %div.span4
       %div.control-group
-        = form.text_field :name, "value placeholder" => "Name"
+        = f.text_field :name, "value placeholder" => "Name"
 
   %div.row
     %div.span4
-      = button_tag "Add Player", class: "btn btn-primary btn-large"
+      %div.control-group
+        = f.text_field :surname, "value placeholder" => "Surname"
+
+  %div.row
+    %div.span4
+      = f.button "Add Player", class: "btn btn-primary btn-large"

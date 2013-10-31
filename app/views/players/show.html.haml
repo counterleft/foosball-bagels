@@ -9,49 +9,49 @@
     %button.close(data-dismiss="alert") &times;
     %p= flash[:notice]
 
-%h1= @player_view.name
+%h1= @player.full_name
 
 #quick-stats
   %ul.thumbnails
     %li#plus-minus.span3
       %div.thumbnail.palette-peter-river
-        %h3= @player_view.plus_minus
+        %h3= @player.plus_minus
         %p Plus-Minus
-    - if @player_view.best_team_on_offense
+    - if @player.best_team_on_offense
       %li#best-defensive-teammate.span3
         %div.thumbnail.palette-emerland
-          %h3= @player_view.best_team_on_offense.defense_name
+          %h3= @player.best_team_on_offense.defense_name
           %p Best Defensive Teammate
-          %p= "Team Plus-Minus: #{@player_view.best_team_on_offense.plus_minus}"
-    - if @player_view.best_team_on_defense
+          %p= "Team Plus-Minus: #{@player.best_team_on_offense.plus_minus}"
+    - if @player.best_team_on_defense
       %li#best-offensive-teammate.span3
         %div.thumbnail.palette-nephritis
-          %h3= @player_view.best_team_on_defense.offense_name
+          %h3= @player.best_team_on_defense.offense_name
           %p Best Offensive Teammate
-          %p= "Team Plus-Minus: #{@player_view.best_team_on_defense.plus_minus}"
-    - if @player_view.worst_team_on_offense
+          %p= "Team Plus-Minus: #{@player.best_team_on_defense.plus_minus}"
+    - if @player.worst_team_on_offense
       %li#worst-defensive-teammate.span3
         %div.thumbnail.palette-alizarin
-          %h3= @player_view.worst_team_on_offense.defense_name
+          %h3= @player.worst_team_on_offense.defense_name
           %p Worst Defensive Teammate
-          %p= "Team Plus-Minus: #{@player_view.worst_team_on_offense.plus_minus}"
-    - if @player_view.worst_team_on_defense
+          %p= "Team Plus-Minus: #{@player.worst_team_on_offense.plus_minus}"
+    - if @player.worst_team_on_defense
       %li#worst-offensive-teammate.span3
         %div.thumbnail.palette-pomegranate
-          %h3= @player_view.worst_team_on_defense.offense_name
+          %h3= @player.worst_team_on_defense.offense_name
           %p Worst Offensive Teammate
-          %p= "Team Plus-Minus: #{@player_view.worst_team_on_defense.plus_minus}"
+          %p= "Team Plus-Minus: #{@player.worst_team_on_defense.plus_minus}"
 
 %h2 Bagel Ownership Compared To Other Players
 %p The ownership is based on the number of times the player was the bagel owner.
-= pie_chart @player_view.data_for_bagels_owned_chart, id: "ownership-chart", content_for: :chart_js
+= pie_chart @player.data_for_bagels_owned_chart, id: "ownership-chart", content_for: :chart_js
 
 %h2 Their Bagels
 
 %div(data-pjax-container)
   #bagels
-    = render partial: "shared/bagels_table", locals: { bagels: @player_view.bagels }
-    = will_paginate @player_view.bagels, params: { anchor: "bagels" }
+    = render partial: "shared/bagels_table", locals: { bagels: @player.bagels }
+    = will_paginate @player.bagels, params: { anchor: "bagels" }
 
 - content_for :page_js do
   = javascript_include_tag "highcharts", "chartkick"

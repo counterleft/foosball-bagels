@@ -88,6 +88,7 @@ GEM
     multi_json (1.7.8)
     multi_test (0.0.2)
     mysql2 (0.3.13)
+    naught (0.0.2)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -191,6 +192,7 @@ DEPENDENCIES
   jquery-ui-rails (~> 4.0.4)
   machinist (= 1.0.6)
   mysql2 (~> 0.3.11)
+  naught
   newrelic_rpm (~> 2.13)
   rack-pjax (~> 0.7.0)
   rails (= 3.2.11)
