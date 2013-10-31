@@ -24,6 +24,8 @@ describe "TeamRank" do
     teams = TeamRank.by_plus_minus(bagels)
     expect(teams).to_not be_empty
     expect(teams).to eq [Team.new(alice, bob), Team.new(fred, sally)]
+    expect(teams.first.plus_minus).to eq(1)
+    expect(teams.last.plus_minus).to eq(-1)
   end
 
   it "returns an empty list when no teams have played" do

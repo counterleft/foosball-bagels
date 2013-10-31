@@ -38,10 +38,14 @@ class Presenter < SimpleDelegator
   end
 
   def self.Maybe(presenter)
-    presenter.__getobj__ ? presenter : NullPresenter.new
+    presenter.__getobj__ ? presenter : NullObjects::NullPresenter.new
   end
 
   def self.new_from(presentee)
+    if presentee.nil?
+      return NullObjects::NullPresenter.new
+    end
+
     presenter_class = Object.const_get("#{presentee.class.name}Presenter")
     self.Maybe(presenter_class.new(presentee))
   end

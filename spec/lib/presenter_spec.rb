@@ -25,7 +25,7 @@ describe Presenter do
     end
 
     it "creates a NullPresenter when given nil presentee" do
-      expect(TempPresenter.new_from(nil)).to be_a(NullPresenter)
+      expect(TempPresenter.new_from(nil)).to be_a(NullObjects::NullPresenter)
     end
 
     it "creates a subclass Presenter when sent from subclass" do

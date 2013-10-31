@@ -16,17 +16,17 @@ class FindPlayers
 
     data_for_bagels_owned_chart = { player.name => num_bagels_owned, "Others" => num_rest_of_bagels }
 
-    ranked_teams = TeamRank.by_plus_minus(Bagel.with_active_players)
-    best_team_on_offense = TeamPresenter.new_from(ranked_teams.find { |team| team.offense_name == player.name })
-    worst_team_on_offense = TeamPresenter.new_from(ranked_teams.reverse_each.find { |team| team.offense_name == player.name })
-    best_team_on_defense = TeamPresenter.new_from(ranked_teams.find { |team| team.defense_name == player.name })
-    worst_team_on_defense = TeamPresenter.new_from(ranked_teams.reverse_each.find { |team| team.defense_name == player.name })
-
     raw_bagels = Bagel.with_players
     .where("owner_id = ? or teammate_id = ? or opponent_1_id = ? or opponent_2_id = ?",
            player.id, player.id, player.id, player.id)
     .paginate(page: page)
     .order_by_baked_on
+
+    ranked_teams = TeamRank.by_plus_minus(raw_bagels)
+    best_team_on_offense = TeamPresenter.new_from(ranked_teams.find { |team| team.offense_name == player.name })
+    worst_team_on_offense = TeamPresenter.new_from(ranked_teams.reverse_each.find { |team| team.offense_name == player.name })
+    best_team_on_defense = TeamPresenter.new_from(ranked_teams.find { |team| team.defense_name == player.name })
+    worst_team_on_defense = TeamPresenter.new_from(ranked_teams.reverse_each.find { |team| team.defense_name == player.name })
 
     bagels = BagelListPresenter.new_from(raw_bagels)
 
