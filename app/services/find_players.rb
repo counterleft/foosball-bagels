@@ -28,7 +28,7 @@ class FindPlayers
     .paginate(page: page)
     .order_by_baked_on
 
-    bagels = BagelListPresenter.new(raw_bagels)
+    bagels = BagelListPresenter.new_from(raw_bagels)
 
     PlayerPresenter.new_from(
       player,

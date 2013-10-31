@@ -1,4 +1,4 @@
-class PlayerPresenter < SimpleDelegator
+class PlayerPresenter < Presenter
   extend Forwardable
 
   attr_reader :data_for_bagels_owned_chart,
@@ -7,8 +7,6 @@ class PlayerPresenter < SimpleDelegator
     :best_team_on_defense,
     :worst_team_on_defense,
     :bagels
-
-  alias_method :player, :__getobj__
 
   def initialize(player,
                  data_for_bagels_owned_chart = nil,
@@ -27,20 +25,17 @@ class PlayerPresenter < SimpleDelegator
   end
 
   def self.new_from(player,
-                 data_for_bagels_owned_chart = nil,
-                 best_team_on_offense = nil,
-                 worst_team_on_offense = nil,
-                 best_team_on_defense = nil,
-                 worst_team_on_defense = nil,
-                 bagels = [])
-    if player
-      PlayerPresenter.new(player, data_for_bagels_owned_chart,
-                           best_team_on_offense, worst_team_on_offense,
-                           best_team_on_defense, worst_team_on_defense,
-                           bagels)
-    else
-      NullPresenter.new
-    end
+                    data_for_bagels_owned_chart = nil,
+                    best_team_on_offense = nil,
+                    worst_team_on_offense = nil,
+                    best_team_on_defense = nil,
+                    worst_team_on_defense = nil,
+                    bagels = [])
+    self.Maybe(
+      PlayerPresenter.new(player, data_for_bagels_owned_chart, 
+                          best_team_on_offense, worst_team_on_offense, 
+                          best_team_on_defense, worst_team_on_defense, 
+                          bagels))
   end
 
   def name

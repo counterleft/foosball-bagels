@@ -12,7 +12,7 @@ class BagelsController < ApplicationController
   def index
     @active_nav_link = "bagels-nav-link"
     raw_bagels = Bagel.with_players.order_by_baked_on.paginate(page: params[:page])
-    @bagels = BagelListPresenter.new(raw_bagels)
+    @bagels = BagelListPresenter.new_from(raw_bagels)
 
     respond_to do |format|
       format.html

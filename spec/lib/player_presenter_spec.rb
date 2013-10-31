@@ -8,13 +8,13 @@ describe PlayerPresenter do
 
     it "shortens first and surname into first name and first initial of surname" do
       bob = FakePlayer.new("Bob", "Fields")
-      subject = PlayerPresenter.new(bob, nil, nil, nil, nil, nil, nil)
+      subject = PlayerPresenter.new(bob)
       expect(subject.name).to eq("Bob F.")
     end
 
     it "is OK for players to not have surnames" do
       bob = FakePlayer.new("Bob", nil)
-      subject = PlayerPresenter.new(bob, nil, nil, nil, nil, nil, nil)
+      subject = PlayerPresenter.new(bob)
       expect(subject.name).to eq("Bob")
     end
   end
