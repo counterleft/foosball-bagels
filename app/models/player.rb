@@ -1,9 +1,7 @@
 class Player < ActiveRecord::Base
-
   has_many :bagels
 
   validates_presence_of :name
-  validates_uniqueness_of :name
 
   scope :active, where("active = true")
   scope :ordered_by_plus_minus, order("plus_minus desc, name asc")

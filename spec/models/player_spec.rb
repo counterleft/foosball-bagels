@@ -22,13 +22,6 @@ describe Player do
     Player.make(:name => 'foo bar').name.should == 'Foo Bar'
   end
 
-  it "should not save player with non-unique name" do
-    name = 'Albert'
-    Player.make(:name => name)
-    actual = Player.new(:name => name)
-    actual.save.should be_false
-  end
-
   it "should increment plus minus only by one" do
     lambda {
       @new_player.incr_plus_minus
