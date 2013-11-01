@@ -3,7 +3,7 @@ $emerland: #2ECC71;
 $wet-asphalt: #34495E;
 
 body {
-  background-image: url(/assets/bright_squares_@2X.png);
+  background-image: asset-url("bright_squares_@2X.png");
 }
 
 .sign-in-bg {
