@@ -3,8 +3,13 @@ class Player < ActiveRecord::Base
 
   validates_presence_of :name
 
-  scope :active, where("active = true")
-  scope :ordered_by_plus_minus, order("plus_minus desc, name asc")
+  def self.active
+    where("active = true")
+  end
+
+  def self.ordered_by_plus_minus
+    order("plus_minus desc, name asc")
+  end
 
   def name=(name)
     self[:name] = name.gsub(/^[a-z]|\s+[a-z]/) { |a| a.upcase }

@@ -26,7 +26,7 @@ class Statistics
 
     total_bagel_count = Bagel.count
 
-    players_by_plus_minus = Player.active.ordered_by_plus_minus.all
+    players_by_plus_minus = Player.active.ordered_by_plus_minus.to_a
     players_by_plus_minus.map! { |p| PlayerPresenter.new_from(p) }
 
     current_bagel_owner = PlayerPresenter.new_from(CurrentBagelOwner.fetch)
