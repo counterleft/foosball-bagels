@@ -3,7 +3,8 @@ require "bundler/capistrano"
 set :bundle_flags, "--deployment --binstubs"
 
 set :default_environment, {
-  'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
+  'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH",
+  "RAILS_ENV" => "production",
 }
 
 set :application, "Bagel Central"
