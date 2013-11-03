@@ -19,7 +19,7 @@ class Statistics
 
     ranked_teams = TeamRank.by_plus_minus(Bagel.with_active_players)
     ranked_teams.map! { |t| TeamPresenter.new_from(t) }
-    ranked_teams = [ NullObjects::NullPresenter.new ] if ranked_teams.empty?
+    ranked_teams = [ NullObjects::NullObjectPresenter.new ] if ranked_teams.empty?
 
     best_team = ranked_teams.first
     worst_team = ranked_teams.last

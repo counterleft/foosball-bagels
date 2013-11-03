@@ -3,7 +3,7 @@ require "ostruct"
 
 describe Presenter do
   describe ".new_from" do
-    class TempPresenter < Presenter
+    class TempPresenteePresenter < Presenter
       attr_reader :foo
 
       def initialize(presentee, foo)
@@ -12,7 +12,7 @@ describe Presenter do
       end
 
       def self.new_from(presentee, foo = nil)
-        self.Maybe(TempPresenter.new(presentee, foo))
+        Conversions::Present(presentee, foo)
       end
     end
 
@@ -25,16 +25,17 @@ describe Presenter do
     end
 
     it "creates a NullPresenter when given nil presentee" do
-      expect(TempPresenter.new_from(nil)).to be_a(NullObjects::NullPresenter)
+      expect(TempPresenteePresenter.new_from(nil)).to be_a(NullObjects::NullObjectPresenter)
+      expect(Presenter.new_from(nil)).to be_a(NullObjects::NullObjectPresenter)
     end
 
     it "creates a subclass Presenter when sent from subclass" do
-      subject = TempPresenter.new_from(TempPresentee.new("Name"))
+      subject = TempPresenteePresenter.new_from(TempPresentee.new("Name"))
       expect(subject.name).to eq("Name")
     end
 
     it "creates a subclass Presenter with extra args" do
-      subject = TempPresenter.new_from(TempPresentee.new("Name"), "Foo")
+      subject = TempPresenteePresenter.new_from(TempPresentee.new("Name"), "Foo")
       expect(subject.name).to eq("Name")
       expect(subject.foo).to eq("Foo")
     end

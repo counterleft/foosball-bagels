@@ -31,11 +31,10 @@ class PlayerPresenter < Presenter
                     best_team_on_defense = nil,
                     worst_team_on_defense = nil,
                     bagels = [])
-    self.Maybe(
-      PlayerPresenter.new(player, data_for_bagels_owned_chart, 
-                          best_team_on_offense, worst_team_on_offense, 
-                          best_team_on_defense, worst_team_on_defense, 
-                          bagels))
+    Conversions::Present(player, data_for_bagels_owned_chart,
+                          best_team_on_offense, worst_team_on_offense,
+                          best_team_on_defense, worst_team_on_defense,
+                          bagels)
   end
 
   def name

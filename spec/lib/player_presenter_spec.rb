@@ -18,5 +18,18 @@ describe PlayerPresenter do
       expect(subject.name).to eq("Bob")
     end
   end
+
+  describe ".new_from" do
+    it "allows just the player as presentee" do
+      subject = PlayerPresenter.new_from(Player.new(name: "Bob"))
+      expect(subject.name).to eq("Bob")
+      expect(subject.bagels).to eq([])
+    end
+
+    it "accepts all optional parameters" do
+      subject = PlayerPresenter.new_from(Player.new(name: "Bob"), nil, nil, nil, nil, nil, [Bagel.new])
+      expect(subject.bagels).to have(1).items
+    end
+  end
 end
 

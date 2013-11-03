@@ -9,8 +9,4 @@ class BagelListPresenter < Presenter
       block.call(presenter)
     end
   end
-
-  def self.new_from(bagel_list)
-    self.Maybe(BagelListPresenter.new(bagel_list))
-  end
 end
