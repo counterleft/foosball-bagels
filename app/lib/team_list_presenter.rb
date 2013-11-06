@@ -1,0 +1,2 @@
+class TeamListPresenter < Presenter
+end

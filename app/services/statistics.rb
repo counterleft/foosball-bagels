@@ -18,18 +18,17 @@ class Statistics
     bagels_given_over_time = Bagel.group_by_month(:baked_on).count
 
     ranked_teams = TeamRank.by_plus_minus(Bagel.with_active_players)
-    ranked_teams.map! { |t| TeamPresenter.new_from(t) }
-    ranked_teams = [ NullObjects::NullObjectPresenter.new ] if ranked_teams.empty?
+    ranked_teams = TeamListPresenter.new(ranked_teams)
 
-    best_team = ranked_teams.first
-    worst_team = ranked_teams.last
+    best_team = Conversions::Maybe(ranked_teams.first)
+    worst_team = Conversions::Maybe(ranked_teams.last)
 
     total_bagel_count = Bagel.count
 
     players_by_plus_minus = Player.active.ordered_by_plus_minus.to_a
-    players_by_plus_minus.map! { |p| PlayerPresenter.new_from(p) }
+    players_by_plus_minus.map! { |p| PlayerPresenter.new(p) }
 
-    current_bagel_owner = PlayerPresenter.new_from(CurrentBagelOwner.fetch)
+    current_bagel_owner = PlayerPresenter.new(CurrentBagelOwner.fetch)
 
     report = IndexReport.new(
       current_bagel_owner: current_bagel_owner,

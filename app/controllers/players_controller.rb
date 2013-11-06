@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
     @active_nav_link = "players-nav-link"
 
     raw_players = Player.active.order("name, surname asc")
-    @players = raw_players.map { |p| PlayerPresenter.new_from(p) }
+    @players = raw_players.map { |p| PlayerPresenter.new(p) }
   end
 
   def show

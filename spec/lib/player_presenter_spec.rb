@@ -19,17 +19,35 @@ describe PlayerPresenter do
     end
   end
 
-  describe ".new_from" do
-    it "allows just the player as presentee" do
-      subject = PlayerPresenter.new_from(Player.new(name: "Bob"))
-      expect(subject.name).to eq("Bob")
-      expect(subject.bagels).to eq([])
-    end
-
-    it "accepts all optional parameters" do
-      subject = PlayerPresenter.new_from(Player.new(name: "Bob"), nil, nil, nil, nil, nil, [Bagel.new])
-      expect(subject.bagels).to have(1).items
+  it "presents a player's bagels" do
+    bob = Player.new(name: "Bob")
+    subject = PlayerPresenter.new(bob, nil, nil, nil, nil, nil, [Bagel.new(owner_id: bob.id)])
+    expect(subject.bagels).to have(1).items
+    subject.bagels.each_bagel do |bagel|
+      expect(bagel.owner_id).to eq(bob.id)
     end
   end
+
+  it "has sensible defaults" do
+    subject = PlayerPresenter.new(Player.new(name: "Bob"))
+    expect(subject.name).to eq("Bob")
+    expect(subject.plus_minus).to eq(0)
+    expect(subject.bagels).to eq([])
+
+    expect(subject.best_team_on_offense.offense_name).to be_nil
+    expect(subject.best_team_on_offense.plus_minus.to_i).to eq(0)
+
+    expect(subject.worst_team_on_offense.offense_name).to be_nil
+    expect(subject.worst_team_on_offense.plus_minus.to_i).to eq(0)
+
+    expect(subject.best_team_on_defense.offense_name).to be_nil
+    expect(subject.best_team_on_defense.plus_minus.to_i).to eq(0)
+
+    expect(subject.worst_team_on_defense.offense_name).to be_nil
+    expect(subject.worst_team_on_defense.plus_minus.to_i).to eq(0)
+
+    expect(subject.data_for_bagels_owned_chart).to be_nil
+  end
+
 end
 
