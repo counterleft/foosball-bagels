@@ -2,7 +2,7 @@ class BagelsController < ApplicationController
   before_filter :require_sign_in
 
   def home
-    @report = Statistics.index_report
+    @report = Dashboard.report
 
     respond_to do |format|
       format.html

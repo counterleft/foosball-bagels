@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Statistics do
-  context ".index_page_report" do
-    let(:subject) { Statistics.index_report }
+describe Dashboard do
+  context ".report" do
+    let(:subject) { Dashboard.report }
 
     context "no bagels given ever" do
       it "provides sensible report values" do
