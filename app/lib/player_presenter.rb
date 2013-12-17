@@ -10,10 +10,10 @@ class PlayerPresenter < Presenter
 
   def initialize(player,
                  data_for_bagels_owned_chart = nil,
-                 best_team_on_offense = nil,
-                 worst_team_on_offense = nil,
-                 best_team_on_defense = nil,
-                 worst_team_on_defense = nil,
+                 best_team_on_offense = TeamPresenter.new,
+                 worst_team_on_offense = TeamPresenter.new,
+                 best_team_on_defense = TeamPresenter.new,
+                 worst_team_on_defense = TeamPresenter.new,
                  bagels = [])
     super(player)
     @data_for_bagels_owned_chart = data_for_bagels_owned_chart
@@ -21,21 +21,7 @@ class PlayerPresenter < Presenter
     @worst_team_on_offense = worst_team_on_offense
     @best_team_on_defense = best_team_on_defense
     @worst_team_on_defense = worst_team_on_defense
-    @bagels = bagels
-  end
-
-  def self.new_from(player,
-                    data_for_bagels_owned_chart = nil,
-                    best_team_on_offense = nil,
-                    worst_team_on_offense = nil,
-                    best_team_on_defense = nil,
-                    worst_team_on_defense = nil,
-                    bagels = [])
-    self.Maybe(
-      PlayerPresenter.new(player, data_for_bagels_owned_chart, 
-                          best_team_on_offense, worst_team_on_offense, 
-                          best_team_on_defense, worst_team_on_defense, 
-                          bagels))
+    @bagels = BagelListPresenter.new(bagels)
   end
 
   def name
@@ -63,10 +49,11 @@ class PlayerPresenter < Presenter
   end
 
   def self.name_for(name, surname)
-    if surname
+    if !surname.nil?
       "#{name} #{surname[0]}."
     else
-      name
+      name.to_s
     end
   end
+
 end

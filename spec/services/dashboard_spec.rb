@@ -1,19 +1,18 @@
 require "spec_helper"
 
-describe Statistics do
-  context ".index_page_report" do
-    let(:subject) { Statistics.index_report }
+describe Dashboard do
+  context ".report" do
+    let(:subject) { Dashboard.report }
 
     context "no bagels given ever" do
       it "provides sensible report values" do
-        expect(subject.current_bagel_owner).to be_nil
-        expect(subject.current_bagel_owner_name).to be_nil
+        expect(subject.current_bagel_owner.name).to eq("n/a")
 
-        expect(subject.best_team).to be_nil
+        expect(subject.best_team).to be_a(TeamPresenter)
         expect(subject.best_team_offensive_player_name).to be_nil
         expect(subject.best_team_defensive_player_name).to be_nil
 
-        expect(subject.worst_team).to be_nil
+        expect(subject.worst_team).to be_a(TeamPresenter)
         expect(subject.worst_team_offensive_player_name).to be_nil
         expect(subject.worst_team_defensive_player_name).to be_nil
 
@@ -62,7 +61,7 @@ describe Statistics do
         @inactive = Player.make(active: false)
         Bagel.make(owner: @inactive)
 
-        expect(subject.best_team).to be_nil
+        expect(subject.best_team_offensive_player_name).to be_nil
       end
     end
   end

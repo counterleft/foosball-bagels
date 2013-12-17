@@ -5,35 +5,15 @@ class PlayersController < ApplicationController
     @active_nav_link = "players-nav-link"
 
     raw_players = Player.active.order("name, surname asc")
-    @players = raw_players.map { |p| PlayerPresenter.new_from(p) }
-
-    respond_to do |format|
-      format.html
-    end
-  end
-
-  def all
-    @players = Player.order("plus_minus desc, name asc")
-
-    respond_to do |format|
-      format.html
-    end
+    @players = raw_players.map { |p| PlayerPresenter.new(p) }
   end
 
   def show
     @player = FindPlayers.single_player(params[:id], params[:page])
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def new
     @player = Player.new
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def create

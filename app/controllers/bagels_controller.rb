@@ -2,7 +2,7 @@ class BagelsController < ApplicationController
   before_filter :require_sign_in
 
   def home
-    @report = Statistics.index_report
+    @report = Dashboard.report
 
     respond_to do |format|
       format.html
@@ -12,7 +12,7 @@ class BagelsController < ApplicationController
   def index
     @active_nav_link = "bagels-nav-link"
     raw_bagels = Bagel.with_players.order_by_baked_on.paginate(page: params[:page])
-    @bagels = BagelListPresenter.new_from(raw_bagels)
+    @bagels = BagelListPresenter.new(raw_bagels)
 
     respond_to do |format|
       format.html
@@ -50,7 +50,7 @@ class BagelsController < ApplicationController
   private
 
   def player_selection
-    players = Player.active.map { |p| PlayerPresenter.new_from(p) }.sort
+    players = Player.active.map { |p| PlayerPresenter.new(p) }.sort
     # TODO "Choose player" is a view thing, how can we specify it there?
     players.inject([["Choose player", 0]]) { |list, p| list << [p.name, p.id] }
   end

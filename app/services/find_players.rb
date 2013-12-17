@@ -23,14 +23,14 @@ class FindPlayers
     .order_by_baked_on
 
     ranked_teams = TeamRank.by_plus_minus(raw_bagels)
-    best_team_on_offense = TeamPresenter.new_from(ranked_teams.find { |team| team.offense_name == player.name })
-    worst_team_on_offense = TeamPresenter.new_from(ranked_teams.reverse_each.find { |team| team.offense_name == player.name })
-    best_team_on_defense = TeamPresenter.new_from(ranked_teams.find { |team| team.defense_name == player.name })
-    worst_team_on_defense = TeamPresenter.new_from(ranked_teams.reverse_each.find { |team| team.defense_name == player.name })
+    best_team_on_offense = TeamPresenter.new(ranked_teams.find { |team| team.offense_name == player.name })
+    worst_team_on_offense = TeamPresenter.new(ranked_teams.reverse_each.find { |team| team.offense_name == player.name })
+    best_team_on_defense = TeamPresenter.new(ranked_teams.find { |team| team.defense_name == player.name })
+    worst_team_on_defense = TeamPresenter.new(ranked_teams.reverse_each.find { |team| team.defense_name == player.name })
 
-    bagels = BagelListPresenter.new_from(raw_bagels)
+    bagels = BagelListPresenter.new(raw_bagels)
 
-    PlayerPresenter.new_from(
+    PlayerPresenter.new(
       player,
       data_for_bagels_owned_chart,
       best_team_on_offense,
