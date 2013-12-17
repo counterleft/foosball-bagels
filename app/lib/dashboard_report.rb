@@ -30,7 +30,7 @@ class DashboardReport
   end
 
   def each_player_by_plus_minus(&block)
-    @players_by_plus_minus.each do |player|
+    @players_by_plus_minus.each_player do |player|
       block.call(player)
     end
   end

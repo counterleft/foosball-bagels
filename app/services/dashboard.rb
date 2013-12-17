@@ -26,7 +26,7 @@ class Dashboard
     total_bagel_count = Bagel.count
 
     players_by_plus_minus = Player.active.ordered_by_plus_minus.to_a
-    players_by_plus_minus.map! { |p| PlayerPresenter.new(p) }
+    players_by_plus_minus = PlayerListPresenter.new(players_by_plus_minus)
 
     current_bagel_owner = PlayerPresenter.new(CurrentBagelOwner.fetch)
 

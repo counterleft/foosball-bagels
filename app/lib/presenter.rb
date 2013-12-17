@@ -14,4 +14,11 @@ class Presenter < SimpleDelegator
     klass.send(:alias_method, wrapped_object_name, :__getobj__)
     klass.send(:alias_method, "#{wrapped_object_name}=", :__setobj__)
   end
+
+  def wrapped_enum(presenter_class, enumerable, &block)
+    enumerable.each do |object|
+      presenter = presenter_class.new(object)
+      block.call(presenter)
+    end
+  end
 end
