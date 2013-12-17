@@ -6,13 +6,13 @@ describe Dashboard do
 
     context "no bagels given ever" do
       it "provides sensible report values" do
-        # TODO better defaults for nil current bagel owner
+        expect(subject.current_bagel_owner.name).to eq("n/a")
 
-        expect(subject.best_team).to be_nil
+        expect(subject.best_team).to be_a(TeamPresenter)
         expect(subject.best_team_offensive_player_name).to be_nil
         expect(subject.best_team_defensive_player_name).to be_nil
 
-        expect(subject.worst_team).to be_nil
+        expect(subject.worst_team).to be_a(TeamPresenter)
         expect(subject.worst_team_offensive_player_name).to be_nil
         expect(subject.worst_team_defensive_player_name).to be_nil
 
@@ -61,7 +61,7 @@ describe Dashboard do
         @inactive = Player.make(active: false)
         Bagel.make(owner: @inactive)
 
-        expect(subject.best_team).to be_nil
+        expect(subject.best_team_offensive_player_name).to be_nil
       end
     end
   end

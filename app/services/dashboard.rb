@@ -20,8 +20,8 @@ class Dashboard
     ranked_teams = TeamRank.by_plus_minus(Bagel.with_active_players)
     ranked_teams = TeamListPresenter.new(ranked_teams)
 
-    best_team = Conversions::Maybe(ranked_teams.first)
-    worst_team = Conversions::Maybe(ranked_teams.last)
+    best_team = ranked_teams.best_team
+    worst_team = ranked_teams.worst_team
 
     total_bagel_count = Bagel.count
 

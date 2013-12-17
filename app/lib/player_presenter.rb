@@ -52,7 +52,8 @@ class PlayerPresenter < Presenter
     if !surname.nil?
       "#{name} #{surname[0]}."
     else
-      name
+      name.to_s
     end
   end
+
 end
