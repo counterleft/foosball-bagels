@@ -18,26 +18,30 @@
       %div.control-group
         = bagel_form.fields_for :owner do |builder|
           = builder.label :name, "Bagel Owner"
-          = select :bagel, :owner, options_for_select(player_selection, selected: @bagel.owner_id), {}, { class: "selectpicker" }
+          = builder.text_field :name, "value placeholder" => "Owner's Name", autocomplete: "off"
+          = builder.hidden_field :id
 
     %div.span4
       %div.control-group
         = bagel_form.fields_for :teammate do |builder|
           = builder.label :name, "Bagel Teammate"
-          = select :bagel, :teammate, options_for_select(player_selection, selected: @bagel.teammate_id), {}, { class: "selectpicker" }
+          = builder.text_field :name, "value placeholder" => "Teammate's Name", autocomplete: "off"
+          = builder.hidden_field :id
 
   %div.row
     %div.span4
       %div.control-group
         = bagel_form.fields_for :opponent_1 do |builder|
           = builder.label :name, "Winning Offensive Player"
-          = select :bagel, :opponent_1, options_for_select(player_selection, selected: @bagel.opponent_1_id), {}, { class: "selectpicker" }
+          = builder.text_field :name, "value placeholder" => "Winning Offensive Player's Name", autocomplete: "off"
+          = builder.hidden_field :id
 
     %div.span4
       %div.control-group
         = bagel_form.fields_for :opponent_2 do |builder|
           = builder.label :name, "Winning Defensive Player"
-          = select :bagel, :opponent_2, options_for_select(player_selection, selected: @bagel.opponent_2_id), {}, { class: "selectpicker" }
+          = builder.text_field :name, "value placeholder" => "Winning Defensive Player's Name", autocomplete: "off"
+          = builder.hidden_field :id
 
   %div.row
     %div.span4
@@ -46,8 +50,27 @@
 - content_for :page_js do
   = javascript_include_tag "picker"
   = javascript_include_tag "picker.date"
+  = javascript_include_tag "underscore-min"
 
   :javascript
+    function make_autocomplete(name_field, id_field) {
+      $(name_field).typeahead({
+        source: function(query, process) {
+          return _.map(#{player_selection}, function(player) { return player.name; });
+        },
+        updater: function(item) {
+          var player = _.find(#{player_selection}, function(player) { return player.name == item; });
+          $(id_field).val(player.id);
+          return item;
+        },
+      });
+    }
+
+    make_autocomplete("#bagel_owner_name", "#bagel_owner_id");
+    make_autocomplete("#bagel_teammate_name", "#bagel_teammate_id");
+    make_autocomplete("#bagel_opponent_1_name", "#bagel_opponent_1_id");
+    make_autocomplete("#bagel_opponent_2_name", "#bagel_opponent_2_id");
+
     $(".datepicker").pickadate({
       format: 'Bake!d on yyyy-mm-dd',
       clear: false,
