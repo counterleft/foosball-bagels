@@ -7,6 +7,13 @@ class FindPlayers
     PlayersForBagel.new(bagel_owner, bagel_teammate, winning_offensive_player, winning_defensive_player)
   end
 
+  def self.active_players_as_json
+    players = Player.active.map { |p| PlayerPresenter.new(p) }.sort
+    Jbuilder.encode do |json|
+      json.array!(players, :id, :name)
+    end
+  end
+
   def self.single_player(id, page = nil)
     player = Player.find(id)
     return nil if player.nil?

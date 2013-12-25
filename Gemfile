@@ -14,6 +14,7 @@ gem "groupdate", "~> 1.0.4"
 gem "dynamic_form", "~> 1.1.4"
 gem "rack-pjax", "~> 0.7.0"
 gem "naught"
+gem "jbuilder", "~> 2.0.1"
 
 group :test, :development do
   gem "capistrano", "~> 2.5.21"
@@ -26,6 +27,7 @@ group :test, :development do
   gem "yaml_db", "~> 0.2"
   gem "cucumber-rails", :require => false
   gem "database_cleaner"
+  gem "poltergeist"
 end
 
 group :production do

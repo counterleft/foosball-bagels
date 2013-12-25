@@ -31,10 +31,10 @@ class BagelsController < ApplicationController
   def create
     @bagel = CreateBagel.save(
       params[:bagel][:baked_on],
-      params[:bagel][:owner],
-      params[:bagel][:teammate],
-      params[:bagel][:opponent_1],
-      params[:bagel][:opponent_2],
+      params[:bagel][:owner][:id],
+      params[:bagel][:teammate][:id],
+      params[:bagel][:opponent_1][:id],
+      params[:bagel][:opponent_2][:id],
     )
 
     respond_to do |format|
@@ -50,8 +50,6 @@ class BagelsController < ApplicationController
   private
 
   def player_selection
-    players = Player.active.map { |p| PlayerPresenter.new(p) }.sort
-    # TODO "Choose player" is a view thing, how can we specify it there?
-    players.inject([["Choose player", 0]]) { |list, p| list << [p.name, p.id] }
+    FindPlayers.active_players_as_json
   end
 end
