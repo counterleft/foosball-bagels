@@ -15,47 +15,9 @@ body {
   padding: 20px 20px 20px 20px;
 }
 
-// Fixes pull-right active-tab bugs from flat-ui
-.navbar-inverse .nav.pull-right {
-  li.active.last a {
-    border-radius: 0 6px 6px 0;
-  }
-  li.active a {
-    border-radius: 0 0 0 0;
-  }
-}
-
-// Fixes active-tab bugs from flat-ui
-.navbar-inverse .nav {
-  li.active {
-    &:first-child a {
-      &:hover {
-        padding-left: 20px;
-      }
-    }
-    a {
-      border-bottom-color: $emerland;
-      &:hover {
-        border-bottom-color: $emerland;
-      }
-      &:focus {
-        border-bottom-color: $emerland;
-      }
-    }
-  }
-}
-
 .thumbnail {
   * {
     text-align:center;
-  }
-}
-
-#quick-stats {
-  .thumbnail {
-    * {
-      color: #FFF;
-    }
   }
 }
 
@@ -83,11 +45,6 @@ body {
   }
 }
 
-.alert-success {
-  background-color: $emerland;
-  color: #fff;
-}
-
 .positive {
   color: $emerland;
 }
@@ -109,7 +66,7 @@ a.brand {
 footer {
   margin-top: 1.5em;
   padding: 10px 15px 1px 15px;
-  border-radius: 6px 6px 6px 6px;
+  border-top: 1px solid gray
 }
 
 @media screen {

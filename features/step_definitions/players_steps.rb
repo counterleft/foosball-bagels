@@ -21,7 +21,7 @@ Then(/^pagination exists for bagels$/) do
   within("#bagels") do
     within(".pagination") do
       click_link("2")
-      expect(page.html).to have_xpath("//li[@class = 'active']/a[. = '2']")
+      expect(page.html).to have_xpath("//li[@class = 'active']/span[. = '2']")
     end
   end
 end

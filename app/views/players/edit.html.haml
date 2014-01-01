@@ -4,25 +4,26 @@
 %h1= "Editing #{@player}"
 
 = form_for @player do |f|
-  = error_messages_for class: "error-text", header_message: "Don't look now, but you gave me bad input."
+  = error_messages_for class: "callout callout-danger", header_message: "Don't look now, but you gave me bad input."
 
   %div.row
-    %div.span4
-      %div.control-group
+    %div.col-md-6
+      %div.form-group
         = f.label :name, "Name"
-        = f.text_field :name
+        = f.text_field :name, class: "form-control"
 
   %div.row
-    %div.span4
-      %div.control-group
+    %div.col-md-6
+      %div.form-group
         = f.label :surname, "Surname"
-        = f.text_field :surname
+        = f.text_field :surname, class: "form-control"
 
   %div.row
-    %div.span4
-      %div.control-group
-        = f.label :active, "#{f.check_box :active, "data-toggle" => "checkbox"} Still Active?".html_safe, class: "checkbox"
+    %div.col-md-6
+      %div.checkbox
+        = f.label :active, "Still Active?"
+        = f.check_box :active
 
   %div.row
-    %div.span4
-      = f.button "Update Player", class: "btn btn-primary btn-large"
+    %div.col-md-6
+      = f.button "Update Player", class: "btn btn-primary btn-lg"

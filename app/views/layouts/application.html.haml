@@ -17,27 +17,27 @@
         %div.thumbnail
           = yield :header_image
 
-      %nav
-        %div.navbar.navbar-inverse
-          %div.navbar-inner
-            %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
+      %nav.navbar.navbar-default(role="navigation")
+        %div.navbar-header
+          %button.navbar-toggle(type="button" data-toggle="collapse" data-target="#navbar")
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
 
-            %a.brand{:href => "#{root_path}", :title => "Bagel Central"} Bagel Central
+          %a.navbar-brand{:href => "#{root_path}", :title => "Bagel Central"} Bagel Central
 
-            %div.nav-collapse.collapse
-              %ul.nav.pull-right
-                %li#players-nav-link= link_to 'Players', players_path
-                %li#bagels-nav-link= link_to "Bagels", bagels_path
-                %li#new-bagel-nav-link.last= link_to "Add Bagel", new_bagel_path
+        #navbar.collapse.navbar-collapse
+          %ul.nav.navbar-nav.pull-right
+            %li#players-nav-link= link_to 'Players', players_path
+            %li#bagels-nav-link= link_to "Bagels", bagels_path
+            %li#new-bagel-nav-link.last= link_to "Add Bagel", new_bagel_path
 
       %section
         = yield
 
       %footer
-        %p Made with <span class="fui-heart"></span> by <a href="http://brian.rarevisions.net">Brian Mathiyakom</a>.  <span class="pull-right"><a href="http://rarevisions.net">rareVisions</a></span>
+        %small Made with <span class="glyphicon glyphicon-heart"></span> by <a href="http://brian.rarevisions.net">Brian Mathiyakom</a>.  <span class="pull-right"><a href="http://rarevisions.net">rareVisions</a></span>
 
     = javascript_include_tag "application"
     - if @active_nav_link

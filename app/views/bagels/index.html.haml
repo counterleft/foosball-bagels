@@ -8,7 +8,7 @@
 
 #bagels(data-pjax-container)
   = render partial: "shared/bagels_table", locals: { bagels: @bagels }
-  = will_paginate @bagels
+  = will_paginate @bagels, renderer: BootstrapPagination::Rails
 
 - content_for :page_js do
   = javascript_include_tag "jquery.pjax"

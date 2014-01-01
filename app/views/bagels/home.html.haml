@@ -3,26 +3,33 @@
 
 #quick-stats
   %h1 Quick Stats
-  %ul.thumbnails
-    %li#bagel-owner.span3
-      %div.thumbnail.palette-amethyst
-        %h3= @report.current_bagel_owner_name
-        %p Current Bagel Owner
-    %li#bagel-total.span3
-      %div.thumbnail.palette-sun-flower
-        %h3= @report.total_bagel_count
-        %p Total Bagels
-    %li#best-team.span3
-      %div.thumbnail.palette-peter-river
-        %h3!= "#{@report.best_team_offensive_player_name} &amp; #{@report.best_team_defensive_player_name}"
-        %p <a id="best-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Best Team</a> (Plus-Minus: #{@report.best_team.plus_minus})
-    %li#worst-team.span3
-      %div.thumbnail.palette-concrete
-        %h3!= "#{@report.worst_team_offensive_player_name} &amp; #{@report.worst_team_defensive_player_name}"
-        %p <a id="worst-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Worst Team</a> (Plus-Minus: #{@report.worst_team.plus_minus})
+
+  %div.row
+    %div#bagel-owner.col-sm-6.col-md-3
+      %div.thumbnail
+        %div.caption
+          %h4= @report.current_bagel_owner_name
+          %p Current Bagel Owner
+    %div#bagel-total.col-sm-6.col-md-3
+      %div.thumbnail
+        %div.caption
+          %h4= @report.total_bagel_count
+          %p Total Bagels
+    %div#best-team.col-sm-6.col-md-3
+      %div.thumbnail
+        %div.caption
+          %h4!= "#{@report.best_team_offensive_player_name} &amp; #{@report.best_team_defensive_player_name}"
+          %p <a id="best-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Best Team</a> (#{@report.best_team.plus_minus})
+    %div#worst-team.col-sm-6.col-md-3
+      %div.thumbnail
+        %div.caption
+          %h4!= "#{@report.worst_team_offensive_player_name} &amp; #{@report.worst_team_defensive_player_name}"
+          %p <a id="worst-team-tip" data-toggle="tooltip" data-placement="bottom" data-title="(offense & defense)">Worst Team</a> (#{@report.worst_team.plus_minus})
 
 #player-rankings
   %h1 Active Player Rankings
+  %p Active players are still with the company.
+
   %table.table.table-condensed.table-striped
     %thead
       %tr

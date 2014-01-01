@@ -1,6 +1,6 @@
 
 /*!
- * Date picker for pickadate.js v3.0.5
+ * Date picker for pickadate.js v3.3.2
  * http://amsul.github.io/pickadate.js/date.htm
  */
 
@@ -13,9 +13,16 @@
    boss: true
  */
 
+(function ( factory ) {
 
-// Create a new scope.
-(function() {
+    // Register as an anonymous module.
+    if ( typeof define === 'function' && define.amd )
+        define( ['picker','jquery'], factory )
+
+    // Or using browser globals.
+    else factory( Picker, jQuery )
+
+}(function( Picker, $ ) {
 
 
 /**
@@ -32,7 +39,13 @@ var DAYS_IN_WEEK = 7,
 function DatePicker( picker, settings ) {
 
     var calendar = this,
-        elementDataValue = picker.$node.data( 'value' )
+        elementValue = picker.$node[ 0 ].value,
+        elementDataValue = picker.$node.data( 'value' ),
+        valueString = elementDataValue || elementValue,
+        formatString = elementDataValue ? settings.formatSubmit : settings.format,
+        isRTL = function() {
+            return getComputedStyle( picker.$root[0] ).direction === 'rtl'
+        }
 
     calendar.settings = settings
 
@@ -64,12 +77,18 @@ function DatePicker( picker, settings ) {
         // Setting the `select` also sets the `highlight` and `view`.
         set( 'select',
 
-            // If there's a `value` or `data-value`, use that with formatting.
-            // Otherwise default to selecting “today”.
-            elementDataValue || picker.$node[ 0 ].value || calendar.item.now,
+            // Use the value provided or default to selecting “today”.
+            valueString || calendar.item.now,
+            {
+                // Use the appropriate format.
+                format: formatString,
 
-            // Use the relevant format and data property.
-            { format: elementDataValue ? settings.formatSubmit : settings.format, data: !!elementDataValue }
+                // Set user-provided month data as true when there is a
+                // “mm” or “m” used in the relative format string.
+                data: (function( formatArray ) {
+                    return valueString && ( formatArray.indexOf( 'mm' ) > -1 || formatArray.indexOf( 'm' ) > -1 )
+                })( calendar.formats.toArray( formatString ) )
+            }
         )
 
 
@@ -77,8 +96,8 @@ function DatePicker( picker, settings ) {
     calendar.key = {
         40: 7, // Down
         38: -7, // Up
-        39: 1, // Right
-        37: -1, // Left
+        39: function() { return isRTL() ? -1 : 1 }, // Right
+        37: function() { return isRTL() ? 1 : -1 }, // Left
         go: function( timeChange ) {
             calendar.set( 'highlight', [ calendar.item.highlight.year, calendar.item.highlight.month, calendar.item.highlight.date + timeChange ], { interval: timeChange } )
             this.render()
@@ -91,11 +110,11 @@ function DatePicker( picker, settings ) {
         on( 'render', function() {
             picker.$root.find( '.' + settings.klass.selectMonth ).on( 'change', function() {
                 picker.set( 'highlight', [ picker.get( 'view' ).year, this.value, picker.get( 'highlight' ).date ] )
-                picker.$root.find( '.' + settings.klass.selectMonth ).focus()
+                picker.$root.find( '.' + settings.klass.selectMonth ).trigger( 'focus' )
             })
             picker.$root.find( '.' + settings.klass.selectYear ).on( 'change', function() {
                 picker.set( 'highlight', [ this.value, picker.get( 'view' ).month, picker.get( 'highlight' ).date ] )
-                picker.$root.find( '.' + settings.klass.selectYear ).focus()
+                picker.$root.find( '.' + settings.klass.selectYear ).trigger( 'focus' )
             })
         }).
         on( 'open', function() {
@@ -166,13 +185,15 @@ DatePicker.prototype.create = function( type, value, options ) {
     }
 
     // If it’s an object, use the native date object.
-    else if ( Picker._.isObject( value ) && Picker._.isInteger( value.pick ) ) {
+    else if ( $.isPlainObject( value ) && Picker._.isInteger( value.pick ) ) {
         value = value.obj
     }
 
-    // If it’s an array, convert it into a date.
-    else if ( Array.isArray( value ) ) {
+    // If it’s an array, convert it into a date and make sure
+    // that it’s a valid date – otherwise default to today.
+    else if ( $.isArray( value ) ) {
         value = new Date( value[ 0 ], value[ 1 ], value[ 2 ] )
+        value = Picker._.isDate( value ) ? value : calendar.create().obj
     }
 
     // If it’s a number or date object, make a normalized date.
@@ -214,16 +235,16 @@ DatePicker.prototype.now = function( type, value, options ) {
  */
 DatePicker.prototype.navigate = function( type, value, options ) {
 
-    if ( Picker._.isObject( value ) ) {
+    if ( $.isPlainObject( value ) ) {
 
-        var targetDateObject = new Date( value.year, value.month + ( options && options.nav ? options.nav : 0 ), 1 ),
+        var targetDateObject = new Date( value.year, value.month + ( options && options.nav ? options.nav : 0 ), 1 ),
             year = targetDateObject.getFullYear(),
             month = targetDateObject.getMonth(),
             date = value.date
 
-        // If the month we’re going to doesn’t have enough days,
-        // keep decreasing the date until we reach the month’s last date.
-        while ( new Date( year, month, date ).getMonth() !== month ) {
+        // Make sure the date is valid and if the month we’re going to doesn’t have enough
+        // days, keep decreasing the date until we reach the month’s last date.
+        while ( Picker._.isDate( targetDateObject ) && new Date( year, month, date ).getMonth() !== month ) {
             date -= 1
         }
 
@@ -286,7 +307,7 @@ DatePicker.prototype.validate = function( type, dateObject, options ) {
         interval = options && options.interval ? options.interval : 1,
 
         // Check if the calendar enabled dates are inverted.
-        isInverted = calendar.item.enable === -1,
+        isFlippedBase = calendar.item.enable === -1,
 
         // Check if we have any enabled dates after/before now.
         hasEnabledBeforeTarget, hasEnabledAfterTarget,
@@ -299,10 +320,10 @@ DatePicker.prototype.validate = function( type, dateObject, options ) {
         reachedMin, reachedMax,
 
         // Check if the calendar is inverted and at least one weekday is enabled.
-        hasEnabledWeekdays = isInverted && calendar.item.disable.filter( function( value ) {
+        hasEnabledWeekdays = isFlippedBase && calendar.item.disable.filter( function( value ) {
 
             // If there’s a date, check where it is relative to the target.
-            if ( Array.isArray( value ) ) {
+            if ( $.isArray( value ) ) {
                 var dateTime = calendar.create( value ).pick
                 if ( dateTime < dateObject.pick ) hasEnabledBeforeTarget = true
                 else if ( dateTime > dateObject.pick ) hasEnabledAfterTarget = true
@@ -320,20 +341,20 @@ DatePicker.prototype.validate = function( type, dateObject, options ) {
     // [3] Out of range.
     //
     // Cases to **not** validate for:
+    // • Navigating months.
     // • Not inverted and date enabled.
     // • Inverted and all dates disabled.
-    // • Navigating months.
-    // • ..and anything else.
-    if (
-        /* 1 */ ( !isInverted && calendar.disabled( dateObject ) ) ||
-        /* 2 */ ( isInverted && calendar.disabled( dateObject ) && ( hasEnabledWeekdays || hasEnabledBeforeTarget || hasEnabledAfterTarget ) ) ||
+    // • ..and anything else.
+    if ( !options.nav ) if (
+        /* 1 */ ( !isFlippedBase && calendar.disabled( dateObject ) ) ||
+        /* 2 */ ( isFlippedBase && calendar.disabled( dateObject ) && ( hasEnabledWeekdays || hasEnabledBeforeTarget || hasEnabledAfterTarget ) ) ||
         /* 3 */ ( dateObject.pick <= minLimitObject.pick || dateObject.pick >= maxLimitObject.pick )
     ) {
 
 
         // When inverted, flip the direction if there aren’t any enabled weekdays
         // and there are no enabled dates in the direction of the interval.
-        if ( isInverted && !hasEnabledWeekdays && ( ( !hasEnabledAfterTarget && interval > 0 ) || ( !hasEnabledBeforeTarget && interval < 0 ) ) ) {
+        if ( isFlippedBase && !hasEnabledWeekdays && ( ( !hasEnabledAfterTarget && interval > 0 ) || ( !hasEnabledBeforeTarget && interval < 0 ) ) ) {
             interval *= -1
         }
 
@@ -379,32 +400,37 @@ DatePicker.prototype.validate = function( type, dateObject, options ) {
 
 
 /**
- * Check if an object is disabled.
+ * Check if a date is disabled.
  */
 DatePicker.prototype.disabled = function( dateObject ) {
 
     var calendar = this,
 
         // Filter through the disabled dates to check if this is one.
-        isDisabledDate = calendar.item.disable.filter( function( dateToDisable ) {
+        isDisabledMatch = calendar.item.disable.filter( function( dateToDisable ) {
 
             // If the date is a number, match the weekday with 0index and `firstDay` check.
             if ( Picker._.isInteger( dateToDisable ) ) {
                 return dateObject.day === ( calendar.settings.firstDay ? dateToDisable : dateToDisable - 1 ) % 7
             }
 
-            // If it's an array, create the object and match the exact date.
-            if ( Array.isArray( dateToDisable ) ) {
+            // If it’s an array or a native JS date, create and match the exact date.
+            if ( $.isArray( dateToDisable ) || Picker._.isDate( dateToDisable ) ) {
                 return dateObject.pick === calendar.create( dateToDisable ).pick
             }
-        }).length
+        })
 
+    // If this date matches a disabled date, confirm it’s not inverted.
+    isDisabledMatch = isDisabledMatch.length && !isDisabledMatch.filter(function( dateToDisable ) {
+        return $.isArray( dateToDisable ) && dateToDisable[3] == 'inverted'
+    }).length
 
-    // It’s disabled beyond the min/max limits. If within the limits, check the
-    // calendar “enabled” flag is flipped and respectively flip the condition.
-    return dateObject.pick < calendar.item.min.pick ||
-        dateObject.pick > calendar.item.max.pick ||
-        calendar.item.enable === -1 ? !isDisabledDate : isDisabledDate
+    // Check the calendar “enabled” flag and respectively flip the
+    // disabled state. Then also check if it’s beyond the min/max limits.
+    return calendar.item.enable === -1 ? !isDisabledMatch : isDisabledMatch ||
+        dateObject.pick < calendar.item.min.pick ||
+        dateObject.pick > calendar.item.max.pick
+
 } //DatePicker.prototype.disabled
 
 
@@ -416,7 +442,7 @@ DatePicker.prototype.parse = function( type, value, options ) {
     var calendar = this,
         parsingObject = {}
 
-    if ( !value || Picker._.isInteger( value ) || Array.isArray( value ) || Picker._.isDate( value ) || Picker._.isObject( value ) && Picker._.isInteger( value.pick ) ) {
+    if ( !value || Picker._.isInteger( value ) || $.isArray( value ) || Picker._.isDate( value ) || $.isPlainObject( value ) && Picker._.isInteger( value.pick ) ) {
         return value
     }
 
@@ -447,7 +473,7 @@ DatePicker.prototype.parse = function( type, value, options ) {
         value = value.substr( formatLength )
     })
 
-    // If it’s parsing a `data-value`, compensate for month 0index.
+    // If it’s parsing a user provided month value, compensate for month 0index.
     return [ parsingObject.yyyy || parsingObject.yy, +( parsingObject.mm || parsingObject.m ) - ( options.data ?  1 : 0 ), parsingObject.dd || parsingObject.d ]
 } //DatePicker.prototype.parse
 
@@ -565,19 +591,38 @@ DatePicker.prototype.flipItem = function( type, value/*, options*/ ) {
 
     var calendar = this,
         collection = calendar.item.disable,
-        isInverted = calendar.item.enable === -1
+        isFlippedBase = calendar.item.enable === -1
 
     // Flip the enabled and disabled dates.
     if ( value == 'flip' ) {
-        calendar.item.enable = isInverted ? 1 : -1
+        calendar.item.enable = isFlippedBase ? 1 : -1
     }
 
-    // Check if we have to add/remove from collection.
-    else if ( !isInverted && type == 'enable' || isInverted && type == 'disable' ) {
-        collection = calendar.removeDisabled( collection, value )
+    // Reset the collection and enable the base state.
+    else if ( ( type == 'enable' && value === true ) || ( type == 'disable' && value === false ) ) {
+        calendar.item.enable = 1
+        collection = []
     }
-    else if ( !isInverted && type == 'disable' || isInverted && type == 'enable' ) {
-        collection = calendar.addDisabled( collection, value )
+
+    // Reset the collection and disable the base state.
+    else if ( ( type == 'enable' && value === false ) || ( type == 'disable' && value === true ) ) {
+        calendar.item.enable = -1
+        collection = []
+    }
+
+    // Make sure a collection of things was passed to add/remove.
+    else if ( $.isArray( value ) ) {
+
+        // Check if we have to add/remove from collection.
+        if ( isFlippedBase && type == 'enable' || !isFlippedBase && type == 'disable' ) {
+            collection = calendar.addDisabled( collection, value )
+        }
+        else if ( !isFlippedBase && type == 'enable' ) {
+            collection = calendar.addEnabled( collection, value )
+        }
+        else if ( isFlippedBase && type == 'disable' ) {
+            collection = calendar.removeDisabled( collection, value )
+        }
     }
 
     return collection
@@ -585,15 +630,63 @@ DatePicker.prototype.flipItem = function( type, value/*, options*/ ) {
 
 
 /**
+ * Add an enabled (inverted) item to the disabled collection.
+ */
+DatePicker.prototype.addEnabled = function( collection, item ) {
+
+    var calendar = this
+
+    // Go through each item to enable.
+    item.map( function( timeUnit ) {
+
+        // Check if the time unit is already within the collection.
+        if ( calendar.filterDisabled( collection, timeUnit, 1 ).length ) {
+
+            // Remove the unit directly from the collection.
+            collection = calendar.removeDisabled( collection, [timeUnit] )
+
+            // If the unit is an array and it falls within a
+            // disabled weekday, invert it and then insert it.
+            if (
+                $.isArray( timeUnit ) &&
+                collection.filter( function( disabledDate ) {
+                    return Picker._.isInteger( disabledDate ) && calendar.create( timeUnit ).day === disabledDate - 1
+                }).length
+            ) {
+                timeUnit = timeUnit.slice(0)
+                timeUnit.push( 'inverted' )
+                collection.push( timeUnit )
+            }
+        }
+    })
+
+    // Return the final collection.
+    return collection
+} //DatePicker.prototype.addEnabled
+
+
+/**
  * Add an item to the disabled collection.
  */
 DatePicker.prototype.addDisabled = function( collection, item ) {
+
     var calendar = this
+
+    // Go through each item to disable.
     item.map( function( timeUnit ) {
+
+        // Add the time unit if it isn’t already within the collection.
         if ( !calendar.filterDisabled( collection, timeUnit ).length ) {
             collection.push( timeUnit )
         }
+
+        // If the time unit is an array and falls within the range, just remove it.
+        else if ( $.isArray( timeUnit ) && calendar.filterDisabled( collection, timeUnit, 1 ).length ) {
+            collection = calendar.removeDisabled( collection, [timeUnit] )
+        }
     })
+
+    // Return the final collection.
     return collection
 } //DatePicker.prototype.addDisabled
 
@@ -602,10 +695,17 @@ DatePicker.prototype.addDisabled = function( collection, item ) {
  * Remove an item from the disabled collection.
  */
 DatePicker.prototype.removeDisabled = function( collection, item ) {
+
     var calendar = this
+
+    // Go through each item to enable.
     item.map( function( timeUnit ) {
+
+        // Filter each item out of the collection.
         collection = calendar.filterDisabled( collection, timeUnit, 1 )
     })
+
+    // Return the final colleciton.
     return collection
 } //DatePicker.prototype.removeDisabled
 
@@ -614,10 +714,24 @@ DatePicker.prototype.removeDisabled = function( collection, item ) {
  * Filter through the disabled collection to find a time unit.
  */
 DatePicker.prototype.filterDisabled = function( collection, timeUnit, isRemoving ) {
-    var timeIsArray = Array.isArray( timeUnit )
+
+    var calendar = this,
+
+        // Check if the time unit passed is an array or date object.
+        timeIsObject = $.isArray( timeUnit ) || Picker._.isDate( timeUnit ),
+
+        // Grab the comparison value if it’s an object.
+        timeObjectValue = timeIsObject && calendar.create( timeUnit ).pick
+
+    // Go through the disabled collection and try to match this time unit.
     return collection.filter( function( disabledTimeUnit ) {
-        var isMatch = !timeIsArray && timeUnit === disabledTimeUnit ||
-            timeIsArray && Array.isArray( disabledTimeUnit ) && timeUnit.toString() === disabledTimeUnit.toString()
+
+        // Check if it’s an object and the collection item is an object,
+        // use the comparison values. Otherwise to a direct comparison.
+        var isMatch = timeIsObject && ( $.isArray( disabledTimeUnit ) || Picker._.isDate( disabledTimeUnit ) ) ?
+                timeObjectValue === calendar.create( disabledTimeUnit ).pick : timeUnit === disabledTimeUnit
+
+        // Invert the match if we’re removing from the collection.
         return isRemoving ? !isMatch : isMatch
     })
 } //DatePicker.prototype.filterDisabled
@@ -762,7 +876,7 @@ DatePicker.prototype.nodes = function( isOpen ) {
                     highestYear = maxYear
                 }
 
-                return Picker._.node( 'select', Picker._.group({
+                return Picker._.node( 'select', Picker._.group({
                     min: lowestYear,
                     max: highestYear,
                     i: 1,
@@ -863,10 +977,11 @@ DatePicker.prototype.nodes = function( isOpen ) {
         settings.klass.table
     ) +
 
+    // * For Firefox forms to submit, make sure to set the buttons’ `type` attributes as “button”.
     Picker._.node(
         'div',
-        Picker._.node( 'button', settings.today, settings.klass.buttonToday, 'data-pick=' + nowObject.pick + ( isOpen ? '' : ' disabled' ) ) +
-        Picker._.node( 'button', settings.clear, settings.klass.buttonClear, 'data-clear=1' + ( isOpen ? '' : ' disabled' ) ),
+        Picker._.node( 'button', settings.today, settings.klass.buttonToday, 'type=button data-pick=' + nowObject.pick + ( isOpen ? '' : ' disabled' ) ) +
+        Picker._.node( 'button', settings.clear, settings.klass.buttonClear, 'type=button data-clear=1' + ( isOpen ? '' : ' disabled' ) ),
         settings.klass.footer
     ) //endreturn
 } //DatePicker.prototype.nodes
@@ -939,8 +1054,7 @@ DatePicker.defaults = (function( prefix ) {
 Picker.extend( 'pickadate', DatePicker )
 
 
-// Close the scope.
-})();
+}));
 
 
 
