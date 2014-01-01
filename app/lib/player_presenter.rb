@@ -49,7 +49,7 @@ class PlayerPresenter < Presenter
   end
 
   def self.name_for(name, surname)
-    if !surname.nil?
+    if !surname.blank?
       "#{name} #{surname[0]}."
     else
       name.to_s

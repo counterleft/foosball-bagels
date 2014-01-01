@@ -4,18 +4,20 @@
 %h1 Add A New Player
 
 = form_for @player do |f|
-  = f.error_messages
+  = f.error_messages class: "callout callout-danger", header_message: "We have a problem Houston...", message: ""
 
   %div.row
-    %div.span4
-      %div.control-group
-        = f.text_field :name, "value placeholder" => "Name"
+    %div.col-md-6
+      %div.form-group
+        = f.label :name
+        = f.text_field :name, "value placeholder" => "Name", class: "form-control"
 
   %div.row
-    %div.span4
-      %div.control-group
-        = f.text_field :surname, "value placeholder" => "Surname"
+    %div.col-md-6
+      %div.form-group
+        = f.label :surname
+        = f.text_field :surname, "value placeholder" => "Surname", class: "form-control"
 
   %div.row
-    %div.span4
-      = f.button "Add Player", class: "btn btn-primary btn-large"
+    %div.col-md-6
+      = f.button "Add Player", class: "btn btn-primary btn-lg"

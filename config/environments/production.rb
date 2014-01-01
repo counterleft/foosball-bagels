@@ -7,7 +7,7 @@ Foosball::Application.configure do
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local = false
-  config.action_controller.perform_caching             = true
+  config.action_controller.perform_caching = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -21,5 +21,15 @@ Foosball::Application.configure do
   config.assets.digest = true
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( bagels.js highcharts.js picker.js picker.date.js picker-classic.css picker-classic.date.css jquery.pjax.js underscore-min.js )
+  config.assets.precompile += %w(
+    bagels.js
+    highcharts.js
+    picker.js
+    picker.date.js
+    picker-classic.css
+    picker-classic.date.css
+    jquery.pjax.js
+    underscore-min.js
+    bootstrap-3-typeahead.js
+  )
 end

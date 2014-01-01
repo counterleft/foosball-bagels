@@ -5,54 +5,66 @@
 - content_for :header_image do
   = image_tag("add-bagel-header.png", alt: "Fresh Baked Bagels")
 
-= form_for @bagel do |bagel_form|
-  = error_messages_for @bagel, class: "error-text", header_message: "Ya got some problems, buddy..", message: ""
+= form_for @bagel, html: { role: "form" } do |bagel_form|
+  = error_messages_for @bagel, class: "callout callout-danger", header_message: "Ya got some problems, buddy...", message: ""
 
   %div.row
-    %div.span4
-      %div.control-group
-        = bagel_form.text_field :baked_on, class: "datepicker", size: 12
+    %div.col-md-6
+      %div.form-group
+        = bagel_form.label :baked_on, "Baked on"
+        = bagel_form.text_field :baked_on, class: "datepicker form-control", size: 12
 
   %div.row
-    %div.span4
-      %div.control-group
+    %div.col-md-6
+      %div.form-group
         = bagel_form.fields_for :owner do |builder|
           = builder.label :name, "Bagel Owner"
-          = builder.text_field :name, "value placeholder" => "Owner's Name", autocomplete: "off"
+          = builder.text_field :name, "value placeholder" => "Owner's Name", autocomplete: "off", class: "form-control"
           = builder.hidden_field :id
 
-    %div.span4
-      %div.control-group
+    %div.col-md-6
+      %div.form-group
         = bagel_form.fields_for :teammate do |builder|
           = builder.label :name, "Bagel Teammate"
-          = builder.text_field :name, "value placeholder" => "Teammate's Name", autocomplete: "off"
+          = builder.text_field :name, "value placeholder" => "Teammate's Name", autocomplete: "off", class: "form-control"
           = builder.hidden_field :id
 
   %div.row
-    %div.span4
-      %div.control-group
+    %div.col-md-6
+      %div.form-group
         = bagel_form.fields_for :opponent_1 do |builder|
           = builder.label :name, "Winning Offensive Player"
-          = builder.text_field :name, "value placeholder" => "Winning Offensive Player's Name", autocomplete: "off"
+          = builder.text_field :name, "value placeholder" => "Winning Offensive Player's Name", autocomplete: "off", class: "form-control"
           = builder.hidden_field :id
 
-    %div.span4
-      %div.control-group
+    %div.col-md-6
+      %div.form-group
         = bagel_form.fields_for :opponent_2 do |builder|
           = builder.label :name, "Winning Defensive Player"
-          = builder.text_field :name, "value placeholder" => "Winning Defensive Player's Name", autocomplete: "off"
+          = builder.text_field :name, "value placeholder" => "Winning Defensive Player's Name", autocomplete: "off", class: "form-control"
           = builder.hidden_field :id
 
   %div.row
-    %div.span4
-      = button_tag "Add New Bagel", class: 'btn btn-primary btn-large'
+    %div.col-md-6
+      = button_tag "Add New Bagel", class: 'btn btn-primary btn-lg'
 
 - content_for :page_js do
   = javascript_include_tag "picker"
   = javascript_include_tag "picker.date"
   = javascript_include_tag "underscore-min"
+  = javascript_include_tag "bootstrap-3-typeahead"
 
   :javascript
+    $(".datepicker").pickadate({
+      format: 'yyyy-mm-dd',
+      clear: false,
+      onStart: function() {
+        var today = new Date();
+        var calendar = this;
+        calendar.set("select", [today.getFullYear(), today.getMonth(), today.getDate()]);
+      }
+    });
+
     function make_autocomplete(name_field, id_field) {
       $(name_field).typeahead({
         source: function(query, process) {
@@ -70,15 +82,3 @@
     make_autocomplete("#bagel_teammate_name", "#bagel_teammate_id");
     make_autocomplete("#bagel_opponent_1_name", "#bagel_opponent_1_id");
     make_autocomplete("#bagel_opponent_2_name", "#bagel_opponent_2_id");
-
-    $(".datepicker").pickadate({
-      format: 'Bake!d on yyyy-mm-dd',
-      clear: false,
-      onStart: function() {
-        var today = new Date();
-        var calendar = this;
-        calendar.set("select", [today.getFullYear(), today.getMonth(), today.getDate()]);
-      }
-    });
-
-    $(".selectpicker").selectpicker({menuStyle: "dropdown-inverse"});

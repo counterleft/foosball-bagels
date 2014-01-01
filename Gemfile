@@ -15,6 +15,7 @@ gem "dynamic_form", "~> 1.1.4"
 gem "rack-pjax", "~> 0.7.0"
 gem "naught"
 gem "jbuilder", "~> 2.0.1"
+gem "will_paginate-bootstrap", "~> 1.0.0"
 
 group :test, :development do
   gem "capistrano", "~> 2.5.21"
