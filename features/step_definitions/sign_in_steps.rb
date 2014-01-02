@@ -12,5 +12,5 @@ And "the user enters an incorrect password" do
 end
 
 Then "an error is shown" do
-  expect(page).to have_selector(".error")
+  expect(page).to have_selector("#error")
 end
