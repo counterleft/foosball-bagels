@@ -3,12 +3,15 @@
     %h1 Bagel Central
     = form_for :sign_in do |f|
       - if flash[:error]
-        %section.control-group.error
-          = f.password_field :password, "value placeholder" => "Password"
-          = f.hidden_field :hp
-        = f.submit "Enter", class: "btn btn-primary btn-large btn-block"
-      - else
-        %section.control-group
-          = f.password_field :password, "value placeholder" => "Password"
-          = f.hidden_field :hp
-        = f.submit "Enter", name: "enter", class: "btn btn-primary btn-large btn-block"
+        %p.callout.callout-danger= flash[:error]
+
+      %div.row
+        %div.col-md-12
+          %div.form-group
+            = f.password_field :password, "value placeholder" => "Password", class: "form-control"
+            = f.hidden_field :hp
+
+      %div.row
+        %div.col-md-12
+          %div.form-group
+            = f.submit "Enter", name: "enter", class: "btn btn-primary btn-lg btn-block"
