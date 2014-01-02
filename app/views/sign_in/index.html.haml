@@ -3,7 +3,7 @@
     %h1 Bagel Central
     = form_for :sign_in do |f|
       - if flash[:error]
-        %p.callout.callout-danger= flash[:error]
+        %p#error.callout.callout-danger= flash[:error]
 
       %div.row
         %div.col-md-12
