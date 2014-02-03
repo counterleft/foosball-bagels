@@ -1,4 +1,4 @@
-<% PASSWORD_FILE = File.join(Rails.root.to_s, '..', '..', '..', '..', 'shared', 'config', 'webapps', 'foosball', 'dbpassword') %>
+<% PASSWORD_FILE = File.path("/var/shared/config/webapps/foosball/dbpassword") &>
 
 development: &development
   adapter: mysql2
