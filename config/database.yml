@@ -1,4 +1,4 @@
-<% PASSWORD_FILE = File.path("/var/shared/config/webapps/foosball/dbpassword") &>
+<% PASSWORD_FILE = File.path("/var/shared/config/webapps/foosball/dbpassword") %>
 
 development: &development
   adapter: mysql2
