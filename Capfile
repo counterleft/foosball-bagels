@@ -1,4 +1,6 @@
-load 'deploy' if respond_to?(:namespace) # cap2 differentiator
-Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
+require 'recap/recipes/rails'
 
-load 'config/deploy' # remove this line to skip loading any of the default tasks
+set :application, 'foosball-bagels'
+set :repository, 'git@github.com:winterchord/foosball-bagels.git'
+
+server 'rarevisions.net', :app
