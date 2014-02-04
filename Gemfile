@@ -18,7 +18,7 @@ gem "jbuilder", "~> 2.0.1"
 gem "will_paginate-bootstrap", "~> 1.0.0"
 
 group :test, :development do
-  gem "capistrano", "~> 2.5.21"
+  gem "recap", "~>1.0.0"
   gem "rspec", "~> 2.13"
   gem "rspec-rails", "~> 2.13"
   gem "machinist", "1.0.6"
