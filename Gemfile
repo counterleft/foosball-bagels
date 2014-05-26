@@ -34,4 +34,5 @@ end
 
 group :production do
   gem "uglifier"
+  gem "unicorn"
 end
