@@ -1,3 +1,4 @@
+ruby "2.1.1"
 source "https://rubygems.org"
 
 gem "rails", "4.0.5"
@@ -6,11 +7,11 @@ gem "sass"
 gem "sass-rails"
 gem "will_paginate", "~> 3.0"
 gem "newrelic_rpm"
-gem "mysql2", "~> 0.3.11"
+gem "pg"
 gem "jquery-rails", "~> 2.1"
 gem "jquery-ui-rails", "~> 4.0.4"
 gem "chartkick", "~> 1.2.0"
-gem "groupdate", "~> 1.0.4"
+gem "groupdate", "~> 2.1.1"
 gem "dynamic_form", "~> 1.1.4"
 gem "rack-pjax", "~> 0.7.0"
 gem "naught"
@@ -33,4 +34,5 @@ end
 
 group :production do
   gem "uglifier"
+  gem "unicorn"
 end
