@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - "2.0.0"
+  - "2.1.1"
 script: bundle exec rake db:create db:migrate spec cucumber RAILS_ENV=test
 before_script:
   - mysql -e 'create database foosball_test;'
