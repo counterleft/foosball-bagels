@@ -1,5 +1,3 @@
-<% PASSWORD_FILE = File.path("/var/shared/config/webapps/foosball/dbpassword") %>
-
 development: &development
   adapter: postgresql
   encoding: utf8
@@ -31,7 +29,7 @@ production:
   database: foosball_production
   pool: 20
   username: foosball
-  password: <%= File.read(PASSWORD_FILE).chomp if File.readable? PASSWORD_FILE %>
+  password:
   socket: /var/run/mysqld/mysqld.sock
 
 cucumber:
