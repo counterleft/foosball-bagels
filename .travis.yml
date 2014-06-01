@@ -2,5 +2,7 @@ language: ruby
 rvm:
   - "2.1.1"
 script: bundle exec rake db:create db:migrate spec cucumber RAILS_ENV=test
+addons:
+  postgresql: "9.3"
 before_script:
-  - mysql -e 'create database foosball_test;'
+  - psql -c 'create database foosball_test;' -U postgres
