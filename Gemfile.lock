@@ -153,6 +153,9 @@ GEM
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
+    seed_dump (3.2.2)
+      activerecord (~> 4)
+      activesupport (~> 4)
     skylight (0.3.13)
       activesupport (>= 3.0.0)
     sprockets (2.12.1)
@@ -216,6 +219,7 @@ DEPENDENCIES
   rspec-rails (~> 2.13)
   sass
   sass-rails
+  seed_dump
   skylight
   uglifier
   unicorn
@@ -223,3 +227,6 @@ DEPENDENCIES
   will_paginate (~> 3.0)
   will_paginate-bootstrap (~> 1.0.0)
   yaml_db (~> 0.2)
+
+BUNDLED WITH
+   1.10.5

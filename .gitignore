@@ -8,3 +8,4 @@ tmp
 .rvmrc
 .powrc
 .sass-cache
+.ruby-version

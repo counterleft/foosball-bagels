@@ -18,6 +18,7 @@ gem "naught"
 gem "jbuilder", "~> 2.0.1"
 gem "will_paginate-bootstrap", "~> 1.0.0"
 gem "skylight"
+gem "seed_dump"
 
 group :test, :development do
   gem "recap", "~>1.0.0"
