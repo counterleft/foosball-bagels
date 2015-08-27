@@ -1,7 +1,7 @@
 sudo: false
 language: ruby
 rvm:
-  - "2.1.1"
+  - "2.2.3"
 script: bundle exec rake db:create db:migrate spec cucumber RAILS_ENV=test
 addons:
   postgresql: "9.3"
