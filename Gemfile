@@ -1,12 +1,11 @@
 ruby "2.2.3"
 source "https://rubygems.org"
 
-gem "rails", "4.0.5"
+gem "rails", "4.1.13"
 gem "haml"
 gem "sass"
 gem "sass-rails"
 gem "will_paginate", "~> 3.0"
-gem "newrelic_rpm"
 gem "pg"
 gem "jquery-rails", "~> 2.1"
 gem "jquery-ui-rails", "~> 4.0.4"
@@ -21,20 +20,19 @@ gem "skylight"
 gem "seed_dump"
 
 group :test, :development do
-  gem "recap", "~>1.0.0"
-  gem "rspec", "~> 2.13"
-  gem "rspec-rails", "~> 2.13"
-  gem "machinist", "1.0.6"
-  gem "faker", "~> 1.2.0"
-  gem "webrat", "~> 0.7.2"
-  gem "yaml_db", "~> 0.2"
+  gem "recap"
+  gem "rspec"
+  gem "rspec-rails"
+  gem "machinist"
+  gem "faker"
+  gem "webrat"
+  gem "yaml_db"
   gem "cucumber-rails", :require => false
   gem "database_cleaner"
   gem "poltergeist"
-  gem "minitest"
 end
 
 group :production do
-  gem "uglifier"
-  gem "unicorn"
+  gem "rails_12factor"
+  gem "puma"
 end

@@ -22,7 +22,7 @@ describe PlayerPresenter do
   it "presents a player's bagels" do
     bob = Player.new(name: "Bob")
     subject = PlayerPresenter.new(bob, nil, nil, nil, nil, nil, [Bagel.new(owner_id: bob.id)])
-    expect(subject.bagels).to have(1).items
+    expect(subject.bagels.size).to be(1)
     subject.bagels.each_bagel do |bagel|
       expect(bagel.owner_id).to eq(bob.id)
     end

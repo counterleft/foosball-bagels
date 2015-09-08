@@ -35,7 +35,7 @@ describe Player do
   end
 
   it "should not save player without name" do
-    @new_player.save.should be_false
+    expect(@new_player.save).to be(false)
   end
 
   it "should have default plus minus of zero" do

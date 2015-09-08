@@ -25,8 +25,8 @@ describe Dashboard do
 
     context "bagels have been given" do
       before(:each) do
-        @player = Player.make
-        @bagel = Bagel.make(baked_on: "3000/12/12", owner: @player)
+        @player = Player.make!
+        @bagel = Bagel.make!(baked_on: "3000/12/12", owner: @player)
       end
 
       it "has the current bagel owner" do
@@ -41,7 +41,7 @@ describe Dashboard do
       end
 
       it "all bagels given" do
-        expect(subject.bagels_given_over_time).to have(1).items
+        expect(subject.bagels_given_over_time.size).to be(1)
         expect(subject.total_bagel_count).to eq(Bagel.count)
       end
 

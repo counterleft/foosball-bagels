@@ -4,8 +4,6 @@ development: &development
   reconnect: false
   database: foosball_development
   pool: 5
-  username: foosball
-  password: foosball
 
 staging:
   <<: *development
@@ -19,8 +17,6 @@ test: &test
   reconnect: false
   database: foosball_test
   pool: 5
-  username: foosball_test
-  password:
 
 production:
   adapter: postgresql

@@ -22,8 +22,8 @@ end
 
 Bagel.blueprint do
   baked_on { Date.today }
-  owner
-  teammate
-  opponent_1
-  opponent_2
+  owner { Player.make! }
+  teammate { Player.make! }
+  opponent_1 { Player.make! }
+  opponent_2 { Player.make! }
 end

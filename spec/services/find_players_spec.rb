@@ -2,10 +2,10 @@ require "spec_helper"
 require "ostruct"
 
 describe FindPlayers do
-  let(:player1) { Player.make }
-  let(:player2) { Player.make }
-  let(:player3) { Player.make }
-  let(:player4) { Player.make }
+  let(:player1) { Player.make! }
+  let(:player2) { Player.make! }
+  let(:player3) { Player.make! }
+  let(:player4) { Player.make! }
   let(:subject) { FindPlayers }
 
   it "finds players for a given bagel" do

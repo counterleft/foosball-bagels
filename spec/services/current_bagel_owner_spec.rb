@@ -7,8 +7,8 @@ describe CurrentBagelOwner do
   end
 
   it "returns current bagel owner" do
-    player = Player.make
-    Bagel.make(baked_on: '3000/12/31', owner: player)
+    player = Player.make!
+    Bagel.make!(baked_on: '3000/12/31', owner: player)
     expect(CurrentBagelOwner.fetch).to eq(player)
   end
 end
