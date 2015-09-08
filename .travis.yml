@@ -5,6 +5,8 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+install:
+  - echo "override default travis bundler handling; docker will setup the ruby env"
 script:
   - docker-compose build
   - docker-compose run shell bundle exec rake test RAILS_ENV=test
