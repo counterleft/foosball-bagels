@@ -9,6 +9,4 @@ install:
   - echo "override default travis bundler handling; docker will setup the ruby env"
 script:
   - docker-compose build
-  - docker-compose start web
-  - docker-compose run shell bundle exec rake test RAILS_ENV=test
-  - docker-compose stop web
+  - docker-compose run test
