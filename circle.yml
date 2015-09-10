@@ -13,5 +13,5 @@ database:
 test:
   override:
     - ./docker-compose up -d web
-    - sleep 3
+    - sleep 1
     - ./docker-compose run test
