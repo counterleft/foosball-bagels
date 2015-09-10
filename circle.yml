@@ -3,7 +3,7 @@ machine:
     - docker
 dependencies:
   pre:
-    - curl --retry 3 -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > ./docker-compose
+    - curl --retry 3 -L https://github.com/docker/compose/releases/download/1.3.3/docker-compose-`uname -s`-`uname -m` > ./docker-compose
     - chmod +x ./docker-compose
   override:
     - ./docker-compose build
