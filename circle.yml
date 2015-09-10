@@ -3,8 +3,8 @@ machine:
     - docker
 dependencies:
   pre:
-    - sudo curl --retry 3 -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-    - sudo chmod +x /usr/local/bin/docker-compose
+    - sudo curl --retry 3 -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > ./docker-compose
+    - sudo chmod +x ./docker-compose
   override:
     - docker-compose build
 test:
