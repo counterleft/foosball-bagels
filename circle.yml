@@ -7,6 +7,9 @@ dependencies:
     - chmod +x ./docker-compose
   override:
     - ./docker-compose build
+database:
+  override:
+    - echo "skip database setup because the db is a docker container"
 test:
   override:
     - ./docker-compose up -d web
