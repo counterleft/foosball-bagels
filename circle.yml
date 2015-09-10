@@ -1,0 +1,11 @@
+machine:
+  - docker
+dependencies:
+  override:
+    - pip install docker-compose
+    - docker-compose build
+test:
+  override:
+    - docker-compose up -d web
+    - sleep 3
+    - docker-compose run test
