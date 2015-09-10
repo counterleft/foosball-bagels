@@ -41,8 +41,4 @@ describe Player do
   it "should have default plus minus of zero" do
     @new_player.plus_minus.should == 0
   end
-
-  it "test failure" do
-    fail "make sure ci fails when it should"
-  end
 end
