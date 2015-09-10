@@ -15,3 +15,8 @@ test:
     - ./docker-compose up -d web
     - sleep 1
     - ./docker-compose run test
+deployment:
+  production:
+    branch: master
+    heroku:
+      appname: bagel-central-lg
