@@ -9,5 +9,6 @@ install:
   - echo "override default travis bundler handling; docker will setup the ruby env"
 script:
   - docker-compose build
-  - docker-compose run test
+  - docker-compose up -d web
+  - sleep 5 # give postgres time to start
   - docker-compose run test

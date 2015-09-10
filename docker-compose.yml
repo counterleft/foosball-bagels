@@ -24,7 +24,7 @@ shell:
     - '.:/app/user'
 test:
   build: .
-  command: 'bash -c ''bundle exec rake RAILS_ENV=test'''
+  command: 'bash -c ''bundle exec rake db:setup spec cucumber:all RAILS_ENV=test'''
   working_dir: /app/user
   environment:
     PORT: 8080
