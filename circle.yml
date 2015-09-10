@@ -20,4 +20,5 @@ deployment:
     branch: master
     commands:
       - ./bin/deploy_prod.sh
+      - sleep 3
       - ruby ./bin/test_prod_deploy.rb
