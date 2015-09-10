@@ -17,4 +17,7 @@ end
 
 response = fetch('https://bagel-central-lg.herokuapp.com')
 
-exit(1) unless response.is_a?(Net::HTTPSuccess)
+unless response.is_a(Net::HTTPSuccess)
+  puts "Did not receive HTTP 2xx from application health check. Got: #{response.code}"
+  exit(1)
+end
